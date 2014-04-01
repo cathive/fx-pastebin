@@ -126,18 +126,18 @@ limitations under the License.
 
             <!-- fx-pastebin modules -->
             <dependency>
-                <groupId>com.cathive.fx</groupId>
-                <artifactId>fx-cdi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cathive.fx.inject</groupId>
-                <artifactId>fx-pastebin-core</artifactId>
+                <groupId>com.cathive.fx.pastebin</groupId>
+                <artifactId>fx-pastebin-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cathive.fx.pastebin</groupId>
-                <artifactId>fx-pastebin-common</artifactId>
+                <artifactId>fx-pastebin-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cathive.fx.pastebin</groupId>
+                <artifactId>fx-pastebin-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
