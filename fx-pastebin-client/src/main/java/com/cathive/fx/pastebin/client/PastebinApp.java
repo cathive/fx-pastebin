@@ -44,6 +44,17 @@ public class PastebinApp extends Application {
     }
     // </editor-fold>
 
+    // <editor-fold desc="Property: root pane">
+    public static final String ROOT_PANE_PROPERTY = "rootPane";
+    private final ReadOnlyObjectWrapper<RootPane> rootPane = new ReadOnlyObjectWrapper<>(this, ROOT_PANE_PROPERTY);
+    public RootPane getRootPane() {
+        return this.rootPane.get();
+    }
+    public ReadOnlyObjectProperty<RootPane> rootPaneProperty() {
+        return this.rootPane.getReadOnlyProperty();
+    }
+    // </editor-fold>
+
     @FXML private ResourceBundle resources;
 
     @Override
@@ -63,7 +74,7 @@ public class PastebinApp extends Application {
 
         primaryStage.setTitle(this.resources.getString(Messages.APP_TITLE));
 
-        final Scene scene = new Scene(new RootPane());
+        final Scene scene = new Scene(new RootPane(this));
 
         primaryStage.setScene(scene);
 
@@ -71,9 +82,11 @@ public class PastebinApp extends Application {
 
     }
 
+    // This method will be called by the FXML Loader after all fields
+    // that have been marked with @FXML have been injected.
     public void initialize() {
-
     }
+
 
     public static void main(final String... args) {
         Application.launch(PastebinApp.class, args);

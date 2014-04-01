@@ -18,8 +18,16 @@ limitations under the License.
 
 <?language javascript?>
 
+<?import javafx.scene.control.ToolBar?>
+
+<?import javafx.scene.control.Button?>
 <fx:root xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
          type="javafx.scene.layout.BorderPane"
         fx:id="root">
+
+    <top>
+        <ToolBar fx:id="toolBar"/>
+    </top>
+
 </fx:root>

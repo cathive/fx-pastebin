@@ -19,6 +19,7 @@ package com.cathive.fx.pastebin.client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
@@ -26,12 +27,26 @@ import java.util.ResourceBundle;
  */
 public class RootPane extends BorderPane {
 
-    public RootPane()  {
+    private final PastebinApp app;
+
+    public RootPane(final PastebinApp app) {
+
         super();
+
+        this.app = app;
+
         final FXMLLoader fxmlLoader = new FXMLLoader(
                 this.getClass().getResource("RootPane.fxml"),
                 ResourceBundle.getBundle(Messages.class.getName())
         );
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (final IOException e) {
+            throw new RuntimeException("Couldn't construct root pane.", e);
+        }
+
     }
 
 }
