@@ -16,6 +16,7 @@
 
 package com.cathive.fx.pastebin.common.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -28,6 +29,7 @@ public class UserProfile extends AbstractEntity {
 
     private String name;
 
+    @Column
     public String getName() {
         return name;
     }
