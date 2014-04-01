@@ -1,4 +1,4 @@
-package rest;/*
+/*
  * Copyright (C) 2014 The Cat Hive Developers.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,19 +14,21 @@ package rest;/*
  * limitations under the License.
  */
 
+package com.cathive.fx.pastebin.server.rest;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 /**
+ * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste}
  * @author Benjamin P. Jung
  */
 @Path("/")
-public class PastebinController {
+public class PasteController {
 
     @GET
-    @Path("paste")
+    @Path("pastes")
     public Response getRecentPastes() {
         // TODO Return something meaningful. ;-)
         return Response.ok().build();

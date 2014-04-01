@@ -135,6 +135,12 @@ limitations under the License.
                 <artifactId>fx-pastebin-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.cathive.fx.pastebin</groupId>
+                <artifactId>fx-pastebin-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <!-- javax.inject API -->
             <dependency>
