@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jaxb:bindings xmlns="http://www.cathive.com/pastebin"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               version="2.0">
+
+    <jaxb:globalBindings generateElementProperty="false">
+        <xjc:serializable uid="1"/>
+    </jaxb:globalBindings>
+
+    <jaxb:bindings schemaLocation="../main/resources/PasteModel.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.cathive.fx.pastebin.common.transfer"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>
