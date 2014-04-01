@@ -14,6 +14,11 @@
     <groupId>com.cathive.fx.pastebin</groupId>
     <artifactId>fx-pastebin-client</artifactId>
     <name>fx-pastebin-client</name>
+    <description>Client components</description>
+
+    <properties>
+        <main.basedir>${parent.basedir}</main.basedir>
+    </properties>
 
     <dependencies>
 

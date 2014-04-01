@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>fx-pastebin</artifactId>
         <groupId>com.cathive.fx.pastebin</groupId>
+        <artifactId>fx-pastebin</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -14,18 +14,24 @@
     <groupId>com.cathive.fx.pastebin</groupId>
     <artifactId>fx-pastebin-common</artifactId>
     <name>fx-pastebin-common</name>
+    <description>Common components</description>
+
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>2.5.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <scope>provided</scope>
             <type>jar</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -35,7 +41,6 @@
                 <groupId>com.github.igor-petruk.protobuf</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <configuration>
-                    <extension>.proto</extension>
                     <outputDirectory>${project.build.directory}/generated-sources/protobuf</outputDirectory>
                     <ignoreVersions>false</ignoreVersions>
                     <addSources>main</addSources>

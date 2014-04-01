@@ -3,6 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>fx-pastebin</artifactId>
         <groupId>com.cathive.fx.pastebin</groupId>
@@ -10,10 +12,14 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <main.basedir>${parent.basedir}</main.basedir>
+    </properties>
+
     <artifactId>fx-pastebin-server</artifactId>
     <packaging>war</packaging>
     <name>fx-pastebin-server</name>
+    <description>Server components</description>
 
     <dependencies>
         <dependency>
@@ -25,6 +31,8 @@
         <dependency>
             <groupId>com.cathive.fx.pastebin</groupId>
             <artifactId>fx-pastebin-common</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
