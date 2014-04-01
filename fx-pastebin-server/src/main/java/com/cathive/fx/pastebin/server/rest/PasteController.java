@@ -41,7 +41,7 @@ public class PasteController {
     }
 
     @GET
-    @Path("/{id:d+}")
+    @Path("/{id:\\d+}")
     public Response getPasteById(@PathParam("id") final Long id) {
         // TODO Return something meaningful. ;-)
         return Response.ok().build();
