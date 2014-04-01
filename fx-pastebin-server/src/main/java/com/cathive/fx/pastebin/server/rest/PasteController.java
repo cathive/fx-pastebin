@@ -16,20 +16,33 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
+import com.cathive.fx.pastebin.common.transfer.Pastes;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste}
  * @author Benjamin P. Jung
  */
-@Path("/")
+@Path("/pastes")
+@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 public class PasteController {
 
     @GET
-    @Path("pastes")
+    @Path("/")
     public Response getRecentPastes() {
+        // TODO Return something meaningful. ;-)
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("/{id:d+}")
+    public Response getPasteById(@PathParam("id") final Long id) {
         // TODO Return something meaningful. ;-)
         return Response.ok().build();
     }
