@@ -33,7 +33,7 @@ import java.util.Collection;
  * @author Benjamin P. Jung
  */
 @Path("/")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({ MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML })
 public class PasteController {
 
     @Inject
@@ -50,4 +50,5 @@ public class PasteController {
     public Paste getPasteById(@PathParam("id") final Long id) {
         return pastebinService.findPasteById(id);
     }
+
 }
