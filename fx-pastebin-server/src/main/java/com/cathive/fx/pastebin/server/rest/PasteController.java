@@ -16,13 +16,12 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
+import com.cathive.fx.pastebin.common.JsonConverter;
 import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,12 +29,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static javax.json.Json.createArrayBuilder;
-import static javax.json.Json.createObjectBuilder;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste} instances.
+ *
  * @author Alexander Erben
  * @author Benjamin P. Jung
  */
@@ -46,19 +44,25 @@ public class PasteController {
     @Inject
     private PastebinService pastebinService;
 
+    @Inject
+    private JsonConverter jsonConverter;
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
         final Collection<Paste> allPastes = this.pastebinService.findAllPastes();
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        allPastes.stream().map((p) ->
+                jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+                .forEach(returnObject::add);
         return returnObject.build().toString();
     }
 
     @GET
     @Path("/id/{id:\\d+}")
     public String getPasteById(@PathParam("id") final Long id) {
-        return buildPasteJson(this.pastebinService.findPasteById(id)).toString();
+        Paste paste = this.pastebinService.findPasteById(id);
+        return jsonConverter.buildPasteWithReferences(paste, paste.getUserProfile(), paste.getPasteType()).toString();
     }
 
     @GET
@@ -66,7 +70,9 @@ public class PasteController {
     public String getPastesByUserProfile(@PathParam("user") final Long id) {
         final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        allPastes.stream().map((p) ->
+                jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+                .forEach(returnObject::add);
         return returnObject.build().toString();
     }
 
@@ -75,34 +81,10 @@ public class PasteController {
     public String getPasteByPasteType(@PathParam("type") final Long id) {
         final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        allPastes.stream().map((p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+                .forEach(returnObject::add);
         return returnObject.build().toString();
 
-    }
-
-    private JsonObject buildPasteJson(final Paste p) {
-        final JsonObjectBuilder singlePaste = createObjectBuilder();
-        singlePaste.add("id", p.getId());
-        singlePaste.add("title", p.getTitle());
-        singlePaste.add("content", p.getContent());
-        singlePaste.add("creation", p.getCreation().format(ISO_DATE_TIME));
-        singlePaste.add("user", buildUserForPaste(p));
-        singlePaste.add("pasteType", buildPasteTypeForPaste(p));
-        return singlePaste.build();
-    }
-
-    private JsonObject buildPasteTypeForPaste(final Paste p) {
-        return createObjectBuilder()
-                .add("id", p.getPasteType().getId())
-                .add("name", p.getPasteType().getName())
-                .build();
-    }
-
-    private JsonObject buildUserForPaste(final Paste p) {
-        final JsonObjectBuilder userBuilder = createObjectBuilder();
-        userBuilder.add("id", p.getUserProfile().getId());
-        userBuilder.add("name", p.getUserProfile().getName());
-        return userBuilder.build();
     }
 
 
