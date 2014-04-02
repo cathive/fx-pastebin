@@ -23,8 +23,8 @@ import com.cathive.fx.pastebin.server.repository.InMemPasteRepository;
 import com.cathive.fx.pastebin.server.server.DefaultPastebinService;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Named;
 import java.util.stream.LongStream;
 
 import static java.util.UUID.randomUUID;
@@ -32,7 +32,7 @@ import static java.util.UUID.randomUUID;
 /**
  * @author Alexander Erben
  */
-@Named
+@ApplicationScoped
 public class Configuration {
 
     @Produces
@@ -48,5 +48,4 @@ public class Configuration {
         });
         return new DefaultPastebinService(inMemPasteRepository);
     }
-
 }

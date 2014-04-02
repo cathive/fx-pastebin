@@ -21,6 +21,7 @@ import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
