@@ -16,10 +16,7 @@
 
 package com.cathive.fx.pastebin.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -29,11 +26,22 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "user_profile")
-public class UserProfile extends AbstractEntity {
+public class UserProfile {
 
     private String name;
 
     private Collection<Paste> pastes;
+
+    private Long id;
+
+    @Id
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
     @Column
     public String getName() {

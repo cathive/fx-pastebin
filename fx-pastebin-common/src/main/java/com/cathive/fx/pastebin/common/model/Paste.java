@@ -16,11 +16,7 @@
 
 package com.cathive.fx.pastebin.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,10 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "paste")
 @XmlRootElement
-public class Paste extends AbstractEntity
-{
+public class Paste {
 
-    /** @see java.io.Serializable */
     private static final long serialVersionUID = 1L;
 
     private String title;
@@ -43,6 +37,17 @@ public class Paste extends AbstractEntity
     private PasteType pasteType;
 
     private UserProfile userProfile;
+
+    private Long id;
+
+    @Id
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
     @Column
     public String getTitle() {
