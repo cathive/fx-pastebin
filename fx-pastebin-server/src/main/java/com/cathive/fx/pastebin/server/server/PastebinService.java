@@ -31,7 +31,7 @@ public interface PastebinService {
 
     Collection<Paste> findAllPastes();
 
-    Collection<Paste> findPasteByUser(Long userId);
+    Collection<Paste> findPastesByUser(Long userId);
 
     Paste findPasteById(Long id);
 
