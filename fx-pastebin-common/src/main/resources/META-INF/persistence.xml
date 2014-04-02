@@ -38,7 +38,7 @@ limitations under the License.
             <!-- EclipseLink specific configuration -->
             <property name="eclipselink.create-ddl-jdbc-file-name" value="fx-pastebin.ddl.jdbc"/>
             <property name="eclipselink.ddl-generation.output-mode" value="both"/>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
             <!-- Hibernate specific configuration -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>
