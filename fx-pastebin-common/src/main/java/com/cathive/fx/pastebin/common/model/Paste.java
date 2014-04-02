@@ -19,6 +19,7 @@ package com.cathive.fx.pastebin.common.model;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Encapsulates a single paste
@@ -41,7 +42,7 @@ public class Paste {
 
     private Long id;
 
-    private LocalDate creation;
+    private LocalDateTime creation;
 
     @Id
     public Long getId() {
@@ -89,11 +90,11 @@ public class Paste {
     }
 
     @Column
-    public LocalDate getCreation() {
+    public LocalDateTime getCreation() {
         return creation;
     }
 
-    public void setCreation(LocalDate creation) {
+    public void setCreation(LocalDateTime creation) {
         this.creation = creation;
     }
 

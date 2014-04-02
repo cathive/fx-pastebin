@@ -16,17 +16,28 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
-import com.cathive.fx.pastebin.common.transfer.*;
-import com.cathive.fx.pastebin.common.transfer.PasteListDto;
+import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.transfer.ObjectFactory;
+import com.cathive.fx.pastebin.common.transfer.PasteDto;
+import com.cathive.fx.pastebin.common.transfer.PasteDtoBuilder;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBElement;
+import java.util.Collection;
+import java.util.stream.Stream;
+
+import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
+import static javax.json.Json.createArrayBuilder;
+import static javax.json.Json.createObjectBuilder;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste}
@@ -44,8 +55,12 @@ public class PasteController {
 
     @GET
     @Path("pastes")
-    public JAXBElement<PasteListDto> getAllPastes() {
-        return OBJECT_FACTORY.createPastes(PasteListDtoBuilder.create(this.pastebinService.findAllPastes()).build());
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllPastes() {
+        Collection<Paste> allPastes = this.pastebinService.findAllPastes();
+        JsonArrayBuilder returnObject = createArrayBuilder();
+        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        return returnObject.build().toString();
     }
 
     @GET
@@ -53,5 +68,31 @@ public class PasteController {
     public JAXBElement<PasteDto> getPasteById(@PathParam("id") final Long id) {
         return OBJECT_FACTORY.createPaste(PasteDtoBuilder.create(this.pastebinService.findPasteById(id)).build());
     }
+
+    private JsonObject buildPasteJson(Paste p) {
+        JsonObjectBuilder singlePaste = createObjectBuilder();
+        singlePaste.add("id", p.getId());
+        singlePaste.add("title", p.getTitle());
+        singlePaste.add("content", p.getContent());
+        singlePaste.add("creation", p.getCreation().format(ISO_DATE_TIME));
+        singlePaste.add("user", buildUserForPaste(p));
+        singlePaste.add("pasteType", buildPasteTypeForPaste(p));
+        return singlePaste.build();
+    }
+
+    private JsonObject buildPasteTypeForPaste(Paste p) {
+        return createObjectBuilder()
+                .add("id", p.getPasteType().getId())
+                .add("name", p.getPasteType().getName())
+                .build();
+    }
+
+    private JsonObject buildUserForPaste(Paste p) {
+        JsonObjectBuilder userBuilder = createObjectBuilder();
+        userBuilder.add("id", p.getUserProfile().getId());
+        userBuilder.add("name", p.getUserProfile().getName());
+        return userBuilder.build();
+    }
+
 
 }
