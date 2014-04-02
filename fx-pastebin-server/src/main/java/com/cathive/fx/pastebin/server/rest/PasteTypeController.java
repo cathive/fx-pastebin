@@ -20,6 +20,7 @@ import com.cathive.fx.pastebin.common.JsonConverter;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -42,6 +43,7 @@ public class PasteTypeController {
     private PastebinService pastebinService;
 
     @Inject
+    @Named("converter")
     private JsonConverter jsonConverter;
 
     @GET
