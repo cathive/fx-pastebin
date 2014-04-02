@@ -27,7 +27,7 @@ limitations under the License.
             <access>PROPERTY</access>
         </persistence-unit-defaults>
     </persistence-unit-metadata>
-    <package>com.cathive.fx.pastebin.model</package>
+    <package>com.cathive.fx.pastebin.common.model</package>
     <access>PROPERTY</access>
 
 </entity-mappings>

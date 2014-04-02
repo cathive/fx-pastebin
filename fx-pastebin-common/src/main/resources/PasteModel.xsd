@@ -22,6 +22,17 @@ limitations under the License.
             targetNamespace="http://www.cathive.com/pastebin"
             elementFormDefault="qualified">
 
+    <!-- ==== Elements ==== -->
+
+    <xsd:element name="paste_type" type="tns:PasteType"/>
+
+    <xsd:element name="paste" type="tns:Paste"/>
+
+    <xsd:element name="pastes" type="tns:PasteList"/>
+
+    <xsd:element name="user_profile" type="tns:UserProfile"/>
+
+
     <!-- ==== Types ==== -->
 
     <xsd:simpleType name="UniqueIdentifier">
@@ -64,16 +75,5 @@ limitations under the License.
         </xsd:sequence>
         <xsd:attribute name="id" type="UniqueIdentifier"/>
     </xsd:complexType>
-
-
-    <!-- ==== Elements ==== -->
-
-    <xsd:element name="paste_type" xml:base="PasteType"/>
-
-    <xsd:element name="paste" xml:base="Paste"/>
-
-    <xsd:element name="pastes" xml:base="PasteList"/>
-
-    <xsd:element name="user_profile" xml:base="UserProfile" />
 
 </xsd:schema>

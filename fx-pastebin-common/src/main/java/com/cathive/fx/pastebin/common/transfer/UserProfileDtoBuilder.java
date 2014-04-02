@@ -19,14 +19,15 @@ package com.cathive.fx.pastebin.common.transfer;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import javafx.util.Builder;
 
+import java.util.Collection;
+
 /**
  * Builder for {@link com.cathive.fx.pastebin.common.transfer.UserProfileDto} instances.
  * @author Benjamin P. Jung
  */
 public class UserProfileDtoBuilder implements Builder<UserProfileDto> {
 
-    private Long id;
-    private String name;
+    private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
 
 
     public static UserProfileDtoBuilder create() {
@@ -38,6 +39,9 @@ public class UserProfileDtoBuilder implements Builder<UserProfileDto> {
                 .id(entity.getId())
                 .name(entity.getName());
     }
+
+    private Long id;
+    private String name;
 
 
     public UserProfileDtoBuilder id(final Long id) {
@@ -53,7 +57,7 @@ public class UserProfileDtoBuilder implements Builder<UserProfileDto> {
 
     @Override
     public UserProfileDto build() {
-        final UserProfileDto dto = new UserProfileDto();
+        final UserProfileDto dto = OBJECT_FACTORY.createUserProfileDto();
         dto.setId(this.id);
         dto.setName(this.name);
         return dto;

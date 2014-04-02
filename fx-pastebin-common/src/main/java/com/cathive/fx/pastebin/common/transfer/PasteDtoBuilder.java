@@ -9,6 +9,8 @@ import javafx.util.Builder;
  */
 public class PasteDtoBuilder implements Builder<PasteDto> {
 
+    private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
+
     private Long id;
     private String title;
     private String content;
@@ -62,7 +64,7 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
 
     @Override
     public PasteDto build() {
-        final PasteDto dto = new PasteDto();
+        final PasteDto dto = OBJECT_FACTORY.createPasteDto();
         dto.setId(this.id);
         dto.setTitle(this.title);
         dto.setContent(this.content);

@@ -31,6 +31,7 @@ limitations under the License.
             <jaxb:package name="com.cathive.fx.pastebin.common.transfer"/>
             <jaxb:nameXmlTransform>
                 <jaxb:typeName suffix="Dto"/>
+                <jaxb:elementName suffix="Dto"/>
             </jaxb:nameXmlTransform>
         </jaxb:schemaBindings>
     </jaxb:bindings>

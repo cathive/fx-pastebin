@@ -25,6 +25,8 @@ import javafx.util.Builder;
  */
 public class PasteTypeDtoBuilder implements Builder<PasteTypeDto> {
 
+    private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
+
     public static PasteTypeDtoBuilder create() {
         return new PasteTypeDtoBuilder();
     }
@@ -53,7 +55,7 @@ public class PasteTypeDtoBuilder implements Builder<PasteTypeDto> {
 
     @Override
     public PasteTypeDto build() {
-        final PasteTypeDto dto = new PasteTypeDto();
+        final PasteTypeDto dto = OBJECT_FACTORY.createPasteTypeDto();
         dto.setId(this.id);
         dto.setName(this.name);
         return dto;
