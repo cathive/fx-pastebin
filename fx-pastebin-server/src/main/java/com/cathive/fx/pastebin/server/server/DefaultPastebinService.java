@@ -17,7 +17,11 @@
 package com.cathive.fx.pastebin.server.server;
 
 import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.model.PasteType;
+import com.cathive.fx.pastebin.common.model.UserProfile;
 import com.cathive.fx.pastebin.server.repository.PasteRepository;
+import com.cathive.fx.pastebin.server.repository.PasteTypeRepository;
+import com.cathive.fx.pastebin.server.repository.UserProfileRepository;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
@@ -27,10 +31,20 @@ import java.util.Collection;
  * @author Alexander Erben
  */
 @Singleton
-public class DefaultPastebinService implements PastebinService{
+public class DefaultPastebinService implements PastebinService {
 
     @Inject
     private PasteRepository pasteRepository;
+
+    @Inject
+    private UserProfileRepository userProfileRepository;
+
+    @Inject
+    private PasteTypeRepository pasteTypeRepository;
+
+    /*
+     * {@link com.cathive.fx.pastebin.common.model.Paste} methods
+     */
 
     @Override
     public Collection<Paste> findAllPastes() {
@@ -60,5 +74,54 @@ public class DefaultPastebinService implements PastebinService{
     @Override
     public void deletePaste(Paste toDelete) {
         pasteRepository.delete(toDelete);
+    }
+
+    /*
+     * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
+     */
+
+    @Override
+    public Collection<UserProfile> findAllUserProfiles() {
+        return userProfileRepository.findAll();
+    }
+
+    @Override
+    public UserProfile findUserProfileById(Long id) {
+        return userProfileRepository.findOne(id);
+    }
+
+    @Override
+    public UserProfile saveUserProfile(UserProfile toSave) {
+        return userProfileRepository.save(toSave);
+    }
+
+    @Override
+    public void deleteUserProfile(UserProfile toDelete) {
+        userProfileRepository.delete(toDelete);
+    }
+
+
+    /*
+     * {@link com.cathive.fx.pastebin.common.model.PasteType} methods
+     */
+
+    @Override
+    public Collection<PasteType> findAllPasteType() {
+        return pasteTypeRepository.findAll();
+    }
+
+    @Override
+    public PasteType findPasteTypeById(Long id) {
+        return pasteTypeRepository.findOne(id);
+    }
+
+    @Override
+    public PasteType savePasteType(PasteType toSave) {
+        return pasteTypeRepository.save(toSave);
+    }
+
+    @Override
+    public void deletePasteType(PasteType toDelete) {
+        pasteTypeRepository.delete(toDelete);
     }
 }

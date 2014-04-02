@@ -17,6 +17,8 @@
 package com.cathive.fx.pastebin.server.server;
 
 import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.model.PasteType;
+import com.cathive.fx.pastebin.common.model.UserProfile;
 
 import javax.ejb.Local;
 import java.util.Collection;
@@ -27,15 +29,31 @@ import java.util.Collection;
 @Local
 public interface PastebinService {
 
-    public Collection<Paste> findAllPastes();
+    Collection<Paste> findAllPastes();
 
-    public Collection<Paste> findPasteByUser(Long userId);
+    Collection<Paste> findPasteByUser(Long userId);
 
-    public Paste findPasteById(Long id);
+    Paste findPasteById(Long id);
 
     Collection<Paste> findPasteByType(Long typeId);
 
-    public Paste savePaste(Paste toSave);
+    Collection<UserProfile> findAllUserProfiles();
 
-    public void deletePaste(Paste toDelete);
+    UserProfile findUserProfileById(Long id);
+
+    Paste savePaste(Paste toSave);
+
+    void deletePaste(Paste toDelete);
+
+    UserProfile saveUserProfile(UserProfile toSave);
+
+    void deleteUserProfile(UserProfile toDelete);
+
+    Collection<PasteType> findAllPasteType();
+
+    PasteType findPasteTypeById(Long id);
+
+    PasteType savePasteType(PasteType toSave);
+
+    void deletePasteType(PasteType toDelete);
 }
