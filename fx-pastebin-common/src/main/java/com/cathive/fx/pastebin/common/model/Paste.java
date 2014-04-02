@@ -62,7 +62,6 @@ public class Paste extends AbstractEntity
         this.content = content;
     }
 
-    @Column
     @ManyToOne
     public PasteType getPasteType() {
         return pasteType;
@@ -72,7 +71,6 @@ public class Paste extends AbstractEntity
         this.pasteType = pasteType;
     }
 
-    @Column
     @ManyToOne
     public UserProfile getUserProfile() {
         return userProfile;

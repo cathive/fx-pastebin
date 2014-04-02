@@ -44,7 +44,6 @@ public class PasteType extends AbstractEntity {
         this.name = name;
     }
 
-    @Column
     @OneToMany(mappedBy = "pasteType")
     public Collection<Paste> getPastes() {
         return this.pastes;

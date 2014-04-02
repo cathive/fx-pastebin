@@ -24,7 +24,7 @@ limitations under the License.
     <persistence-unit name="fx-pastebin" transaction-type="JTA">
         <description>Pastebin - Persistence Unit</description>
         <jta-data-source>jboss/datasources/ExampleDS</jta-data-source>
-        <mapping-file>META-INF/orm.xml</mapping-file>
+        <mapping-file>com/cathive/fx/pastebin/common/model/orm.xml</mapping-file>
         <class>com.cathive.fx.pastebin.common.model.AbstractEntity</class>
         <class>com.cathive.fx.pastebin.common.model.Paste</class>
         <class>com.cathive.fx.pastebin.common.model.PasteType</class>
