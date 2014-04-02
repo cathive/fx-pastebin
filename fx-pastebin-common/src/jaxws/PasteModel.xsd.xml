@@ -26,9 +26,12 @@ limitations under the License.
         <xjc:serializable uid="1"/>
     </jaxb:globalBindings>
 
-    <jaxb:bindings schemaLocation="../main/resources/PasteModel.xsd">
+    <jaxb:bindings schemaLocation="../main/resources/PasteModel.xsd" node="/xsd:schema">
         <jaxb:schemaBindings>
             <jaxb:package name="com.cathive.fx.pastebin.common.transfer"/>
+            <jaxb:nameXmlTransform>
+                <jaxb:typeName suffix="Dto"/>
+            </jaxb:nameXmlTransform>
         </jaxb:schemaBindings>
     </jaxb:bindings>
 
