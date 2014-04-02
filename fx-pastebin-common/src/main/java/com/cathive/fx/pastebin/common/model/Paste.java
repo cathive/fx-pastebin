@@ -19,6 +19,7 @@ package com.cathive.fx.pastebin.common.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Encapsulates a single paste
@@ -26,6 +27,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "paste")
+@XmlRootElement
 public class Paste extends AbstractEntity
 {
 
