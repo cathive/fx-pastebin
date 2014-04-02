@@ -41,9 +41,11 @@ limitations under the License.
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
             <!-- Hibernate specific configuration -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
 

@@ -3,6 +3,7 @@ package com.cathive.fx.pastebin.server.repository;
 import com.cathive.fx.pastebin.common.model.Paste;
 
 import javax.inject.Singleton;
+import java.util.Collection;
 
 /**
  * @author Alexander Erben
@@ -10,4 +11,8 @@ import javax.inject.Singleton;
 @Singleton
 public class DefaultPasteRepository extends AbstractRepository<Paste, Long> implements PasteRepository {
 
+    @Override
+    public Collection<Paste> findByUser(Long userId) {
+        return em.createNamedQuery("findByUser", Paste.class).setParameter("id", userId).getResultList();
+    }
 }

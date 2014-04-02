@@ -17,9 +17,6 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.model.Paste;
-import com.cathive.fx.pastebin.common.transfer.ObjectFactory;
-import com.cathive.fx.pastebin.common.transfer.PasteDto;
-import com.cathive.fx.pastebin.common.transfer.PasteDtoBuilder;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
@@ -31,9 +28,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBElement;
 import java.util.Collection;
-import java.util.stream.Stream;
 
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static javax.json.Json.createArrayBuilder;
@@ -61,8 +56,23 @@ public class PasteController {
     }
 
     @GET
-    @Path("/{id:\\d+}")
-    public JsonObject getPasteById(@PathParam("id") final Long id) {
+    @Path("/id/{id:\\d+}")
+    public String getPasteById(@PathParam("id") final Long id) {
+        return buildPasteJson(this.pastebinService.findPasteById(id)).toString();
+    }
+
+    @GET
+    @Path("/user/{user:\\d+}")
+    public String getPastesByUserProfile(@PathParam("user") final Long id) {
+        Collection<Paste> allPastes = this.pastebinService.findPasteByUser(id);
+        JsonArrayBuilder returnObject = createArrayBuilder();
+        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        return returnObject.build().toString();
+    }
+
+    @GET
+    @Path("/type/{type:\\d+}")
+    public JsonObject getPasteByPasteType(@PathParam("type") final Long id) {
         return buildPasteJson(this.pastebinService.findPasteById(id));
     }
 

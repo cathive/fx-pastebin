@@ -29,6 +29,8 @@ public interface PastebinService {
 
     public Collection<Paste> findAllPastes();
 
+    public Collection<Paste> findPasteByUser(Long userId);
+
     public Paste findPasteById(Long id);
 
     public Paste savePaste(Paste toSave);

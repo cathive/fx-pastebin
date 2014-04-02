@@ -17,19 +17,20 @@
 package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Encapsulates a single paste
+ *
  * @author Alexander Erben
  */
 @Entity
 @Table(name = "paste")
-@XmlRootElement
-public class Paste implements Serializable{
+@NamedQueries({
+        @NamedQuery(name = "findByUser", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)")
+})
+public class Paste implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

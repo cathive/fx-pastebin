@@ -20,7 +20,7 @@ import java.util.Collection;
 abstract class AbstractRepository<T, ID extends Serializable> implements Repository<T, ID> {
 
     @PersistenceContext(unitName = "fx-pastebin")
-    private EntityManager em;
+    protected EntityManager em;
 
     @Override
     public long count() {

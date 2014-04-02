@@ -19,10 +19,12 @@ package com.cathive.fx.pastebin.server.repository;
 import com.cathive.fx.pastebin.common.model.Paste;
 
 import javax.ejb.Local;
+import java.util.Collection;
 
 /**
  * @author Alexander Erben
  */
 @Local
 public interface PasteRepository extends Repository<Paste, Long> {
+    Collection<Paste> findByUser(Long userId);
 }
