@@ -17,6 +17,7 @@ limitations under the License.
 -->
 
 <jaxb:bindings xmlns="http://www.cathive.com/pastebin"
+               xmlns:tns="http://www.cathive.com/pastebin"
                xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
                xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -26,14 +27,21 @@ limitations under the License.
         <xjc:serializable uid="1"/>
     </jaxb:globalBindings>
 
-    <jaxb:bindings schemaLocation="../main/resources/PasteModel.xsd" node="/xsd:schema">
-        <jaxb:schemaBindings>
-            <jaxb:package name="com.cathive.fx.pastebin.common.transfer"/>
-            <jaxb:nameXmlTransform>
-                <jaxb:typeName suffix="Dto"/>
-                <jaxb:elementName suffix="Dto"/>
-            </jaxb:nameXmlTransform>
-        </jaxb:schemaBindings>
+    <jaxb:bindings schemaLocation="../main/resources/PasteModel.xsd">
+        <jaxb:bindings node="/xsd:schema">
+            <jaxb:schemaBindings>
+                <jaxb:package name="com.cathive.fx.pastebin.common.transfer"/>
+                <jaxb:nameXmlTransform>
+                    <jaxb:typeName suffix="Dto"/>
+                    <jaxb:elementName suffix="Dto"/>
+                </jaxb:nameXmlTransform>
+            </jaxb:schemaBindings>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xsd:element[@type='xsd:dateTime']">
+            <jaxb:javaType name="java.time.LocalDateTime"
+                           printMethod="com.cathive.fx.pastebin.common.transfer.adapter.LocalDataTimeAdapter.printLocalDateTime"
+                           parseMethod="com.cathive.fx.pastebin.common.transfer.adapter.LocalDataTimeAdapter.parseLocalDateTime"/>
+        </jaxb:bindings>
     </jaxb:bindings>
 
 </jaxb:bindings>

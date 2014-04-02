@@ -49,6 +49,7 @@ limitations under the License.
         <xsd:sequence>
             <xsd:element name="title" type="xsd:string"/>
             <xsd:element name="content" type="xsd:string"/>
+            <xsd:element name="created" type="xsd:dateTime"/>
         </xsd:sequence>
         <xsd:attribute name="id" type="UniqueIdentifier"/>
         <xsd:attribute name="paste_type_id" type="xsd:long"/>
