@@ -17,6 +17,7 @@
 package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -26,7 +27,9 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "user_profile")
-public class UserProfile {
+public class UserProfile implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String name;
 

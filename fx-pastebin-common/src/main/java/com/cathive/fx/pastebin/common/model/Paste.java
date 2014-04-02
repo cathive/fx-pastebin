@@ -18,6 +18,7 @@ package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,7 +29,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "paste")
 @XmlRootElement
-public class Paste {
+public class Paste implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
