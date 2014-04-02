@@ -19,18 +19,18 @@ package com.cathive.fx.pastebin.server.server;
 import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.server.repository.PasteRepository;
 
+import javax.ejb.Singleton;
+import javax.inject.Inject;
 import java.util.Collection;
 
 /**
  * @author Alexander Erben
  */
+@Singleton
 public class DefaultPastebinService implements PastebinService{
 
-    private final PasteRepository pasteRepository;
-
-    public DefaultPastebinService(PasteRepository pasteRepository) {
-        this.pasteRepository = pasteRepository;
-    }
+    @Inject
+    private PasteRepository pasteRepository;
 
     @Override
     public Collection<Paste> findAllPastes() {

@@ -17,15 +17,27 @@
 package com.cathive.fx.pastebin.server.repository;
 
 import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.model.PasteType;
+import com.cathive.fx.pastebin.common.model.UserProfile;
+import com.cathive.fx.pastebin.server.server.DefaultPastebinService;
+import com.cathive.fx.pastebin.server.server.PastebinService;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.LongStream;
+
+import static java.util.UUID.randomUUID;
 
 /**
  * @author Alexander Erben
  */
+@Singleton
+@Startup
 public class InMemPasteRepository implements PasteRepository {
 
     private final Map<Long, Paste> pastes = new HashMap<>();
@@ -57,4 +69,19 @@ public class InMemPasteRepository implements PasteRepository {
     public void clear() {
         pastes.clear();
     }
+
+
+    @PostConstruct
+    void initialize() {
+        LongStream.range(1, 30).forEach(i -> {
+            Paste p = new Paste();
+            p.setId(i);
+            p.setContent(randomUUID().toString());
+            p.setTitle(randomUUID().toString());
+            p.setPasteType(new PasteType());
+            p.setUserProfile(new UserProfile());
+            pastes.put(p.getId(), p);
+        });
+    }
+
 }

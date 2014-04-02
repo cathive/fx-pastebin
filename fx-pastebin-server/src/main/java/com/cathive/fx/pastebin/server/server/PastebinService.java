@@ -18,11 +18,13 @@ package com.cathive.fx.pastebin.server.server;
 
 import com.cathive.fx.pastebin.common.model.Paste;
 
+import javax.ejb.Local;
 import java.util.Collection;
 
 /**
  * @author Alexander Erben
  */
+@Local
 public interface PastebinService {
 
     public Collection<Paste> findAllPastes();

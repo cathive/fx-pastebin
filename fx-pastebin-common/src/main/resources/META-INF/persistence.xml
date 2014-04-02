@@ -40,6 +40,7 @@ limitations under the License.
             <!-- Hibernate specific configuration -->
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
         </properties>
     </persistence-unit>
 

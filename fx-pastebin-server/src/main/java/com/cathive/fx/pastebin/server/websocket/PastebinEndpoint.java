@@ -21,7 +21,7 @@ import javax.websocket.server.ServerEndpoint;
 /**
  * @author Benjamin P. Jung
  */
-@ServerEndpoint("pastebin")
+@ServerEndpoint("/pastebin")
 class PastebinEndpoint {
 
 }

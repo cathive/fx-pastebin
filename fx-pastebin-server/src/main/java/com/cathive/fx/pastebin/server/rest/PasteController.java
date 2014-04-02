@@ -33,7 +33,6 @@ import java.util.Collection;
  * @author Benjamin P. Jung
  */
 @Path("/")
-@Stateless
 @Produces(MediaType.APPLICATION_JSON)
 public class PasteController {
 
