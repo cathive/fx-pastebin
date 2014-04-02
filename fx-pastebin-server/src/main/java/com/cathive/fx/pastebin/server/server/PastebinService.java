@@ -49,7 +49,7 @@ public interface PastebinService {
 
     void deleteUserProfile(UserProfile toDelete);
 
-    Collection<PasteType> findAllPasteType();
+    Collection<PasteType> findAllPasteTypes();
 
     PasteType findPasteTypeById(Long id);
 

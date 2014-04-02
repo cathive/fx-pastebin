@@ -36,9 +36,8 @@ import static javax.json.Json.createArrayBuilder;
 import static javax.json.Json.createObjectBuilder;
 
 /**
- * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste} instances.
+ * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.UserProfile} instances.
  * @author Alexander Erben
- * @author Benjamin P. Jung
  */
 @Path("/userProfile")
 @Produces(MediaType.APPLICATION_JSON)
@@ -50,20 +49,20 @@ public class UserProfileController {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllUserProfiles() {
-        Collection<UserProfile> allPastes = this.pastebinService.findAllUserProfiles();
-        JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map(this::buildUserProfileJson).forEach(returnObject::add);
+        final Collection<UserProfile> all = pastebinService.findAllUserProfiles();
+        final JsonArrayBuilder returnObject = createArrayBuilder();
+        all.stream().map(this::buildUserProfileJson).forEach(returnObject::add);
         return returnObject.build().toString();
     }
 
     @GET
     @Path("/id/{id:\\d+}")
     public String getUserProfileById(@PathParam("id") final Long id) {
-        return buildUserProfileJson(this.pastebinService.findUserProfileById(id)).toString();
+        return buildUserProfileJson(pastebinService.findUserProfileById(id)).toString();
     }
 
     private JsonObject buildPasteJson(final Paste p) {
-        JsonObjectBuilder singlePaste = createObjectBuilder();
+        final JsonObjectBuilder singlePaste = createObjectBuilder();
         singlePaste.add("id", p.getId());
         singlePaste.add("title", p.getTitle());
         singlePaste.add("content", p.getContent());
@@ -73,11 +72,11 @@ public class UserProfileController {
     }
 
     private JsonObject buildUserProfileJson(final UserProfile p) {
-        JsonObjectBuilder userBuilder = createObjectBuilder();
+        final JsonObjectBuilder userBuilder = createObjectBuilder();
         userBuilder.add("id", p.getId());
         userBuilder.add("name", p.getName());
-        JsonArrayBuilder userProfiles = createArrayBuilder();
-        Collection<Paste> pastes = pastebinService.findPastesByUser(p.getId());
+        final JsonArrayBuilder userProfiles = createArrayBuilder();
+        final Collection<Paste> pastes = pastebinService.findPastesByUser(p.getId());
         pastes.stream().map(this::buildPasteJson).forEach(userProfiles::add);
         userBuilder.add("pastes", userProfiles);
         return userBuilder.build();

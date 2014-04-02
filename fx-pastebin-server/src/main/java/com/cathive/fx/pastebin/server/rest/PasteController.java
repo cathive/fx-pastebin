@@ -49,8 +49,8 @@ public class PasteController {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
-        Collection<Paste> allPastes = this.pastebinService.findAllPastes();
-        JsonArrayBuilder returnObject = createArrayBuilder();
+        final Collection<Paste> allPastes = this.pastebinService.findAllPastes();
+        final JsonArrayBuilder returnObject = createArrayBuilder();
         allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
         return returnObject.build().toString();
     }
@@ -64,8 +64,8 @@ public class PasteController {
     @GET
     @Path("/user/{user:\\d+}")
     public String getPastesByUserProfile(@PathParam("user") final Long id) {
-        Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
-        JsonArrayBuilder returnObject = createArrayBuilder();
+        final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
+        final JsonArrayBuilder returnObject = createArrayBuilder();
         allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
         return returnObject.build().toString();
     }
@@ -73,15 +73,15 @@ public class PasteController {
     @GET
     @Path("/type/{type:\\d+}")
     public String getPasteByPasteType(@PathParam("type") final Long id) {
-        Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
-        JsonArrayBuilder returnObject = createArrayBuilder();
+        final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
+        final JsonArrayBuilder returnObject = createArrayBuilder();
         allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
         return returnObject.build().toString();
 
     }
 
     private JsonObject buildPasteJson(final Paste p) {
-        JsonObjectBuilder singlePaste = createObjectBuilder();
+        final JsonObjectBuilder singlePaste = createObjectBuilder();
         singlePaste.add("id", p.getId());
         singlePaste.add("title", p.getTitle());
         singlePaste.add("content", p.getContent());
@@ -99,7 +99,7 @@ public class PasteController {
     }
 
     private JsonObject buildUserForPaste(final Paste p) {
-        JsonObjectBuilder userBuilder = createObjectBuilder();
+        final JsonObjectBuilder userBuilder = createObjectBuilder();
         userBuilder.add("id", p.getUserProfile().getId());
         userBuilder.add("name", p.getUserProfile().getName());
         return userBuilder.build();

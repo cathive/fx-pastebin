@@ -29,11 +29,6 @@ import java.util.Collection;
  */
 interface Repository<T, ID extends Serializable> extends Serializable {
 
-    /**
-     * Returns the number of entities available.
-     * @return
-     *     The number of entities.
-     */
     long count();
 
     void delete(Iterable<? extends T> entities);

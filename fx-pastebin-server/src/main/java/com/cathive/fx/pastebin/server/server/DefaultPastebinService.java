@@ -106,7 +106,7 @@ public class DefaultPastebinService implements PastebinService {
      */
 
     @Override
-    public Collection<PasteType> findAllPasteType() {
+    public Collection<PasteType> findAllPasteTypes() {
         return pasteTypeRepository.findAll();
     }
 

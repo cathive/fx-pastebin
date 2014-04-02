@@ -34,6 +34,7 @@ import static java.util.Collections.singletonList;
 import static java.util.UUID.randomUUID;
 
 /**
+ * Fills the repositories with sample data.
  * @author Alexander Erben
  */
 @Singleton
