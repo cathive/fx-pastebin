@@ -19,8 +19,6 @@ package com.cathive.fx.pastebin.common.transfer;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import javafx.util.Builder;
 
-import java.util.Collection;
-
 /**
  * Builder for {@link com.cathive.fx.pastebin.common.transfer.UserProfileDto} instances.
  * @author Benjamin P. Jung

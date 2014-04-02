@@ -21,10 +21,14 @@ limitations under the License.
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="fx-pastebin" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="fx-pastebin" transaction-type="JTA">
         <description>Pastebin - Persistence Unit</description>
+        <jta-data-source>jboss/datasources/ExampleDS</jta-data-source>
         <mapping-file>META-INF/orm.xml</mapping-file>
+        <class>com.cathive.fx.pastebin.common.model.AbstractEntity</class>
         <class>com.cathive.fx.pastebin.common.model.Paste</class>
+        <class>com.cathive.fx.pastebin.common.model.PasteType</class>
+        <class>com.cathive.fx.pastebin.common.model.UserProfile</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <validation-mode>AUTO</validation-mode>

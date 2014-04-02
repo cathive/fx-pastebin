@@ -39,7 +39,7 @@ public class DefaultPastebinService implements PastebinService{
 
     @Override
     public Paste findPasteById(Long id) {
-        return pasteRepository.findById(id);
+        return pasteRepository.findOne(id);
     }
 
     @Override
