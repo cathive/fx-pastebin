@@ -18,6 +18,8 @@ package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -61,6 +63,7 @@ public class Paste extends AbstractEntity
     }
 
     @Column
+    @ManyToOne
     public PasteType getPasteType() {
         return pasteType;
     }
@@ -70,6 +73,7 @@ public class Paste extends AbstractEntity
     }
 
     @Column
+    @ManyToOne
     public UserProfile getUserProfile() {
         return userProfile;
     }

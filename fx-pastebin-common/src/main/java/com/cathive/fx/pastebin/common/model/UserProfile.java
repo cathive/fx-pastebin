@@ -18,6 +18,9 @@ package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.Collection;
 
 /**
  * Encapsulates a user's profile
@@ -25,9 +28,12 @@ import javax.persistence.Entity;
  * @author Alexander Erben
  */
 @Entity
+@Table(name = "user_profile")
 public class UserProfile extends AbstractEntity {
 
     private String name;
+
+    private Collection<Paste> pastes;
 
     @Column
     public String getName() {
@@ -37,4 +43,15 @@ public class UserProfile extends AbstractEntity {
     public void setName(final String name) {
         this.name = name;
     }
+
+    @Column
+    @OneToMany(mappedBy = "pasteType")
+    public Collection<Paste> getPastes() {
+        return this.pastes;
+    }
+
+    public void setPastes(final Collection<Paste> pastes) {
+        this.pastes = pastes;
+    }
+
 }
