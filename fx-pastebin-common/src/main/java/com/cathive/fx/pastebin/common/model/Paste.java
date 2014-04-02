@@ -41,7 +41,7 @@ public class Paste {
 
     private Long id;
 
-    private LocalDate localDate;
+    private LocalDate creation;
 
     @Id
     public Long getId() {
@@ -89,12 +89,12 @@ public class Paste {
     }
 
     @Column
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getCreation() {
+        return creation;
     }
 
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+    public void setCreation(LocalDate creation) {
+        this.creation = creation;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Paste {
                 ", pasteType=" + pasteType +
                 ", userProfile=" + userProfile +
                 ", id=" + id +
-                ", localDate=" + localDate +
+                ", creation=" + creation +
                 '}';
     }
 
@@ -118,7 +118,7 @@ public class Paste {
 
         if (content != null ? !content.equals(paste.content) : paste.content != null) return false;
         if (id != null ? !id.equals(paste.id) : paste.id != null) return false;
-        if (localDate != null ? !localDate.equals(paste.localDate) : paste.localDate != null) return false;
+        if (creation != null ? !creation.equals(paste.creation) : paste.creation != null) return false;
         if (pasteType != null ? !pasteType.equals(paste.pasteType) : paste.pasteType != null) return false;
         if (title != null ? !title.equals(paste.title) : paste.title != null) return false;
         if (userProfile != null ? !userProfile.equals(paste.userProfile) : paste.userProfile != null) return false;
@@ -133,7 +133,7 @@ public class Paste {
         result = 31 * result + (pasteType != null ? pasteType.hashCode() : 0);
         result = 31 * result + (userProfile != null ? userProfile.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (localDate != null ? localDate.hashCode() : 0);
+        result = 31 * result + (creation != null ? creation.hashCode() : 0);
         return result;
     }
 }
