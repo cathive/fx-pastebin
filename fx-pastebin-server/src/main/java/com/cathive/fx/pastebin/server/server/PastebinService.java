@@ -33,6 +33,8 @@ public interface PastebinService {
 
     public Paste findPasteById(Long id);
 
+    Collection<Paste> findPasteByType(Long typeId);
+
     public Paste savePaste(Paste toSave);
 
     public void deletePaste(Paste toDelete);

@@ -38,13 +38,18 @@ public class DefaultPastebinService implements PastebinService{
     }
 
     @Override
+    public Paste findPasteById(Long id) {
+        return pasteRepository.findOne(id);
+    }
+
+    @Override
     public Collection<Paste> findPasteByUser(Long userId) {
         return pasteRepository.findByUser(userId);
     }
 
     @Override
-    public Paste findPasteById(Long id) {
-        return pasteRepository.findOne(id);
+    public Collection<Paste> findPasteByType(Long typeId) {
+        return pasteRepository.findByType(typeId);
     }
 
     @Override

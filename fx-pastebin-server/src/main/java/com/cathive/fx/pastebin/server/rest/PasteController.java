@@ -72,8 +72,12 @@ public class PasteController {
 
     @GET
     @Path("/type/{type:\\d+}")
-    public JsonObject getPasteByPasteType(@PathParam("type") final Long id) {
-        return buildPasteJson(this.pastebinService.findPasteById(id));
+    public String getPasteByPasteType(@PathParam("type") final Long id) {
+        Collection<Paste> allPastes = this.pastebinService.findPasteByUser(id);
+        JsonArrayBuilder returnObject = createArrayBuilder();
+        allPastes.stream().map(this::buildPasteJson).forEach(returnObject::add);
+        return returnObject.build().toString();
+
     }
 
     private JsonObject buildPasteJson(final Paste p) {

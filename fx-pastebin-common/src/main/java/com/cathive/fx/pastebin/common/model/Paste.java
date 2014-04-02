@@ -28,7 +28,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "paste")
 @NamedQueries({
-        @NamedQuery(name = "findByUser", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)")
+        @NamedQuery(name = "findByUser", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)"),
+        @NamedQuery(name = "findByType", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT type.id FROM p.pasteType type)")
 })
 public class Paste implements Serializable {
 

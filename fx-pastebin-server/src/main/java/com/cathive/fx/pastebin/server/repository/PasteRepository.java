@@ -27,4 +27,6 @@ import java.util.Collection;
 @Local
 public interface PasteRepository extends Repository<Paste, Long> {
     Collection<Paste> findByUser(Long userId);
+
+    Collection<Paste> findByType(Long typeId);
 }
