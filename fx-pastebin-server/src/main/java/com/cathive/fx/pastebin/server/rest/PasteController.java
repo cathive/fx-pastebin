@@ -27,7 +27,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
 import static javax.json.Json.createArrayBuilder;
 
@@ -50,9 +49,8 @@ public class PasteController {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
-        final Collection<Paste> allPastes = this.pastebinService.findAllPastes();
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map((p) ->
+        pastebinService.findAllPastes().stream().map((p) ->
                 jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
                 .forEach(returnObject::add);
         return returnObject.build().toString();
@@ -68,10 +66,9 @@ public class PasteController {
     @GET
     @Path("/user/{user:\\d+}")
     public String getPastesByUserProfile(@PathParam("user") final Long id) {
-        final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map((p) ->
-                jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+        pastebinService.findPastesByUser(id).stream().map(
+                (p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
                 .forEach(returnObject::add);
         return returnObject.build().toString();
     }
@@ -79,9 +76,9 @@ public class PasteController {
     @GET
     @Path("/type/{type:\\d+}")
     public String getPasteByPasteType(@PathParam("type") final Long id) {
-        final Collection<Paste> allPastes = this.pastebinService.findPastesByUser(id);
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        allPastes.stream().map((p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+        pastebinService.findPastesByUser(id).stream().map(
+                (p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
                 .forEach(returnObject::add);
         return returnObject.build().toString();
 
