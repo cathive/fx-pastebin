@@ -61,4 +61,34 @@ public class PasteType {
         this.pastes = pastes;
     }
 
+    @Override
+    public String toString() {
+        return "PasteType{" +
+                "name='" + name + '\'' +
+                ", pastes=" + pastes +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PasteType pasteType = (PasteType) o;
+
+        if (id != null ? !id.equals(pasteType.id) : pasteType.id != null) return false;
+        if (name != null ? !name.equals(pasteType.name) : pasteType.name != null) return false;
+        if (pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (pastes != null ? pastes.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
+    }
 }

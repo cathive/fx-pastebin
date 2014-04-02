@@ -18,6 +18,7 @@ package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
 
 /**
  * Encapsulates a single paste
@@ -39,6 +40,8 @@ public class Paste {
     private UserProfile userProfile;
 
     private Long id;
+
+    private LocalDate localDate;
 
     @Id
     public Long getId() {
@@ -83,5 +86,54 @@ public class Paste {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
+    }
+
+    @Column
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Paste{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", pasteType=" + pasteType +
+                ", userProfile=" + userProfile +
+                ", id=" + id +
+                ", localDate=" + localDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Paste paste = (Paste) o;
+
+        if (content != null ? !content.equals(paste.content) : paste.content != null) return false;
+        if (id != null ? !id.equals(paste.id) : paste.id != null) return false;
+        if (localDate != null ? !localDate.equals(paste.localDate) : paste.localDate != null) return false;
+        if (pasteType != null ? !pasteType.equals(paste.pasteType) : paste.pasteType != null) return false;
+        if (title != null ? !title.equals(paste.title) : paste.title != null) return false;
+        if (userProfile != null ? !userProfile.equals(paste.userProfile) : paste.userProfile != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (pasteType != null ? pasteType.hashCode() : 0);
+        result = 31 * result + (userProfile != null ? userProfile.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (localDate != null ? localDate.hashCode() : 0);
+        return result;
     }
 }
