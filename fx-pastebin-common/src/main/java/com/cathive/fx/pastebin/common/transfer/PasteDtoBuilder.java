@@ -4,6 +4,8 @@ import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import javafx.util.Builder;
 
+import java.time.LocalDateTime;
+
 /**
  * Builder for {@link com.cathive.fx.pastebin.common.transfer.PasteDto} instances.
  */
@@ -16,6 +18,7 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
     private String content;
     private Long userProfileId;
     private Long pasteTypeId;
+    private LocalDateTime created;
 
 
     public static PasteDtoBuilder create() {
@@ -28,7 +31,8 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .pasteTypeId(entity.getPasteType().getId());
+                .pasteTypeId(entity.getPasteType().getId())
+                .created(entity.getCreation());
         final UserProfile userProfile = entity.getUserProfile();
         if (userProfile != null) {
             builder.userProfileId(userProfile.getId());
@@ -61,6 +65,11 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
         return this;
     }
 
+    public PasteDtoBuilder created(final LocalDateTime created) {
+        this.created = created;
+        return this;
+    }
+
 
     @Override
     public PasteDto build() {
@@ -70,6 +79,7 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
         dto.setContent(this.content);
         dto.setPasteTypeId(this.pasteTypeId);
         dto.setUserProfileId(this.userProfileId);
+        dto.setCreated(this.created);
         return dto;
     }
 
