@@ -58,7 +58,7 @@ public class PastebinApp extends Application {
 
     @Override
     public void init() throws Exception {
-        this.restConnection.set(new RestConnection(URI.create("http://localhost:8080/fx-pastebin/api")));
+        this.restConnection.set(new RestConnection(URI.create("http://localhost:18080/fx-pastebin/api")));
         super.init();
     }
 

@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.common.transfer.adapter;
+package com.cathive.fx.pastebin.common.rest.conversion;
 
-import java.time.LocalDateTime;
-
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.ext.MessageBodyReader;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
 /**
- * Static adapter method that can handle the new java.time classes correctly.
  * @author Benjamin P. Jung
  */
-public class LocalDataTimeAdapter {
+abstract class AbstractDtoMessageBodyReader<T> implements MessageBodyReader<T> {
 
-    public static String printLocalDateTime(final LocalDateTime localDateTime) {
-        return localDateTime.format(ISO_DATE_TIME);
+    private final Class<T> type;
+
+    protected AbstractDtoMessageBodyReader(final Class<T> type) {
+        super();
+        this.type = type;
     }
 
 
-    public static LocalDateTime parseLocalDateTime(final String string) {
-        return LocalDateTime.parse(string, ISO_DATE_TIME);
+    @Override
+    public final boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+        return this.type == type;
     }
 
 }

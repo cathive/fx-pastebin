@@ -42,7 +42,7 @@ public class PasteTypeDtoBuilder implements Builder<PasteTypeDto> {
     public static PasteTypeDtoBuilder create(final JsonObject json) {
         if (json == null) { return null; }
         final PasteTypeDtoBuilder builder = new PasteTypeDtoBuilder();
-        builder.id(Long.valueOf(json.getString("id")));
+        builder.id(json.getJsonNumber("id").longValue());
         builder.name(json.getString("name"));
         return builder;
     }

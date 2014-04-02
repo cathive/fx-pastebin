@@ -19,6 +19,8 @@ package com.cathive.fx.pastebin.common.transfer;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import javafx.util.Builder;
 
+import javax.json.JsonObject;
+
 /**
  * Builder for {@link com.cathive.fx.pastebin.common.transfer.UserProfileDto} instances.
  * @author Benjamin P. Jung
@@ -26,7 +28,6 @@ import javafx.util.Builder;
 public class UserProfileDtoBuilder implements Builder<UserProfileDto> {
 
     private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
-
 
     public static UserProfileDtoBuilder create() {
         return new UserProfileDtoBuilder();
@@ -37,6 +38,15 @@ public class UserProfileDtoBuilder implements Builder<UserProfileDto> {
                 .id(entity.getId())
                 .name(entity.getName());
     }
+
+    public static UserProfileDtoBuilder create(final JsonObject json) {
+        if (json == null) { return null; }
+        final UserProfileDtoBuilder builder = new UserProfileDtoBuilder();
+        builder.id(json.getJsonNumber("id").longValue());
+        builder.name(json.getString("name"));
+        return builder;
+    }
+
 
     private Long id;
     private String name;

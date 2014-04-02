@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.common.transfer.adapter;
-
-import java.time.LocalDateTime;
-
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
-
 /**
- * Static adapter method that can handle the new java.time classes correctly.
- * @author Benjamin P. Jung
+ * This package contains entity providers (message body readers and writers)
+ * for JAX-RS that know how to handle the different Java objects in use.
+ * <p>See <a href="https://jersey.java.net/documentation/latest/user-guide.html#message-body-workers">https://jersey.java.net/documentation/latest/user-guide.html#message-body-workers</a>
+ * for further details about how to work with entity providers.</p>
  */
-public class LocalDataTimeAdapter {
 
-    public static String printLocalDateTime(final LocalDateTime localDateTime) {
-        return localDateTime.format(ISO_DATE_TIME);
-    }
-
-
-    public static LocalDateTime parseLocalDateTime(final String string) {
-        return LocalDateTime.parse(string, ISO_DATE_TIME);
-    }
-
-}
+package com.cathive.fx.pastebin.common.rest.conversion;

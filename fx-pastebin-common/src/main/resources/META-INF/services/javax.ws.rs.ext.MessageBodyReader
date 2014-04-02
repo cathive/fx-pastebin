@@ -1,0 +1,4 @@
+com.cathive.fx.pastebin.common.rest.conversion.PasteDtoMessageBodyReader
+com.cathive.fx.pastebin.common.rest.conversion.PasteListDtoMessageBodyReader
+com.cathive.fx.pastebin.common.rest.conversion.PasteTypeDtoMessageBodyReader
+com.cathive.fx.pastebin.common.rest.conversion.UserProfileDtoMessageBodyReader

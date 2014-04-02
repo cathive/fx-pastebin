@@ -53,7 +53,9 @@ public class RootPane extends BorderPane {
 
     @FXML
     public void performRefresh(final ActionEvent event) {
-        System.out.println(this.app.getRestConnection().getRecentPastes());
+        this.app.getRestConnection().getRecentPastes().getPaste().forEach((p) -> {
+            System.out.println(p.getId() + " " + p.getContent());
+        });
     }
 
 }

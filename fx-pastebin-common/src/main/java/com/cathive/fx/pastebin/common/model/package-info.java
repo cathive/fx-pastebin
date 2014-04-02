@@ -14,25 +14,8 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.common.transfer.adapter;
-
-import java.time.LocalDateTime;
-
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
-
 /**
- * Static adapter method that can handle the new java.time classes correctly.
- * @author Benjamin P. Jung
+ * Entity beans used by the client and server components.
  */
-public class LocalDataTimeAdapter {
 
-    public static String printLocalDateTime(final LocalDateTime localDateTime) {
-        return localDateTime.format(ISO_DATE_TIME);
-    }
-
-
-    public static LocalDateTime parseLocalDateTime(final String string) {
-        return LocalDateTime.parse(string, ISO_DATE_TIME);
-    }
-
-}
+package com.cathive.fx.pastebin.common.model;

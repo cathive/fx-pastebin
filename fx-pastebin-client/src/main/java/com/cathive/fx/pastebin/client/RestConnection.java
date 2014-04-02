@@ -17,17 +17,15 @@
 package com.cathive.fx.pastebin.client;
 
 import com.cathive.fx.pastebin.common.transfer.PasteListDto;
+import com.cathive.fx.pastebin.common.transfer.PasteTypeDto;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import java.net.URI;
-import java.util.Collection;
 
 /**
  * @author Benjamin P. Jung
@@ -70,16 +68,17 @@ public class RestConnection {
     public RestConnection(@NamedArg(ENDPOINT_URI_PROPERTY) final URI endpointUri) {
         super();
         this.setEndpointUri(endpointUri);
-        this.setClient(ClientBuilder.newClient());
+        final Client client = ClientBuilder.newClient();
+        this.setClient(client);
     }
 
-    public JsonArray getRecentPastes() {
-        final JsonArray json = this.getClient()
+    public PasteListDto getRecentPastes() {
+        final PasteListDto pasteList = this.getClient()
                 .target(this.getEndpointUri())
                 .path("pastes")
                 .request(MediaType.APPLICATION_JSON)
-                .get(JsonArray.class);
-        return json;
+                .get(PasteListDto.class);
+        return pasteList;
     }
 
 }
