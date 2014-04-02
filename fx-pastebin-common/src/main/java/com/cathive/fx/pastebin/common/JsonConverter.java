@@ -99,4 +99,23 @@ public class JsonConverter {
         userBuilder.add("name", p.getName());
         return userBuilder.build();
     }
+
+    /**
+     * Build a JSON representation of {@link com.cathive.fx.pastebin.common.model.UserProfile}
+     * WITH referenced entities
+     *
+     * @param u            the user profile
+     * @param pastesByUser the referenced pastes
+     * @return the JSON representation
+     */
+    public JsonObject buildUserWithReferences(UserProfile u, Collection<Paste> pastesByUser) {
+        final JsonArrayBuilder pasteArrayBuilder = createArrayBuilder();
+        pastesByUser.stream().map(this::buildPaste).forEach(pasteArrayBuilder::add);
+        final JsonObjectBuilder userBuilder = createObjectBuilder();
+        userBuilder.add("id", u.getId());
+        userBuilder.add("name", u.getName());
+        userBuilder.add("pastes", pasteArrayBuilder);
+        return userBuilder.build();
+
+    }
 }

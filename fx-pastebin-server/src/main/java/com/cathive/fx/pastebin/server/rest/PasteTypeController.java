@@ -17,7 +17,6 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.JsonConverter;
-import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
@@ -27,7 +26,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
 import static javax.json.Json.createArrayBuilder;
 
@@ -49,9 +47,8 @@ public class PasteTypeController {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPasteTypes() {
-        final Collection<PasteType> all = pastebinService.findAllPasteTypes();
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        all.stream().map(jsonConverter::buildPasteType).forEach(returnObject::add);
+        pastebinService.findAllPasteTypes().stream().map(jsonConverter::buildPasteType).forEach(returnObject::add);
         return returnObject.build().toString();
     }
 

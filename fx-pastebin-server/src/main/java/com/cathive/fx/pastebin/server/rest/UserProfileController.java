@@ -16,27 +16,23 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
-import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.JsonConverter;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import com.cathive.fx.pastebin.server.server.PastebinService;
 
 import javax.inject.Inject;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static javax.json.Json.createArrayBuilder;
-import static javax.json.Json.createObjectBuilder;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.UserProfile} instances.
+ *
  * @author Alexander Erben
  */
 @Path("/userProfile")
@@ -46,47 +42,22 @@ public class UserProfileController {
     @Inject
     private PastebinService pastebinService;
 
+    @Inject
+    private JsonConverter jsonConverter;
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllUserProfiles() {
-        final Collection<UserProfile> all = pastebinService.findAllUserProfiles();
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        all.stream().map(this::buildUserProfileJson).forEach(returnObject::add);
+        pastebinService.findAllUserProfiles().stream().map((u) -> jsonConverter.buildUserWithReferences(u, pastebinService.findPastesByUser(u.getId()))).forEach(returnObject::add);
         return returnObject.build().toString();
     }
 
     @GET
     @Path("/id/{id:\\d+}")
     public String getUserProfileById(@PathParam("id") final Long id) {
-        return buildUserProfileJson(pastebinService.findUserProfileById(id)).toString();
-    }
-
-    private JsonObject buildPasteJson(final Paste p) {
-        final JsonObjectBuilder singlePaste = createObjectBuilder();
-        singlePaste.add("id", p.getId());
-        singlePaste.add("title", p.getTitle());
-        singlePaste.add("content", p.getContent());
-        singlePaste.add("creation", p.getCreation().format(ISO_DATE_TIME));
-        singlePaste.add("pasteType", buildPasteTypeForPaste(p));
-        return singlePaste.build();
-    }
-
-    private JsonObject buildUserProfileJson(final UserProfile p) {
-        final JsonObjectBuilder userBuilder = createObjectBuilder();
-        userBuilder.add("id", p.getId());
-        userBuilder.add("name", p.getName());
-        final JsonArrayBuilder userProfiles = createArrayBuilder();
-        final Collection<Paste> pastes = pastebinService.findPastesByUser(p.getId());
-        pastes.stream().map(this::buildPasteJson).forEach(userProfiles::add);
-        userBuilder.add("pastes", userProfiles);
-        return userBuilder.build();
-    }
-
-    private JsonObject buildPasteTypeForPaste(final Paste p) {
-        return createObjectBuilder()
-                .add("id", p.getPasteType().getId())
-                .add("name", p.getPasteType().getName())
-                .build();
+        UserProfile user = pastebinService.findUserProfileById(id);
+        return jsonConverter.buildUserWithReferences(user, pastebinService.findPastesByUser(user.getId())).toString();
     }
 
 
