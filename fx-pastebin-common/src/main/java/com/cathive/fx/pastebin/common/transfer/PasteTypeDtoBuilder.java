@@ -19,6 +19,8 @@ package com.cathive.fx.pastebin.common.transfer;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import javafx.util.Builder;
 
+import javax.json.JsonObject;
+
 /**
  * Builder for {@link com.cathive.fx.pastebin.common.transfer.PasteTypeDto} instances.
  * @author Benjamin P. Jung
@@ -35,6 +37,14 @@ public class PasteTypeDtoBuilder implements Builder<PasteTypeDto> {
         return entity == null ? null : new PasteTypeDtoBuilder()
                 .id(entity.getId())
                 .name(entity.getName());
+    }
+
+    public static PasteTypeDtoBuilder create(final JsonObject json) {
+        if (json == null) { return null; }
+        final PasteTypeDtoBuilder builder = new PasteTypeDtoBuilder();
+        builder.id(Long.valueOf(json.getString("id")));
+        builder.name(json.getString("name"));
+        return builder;
     }
 
 
