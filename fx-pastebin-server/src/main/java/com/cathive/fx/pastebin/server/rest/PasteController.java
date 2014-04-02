@@ -40,21 +40,18 @@ import static javax.json.Json.createArrayBuilder;
 import static javax.json.Json.createObjectBuilder;
 
 /**
- * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste}
+ * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste} instances.
+ * @author Alexander Erben
  * @author Benjamin P. Jung
  */
-@Path("/")
-@Produces({ MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML })
+@Path("/pastes")
+@Produces(MediaType.APPLICATION_JSON)
 public class PasteController {
-
-    /** ObjectFactory to be used to wrap our JAXB types into proper XML elements. */
-    private static final ObjectFactory OBJECT_FACTORY = new ObjectFactory();
 
     @Inject
     private PastebinService pastebinService;
 
     @GET
-    @Path("pastes")
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
         Collection<Paste> allPastes = this.pastebinService.findAllPastes();
@@ -65,11 +62,11 @@ public class PasteController {
 
     @GET
     @Path("/{id:\\d+}")
-    public JAXBElement<PasteDto> getPasteById(@PathParam("id") final Long id) {
-        return OBJECT_FACTORY.createPaste(PasteDtoBuilder.create(this.pastebinService.findPasteById(id)).build());
+    public JsonObject getPasteById(@PathParam("id") final Long id) {
+        return buildPasteJson(this.pastebinService.findPasteById(id));
     }
 
-    private JsonObject buildPasteJson(Paste p) {
+    private JsonObject buildPasteJson(final Paste p) {
         JsonObjectBuilder singlePaste = createObjectBuilder();
         singlePaste.add("id", p.getId());
         singlePaste.add("title", p.getTitle());
@@ -80,14 +77,14 @@ public class PasteController {
         return singlePaste.build();
     }
 
-    private JsonObject buildPasteTypeForPaste(Paste p) {
+    private JsonObject buildPasteTypeForPaste(final Paste p) {
         return createObjectBuilder()
                 .add("id", p.getPasteType().getId())
                 .add("name", p.getPasteType().getName())
                 .build();
     }
 
-    private JsonObject buildUserForPaste(Paste p) {
+    private JsonObject buildUserForPaste(final Paste p) {
         JsonObjectBuilder userBuilder = createObjectBuilder();
         userBuilder.add("id", p.getUserProfile().getId());
         userBuilder.add("name", p.getUserProfile().getName());

@@ -27,7 +27,9 @@ limitations under the License.
         fx:id="root">
 
     <top>
-        <ToolBar fx:id="toolBar"/>
+        <ToolBar fx:id="toolBar">
+            <Button fx:id="refreshButton" text="Refresh"  onAction="#performRefresh"/>
+        </ToolBar>
     </top>
 
 </fx:root>

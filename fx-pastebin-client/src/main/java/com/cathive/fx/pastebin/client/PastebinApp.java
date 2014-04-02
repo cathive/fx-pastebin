@@ -25,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
@@ -33,14 +32,14 @@ import java.util.ResourceBundle;
  */
 public class PastebinApp extends Application {
 
-    // <editor-fold desc="Property: web socket client">
-    public static final String WEB_SOCKET_CLIENT_PROPERTY = "webCocketClient";
-    private final ReadOnlyObjectWrapper<PasteBinWebSocketClient> webSocketClient = new ReadOnlyObjectWrapper<>(this, WEB_SOCKET_CLIENT_PROPERTY);
-    public PasteBinWebSocketClient getWebSocketClient() {
-        return this.webSocketClient.get();
+    // <editor-fold desc="Property: RESTful client">
+    public static final String REST_CONNECTION_PROPERTY = "restConnection";
+    private final ReadOnlyObjectWrapper<RestConnection> restConnection = new ReadOnlyObjectWrapper<>(this, REST_CONNECTION_PROPERTY);
+    public RestConnection getRestConnection() {
+        return this.restConnection.get();
     }
-    public ReadOnlyObjectProperty<PasteBinWebSocketClient> webSocketClientProperty() {
-        return this.webSocketClient.getReadOnlyProperty();
+    public ReadOnlyObjectProperty<RestConnection> restConnectionProperty() {
+        return this.restConnection.getReadOnlyProperty();
     }
     // </editor-fold>
 
@@ -59,7 +58,7 @@ public class PastebinApp extends Application {
 
     @Override
     public void init() throws Exception {
-        this.webSocketClient.set(new PasteBinWebSocketClient(URI.create("http://localhost:8080/fx-pastebin")));
+        this.restConnection.set(new RestConnection(URI.create("http://localhost:8080/fx-pastebin/api")));
         super.init();
     }
 

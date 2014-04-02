@@ -12,7 +12,7 @@ import java.net.URI;
  * @author Benjamin P. Jung
  */
 @ClientEndpoint
-public class PasteBinWebSocketClient {
+public class WebSocketConnection {
 
     // <editor-fold desc="Property: endpoint URI">
     public static final String ENDPOINT_URI_PROPERTY = "endpointUri";
@@ -37,7 +37,7 @@ public class PasteBinWebSocketClient {
     // </editor-fold>
 
 
-    public PasteBinWebSocketClient(@NamedArg(ENDPOINT_URI_PROPERTY) final URI endpointUri) {
+    public WebSocketConnection(@NamedArg(ENDPOINT_URI_PROPERTY) final URI endpointUri) {
         super();
         this.endpointUri.set(endpointUri);
     }

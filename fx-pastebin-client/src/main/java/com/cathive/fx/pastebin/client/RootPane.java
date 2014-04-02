@@ -16,6 +16,8 @@
 
 package com.cathive.fx.pastebin.client;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 
@@ -47,6 +49,11 @@ public class RootPane extends BorderPane {
             throw new RuntimeException("Couldn't construct root pane.", e);
         }
 
+    }
+
+    @FXML
+    public void performRefresh(final ActionEvent event) {
+        System.out.println(this.app.getRestConnection().getRecentPastes());
     }
 
 }

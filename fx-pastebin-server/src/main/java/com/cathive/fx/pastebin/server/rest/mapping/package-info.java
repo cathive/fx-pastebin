@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server.repository;
-
-import com.cathive.fx.pastebin.common.model.PasteType;
-
-import javax.inject.Singleton;
-
 /**
- * @author Alexander Erben
+ * Exception mappers for JAX-RS.
  */
-@Singleton
-public class DefaultPasteTypeRepository extends AbstractRepository<PasteType, Long> implements PasteTypeRepository {
 
-}
+package com.cathive.fx.pastebin.server.rest.mapping;

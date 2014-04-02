@@ -22,33 +22,81 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.cathive.fx.pastebin</groupId>
+            <artifactId>fx-pastebin-common</artifactId>
+            <type>jar</type>
+        </dependency>
+
         <!-- WebSocket API and implementation -->
         <dependency>
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-client-api</artifactId>
             <version>1.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-client</artifactId>
             <version>1.1</version>
+            <type>jar</type>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.tyrus</groupId>
             <artifactId>tyrus-container-grizzly</artifactId>
             <version>1.1</version>
+            <type>jar</type>
+            <scope>runtime</scope>
         </dependency>
 
-        <!-- JSON API -->
+        <!-- JAX-RS API and implementation -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.2</version>
+            <type>jar</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-processing</artifactId>
+            <version>2.2</version>
+            <type>jar</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Persistence API (JPA) -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.1.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- JSON API and implementation-->
         <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
             <version>1.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.json</artifactId>
             <version>1.0.1</version>
+            <type>jar</type>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Unit tests -->
@@ -69,7 +117,8 @@
         </dependency>
 
 
-	</dependencies>
+    </dependencies>
 
-	<build/>
+    <build/>
+
 </project>
