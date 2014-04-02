@@ -33,7 +33,7 @@ import static java.util.UUID.randomUUID;
  * @author Alexander Erben
  */
 @ApplicationScoped
-public class Configuration {
+class Configuration {
 
     @Produces
     public PastebinService getPastebinService() {

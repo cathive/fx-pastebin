@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class InMemPasteRepository implements PasteRepository {
 
-    Map<Long, Paste> pastes = new HashMap<>();
+    private final Map<Long, Paste> pastes = new HashMap<>();
 
     @Override
     public Collection<Paste> findAll() {
