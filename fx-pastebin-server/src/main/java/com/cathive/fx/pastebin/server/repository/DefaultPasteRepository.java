@@ -16,7 +16,7 @@ public class DefaultPasteRepository extends AbstractRepository<Paste, Long> impl
 
     @PostConstruct
     public void fillWithDummyData() {
-        /* LongStream.range(1, 30).forEach(
+        LongStream.range(1, 30).forEach(
                 i -> {
                     Paste p = new Paste();
                     p.setId(i);
@@ -24,6 +24,6 @@ public class DefaultPasteRepository extends AbstractRepository<Paste, Long> impl
                     p.setContent(randomUUID().toString());
                     this.save(p);
                 }
-        ); */
+        );
     }
 }
