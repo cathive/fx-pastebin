@@ -48,6 +48,12 @@ public class PasteController {
     @Named("converter")
     private JsonConverter jsonConverter;
 
+    /**
+     * Return all {@link com.cathive.fx.pastebin.common.model.Paste}
+     * References suppressed
+     *
+     * @return JSON
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
@@ -57,6 +63,12 @@ public class PasteController {
         return returnObject.build().toString();
     }
 
+    /**
+     * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by id
+     * References suppressed
+     * @param id to search for
+     * @return JSON
+     */
     @GET
     @Path("/id/{id:\\d+}")
     public String getPasteById(@PathParam("id") final Long id) {
@@ -64,6 +76,12 @@ public class PasteController {
         return jsonConverter.buildPaste(paste).toString();
     }
 
+    /**
+     * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.UserProfile} id
+     * References suppressed
+     * @param id to search for
+     * @return JSON
+     */
     @GET
     @Path("/user/{user:\\d+}")
     public String getPastesByUserProfile(@PathParam("user") final Long id) {
@@ -74,6 +92,12 @@ public class PasteController {
         return returnObject.build().toString();
     }
 
+    /**
+     * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.PasteType} id
+     * References suppressed
+     * @param id to search for
+     * @return JSON
+     */
     @GET
     @Path("/type/{type:\\d+}")
     public String getPasteByPasteType(@PathParam("type") final Long id) {

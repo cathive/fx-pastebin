@@ -24,6 +24,7 @@ import javax.ejb.Local;
 import java.util.Collection;
 
 /**
+ * Service for all Entities
  * @author Alexander Erben
  */
 @Local

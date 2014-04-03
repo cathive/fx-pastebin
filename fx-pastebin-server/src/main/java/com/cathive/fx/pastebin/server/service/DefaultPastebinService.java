@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 /**
+ * Default service for all Entities
  * @author Alexander Erben
  */
 @Singleton

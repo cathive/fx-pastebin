@@ -21,6 +21,7 @@ import com.cathive.fx.pastebin.common.model.PasteType;
 import javax.ejb.Local;
 
 /**
+ * Repository for {@link com.cathive.fx.pastebin.common.model.PasteType}
  * @author Alexander Erben
  */
 @Local

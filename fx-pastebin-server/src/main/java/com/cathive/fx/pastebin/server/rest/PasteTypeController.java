@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 import static javax.json.Json.createArrayBuilder;
 
 /**
- * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.UserProfile} instances.
+ * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.PasteType} instances.
  *
  * @author Alexander Erben
  */
@@ -46,6 +46,10 @@ public class PasteTypeController {
     @Named("converter")
     private JsonConverter jsonConverter;
 
+    /**
+     * Return all {@link com.cathive.fx.pastebin.common.model.PasteType} as JSON
+     * @return the JSON
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPasteTypes() {
@@ -54,6 +58,11 @@ public class PasteTypeController {
         return returnObject.build().toString();
     }
 
+    /**
+     * Retrieve a {@link com.cathive.fx.pastebin.common.model.PasteType} by id
+     * @param id to search for
+     * @return JSON
+     */
     @GET
     @Path("/id/{id:\\d+}")
     public String getPasteTypeById(@PathParam("id") final Long id) {

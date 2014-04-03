@@ -47,6 +47,11 @@ public class UserProfileController {
     @Named("converter")
     private JsonConverter jsonConverter;
 
+    /**
+     * Retrieve all {@link com.cathive.fx.pastebin.common.model.UserProfile} as JSON.
+     *
+     * @return the JSON
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllUserProfiles() {
@@ -55,10 +60,15 @@ public class UserProfileController {
         return returnObject.build().toString();
     }
 
+    /**
+     * Retrieve a {@link com.cathive.fx.pastebin.common.model.UserProfile} by id as JSON
+     * @param id to search for
+     * @return JSON
+     */
     @GET
     @Path("/id/{id:\\d+}")
     public String getUserProfileById(@PathParam("id") final Long id) {
-        UserProfile user = pastebinService.findUserProfileById(id);
+        final UserProfile user = pastebinService.findUserProfileById(id);
         return jsonConverter.buildUserWithReferences(user, pastebinService.findPastesByUser(user.getId())).toString();
     }
 

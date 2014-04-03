@@ -22,6 +22,8 @@ import javax.inject.Singleton;
 import java.util.Collection;
 
 /**
+ * Default Repository for {@link com.cathive.fx.pastebin.common.model.Paste}
+ *
  * @author Alexander Erben
  */
 @Singleton

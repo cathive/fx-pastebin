@@ -21,6 +21,7 @@ import com.cathive.fx.pastebin.common.model.UserProfile;
 import javax.inject.Singleton;
 
 /**
+ * Default JPA Repository for {@link com.cathive.fx.pastebin.common.model.PasteType}
  * @author Alexander Erben
  */
 @Singleton
