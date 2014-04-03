@@ -1,4 +1,4 @@
-package com.cathive.fx.pastebin.common.rest.conversion;
+package com.cathive.fx.pastebin.common.rest.conversion.pastetype;
 
 import com.cathive.fx.pastebin.common.model.PasteType;
 

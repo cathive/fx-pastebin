@@ -22,14 +22,12 @@ import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import static javax.json.Json.createArrayBuilder;
+import java.util.Collection;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.Paste} instances.
@@ -56,11 +54,8 @@ public class PasteController {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllPastes() {
-        final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findAllPastes().stream().map(jsonConverter::buildPaste)
-                .forEach(returnObject::add);
-        return returnObject.build().toString();
+    public Collection<Paste> getAllPastes() {
+        return pastebinService.findAllPastes();
     }
 
     /**
@@ -71,9 +66,8 @@ public class PasteController {
      */
     @GET
     @Path("/id/{id:\\d+}")
-    public String getPasteById(@PathParam("id") final Long id) {
-        Paste paste = this.pastebinService.findPasteById(id);
-        return jsonConverter.buildPaste(paste).toString();
+    public Paste getPasteById(@PathParam("id") final Long id) {
+        return pastebinService.findPasteById(id);
     }
 
     /**
@@ -84,12 +78,8 @@ public class PasteController {
      */
     @GET
     @Path("/user/{user:\\d+}")
-    public String getPastesByUserProfile(@PathParam("user") final Long id) {
-        final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findPastesByUser(id).stream().map(
-                jsonConverter::buildPaste)
-                .forEach(returnObject::add);
-        return returnObject.build().toString();
+    public Collection<Paste> getPastesByUserProfile(@PathParam("user") final Long id) {
+        return pastebinService.findPastesByUser(id);
     }
 
     /**
@@ -100,12 +90,7 @@ public class PasteController {
      */
     @GET
     @Path("/type/{type:\\d+}")
-    public String getPasteByPasteType(@PathParam("type") final Long id) {
-        final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findPastesByUser(id).stream().map(
-                jsonConverter::buildPaste)
-                .forEach(returnObject::add);
-        return returnObject.build().toString();
-
+    public Collection<Paste> getPastesByPasteType(@PathParam("type") final Long id) {
+        return pastebinService.findPastesByUser(id);
     }
 }

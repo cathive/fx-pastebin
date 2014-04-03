@@ -16,20 +16,16 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
-import com.cathive.fx.pastebin.common.JsonConverter;
 import com.cathive.fx.pastebin.common.model.UserProfile;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import static javax.json.Json.createArrayBuilder;
+import java.util.Collection;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.UserProfile} instances.
@@ -43,10 +39,6 @@ public class UserProfileController {
     @Inject
     private PastebinService pastebinService;
 
-    @Inject
-    @Named("converter")
-    private JsonConverter jsonConverter;
-
     /**
      * Retrieve all {@link com.cathive.fx.pastebin.common.model.UserProfile} as JSON.
      *
@@ -54,22 +46,20 @@ public class UserProfileController {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllUserProfiles() {
-        final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findAllUserProfiles().stream().map((u) -> jsonConverter.buildUserWithReferences(u, pastebinService.findPastesByUser(u.getId()))).forEach(returnObject::add);
-        return returnObject.build().toString();
+    public Collection<UserProfile> getAllUserProfiles() {
+        return pastebinService.findAllUserProfiles();
     }
 
     /**
      * Retrieve a {@link com.cathive.fx.pastebin.common.model.UserProfile} by id as JSON
+     *
      * @param id to search for
      * @return JSON
      */
     @GET
     @Path("/id/{id:\\d+}")
-    public String getUserProfileById(@PathParam("id") final Long id) {
-        final UserProfile user = pastebinService.findUserProfileById(id);
-        return jsonConverter.buildUserWithReferences(user, pastebinService.findPastesByUser(user.getId())).toString();
+    public UserProfile getUserProfileById(@PathParam("id") final Long id) {
+        return pastebinService.findUserProfileById(id);
     }
 
 
