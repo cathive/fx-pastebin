@@ -50,7 +50,7 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
                 .title(entity.getTitle())
                 .content(entity.getContent())
                 .pasteTypeId(entity.getPasteType().getId())
-                .created(entity.getCreation());
+                .created(entity.getCreated());
         final UserProfile userProfile = entity.getUserProfile();
         if (userProfile != null) {
             builder.userProfileId(userProfile.getId());

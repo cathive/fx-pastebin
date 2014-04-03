@@ -45,7 +45,7 @@ public class Paste implements Serializable {
 
     private Long id;
 
-    private LocalDateTime creation;
+    private LocalDateTime created;
 
     @Id
     public Long getId() {
@@ -93,12 +93,12 @@ public class Paste implements Serializable {
     }
 
     @Column
-    public LocalDateTime getCreation() {
-        return creation;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setCreation(LocalDateTime creation) {
-        this.creation = creation;
+    public void setCreated(LocalDateTime creation) {
+        this.created = creation;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Paste implements Serializable {
                 ", pasteType=" + pasteType +
                 ", userProfile=" + userProfile +
                 ", id=" + id +
-                ", creation=" + creation +
+                ", creation=" + created +
                 '}';
     }
 
@@ -122,7 +122,7 @@ public class Paste implements Serializable {
 
         if (content != null ? !content.equals(paste.content) : paste.content != null) return false;
         if (id != null ? !id.equals(paste.id) : paste.id != null) return false;
-        if (creation != null ? !creation.equals(paste.creation) : paste.creation != null) return false;
+        if (created != null ? !created.equals(paste.created) : paste.created != null) return false;
         if (pasteType != null ? !pasteType.equals(paste.pasteType) : paste.pasteType != null) return false;
         if (title != null ? !title.equals(paste.title) : paste.title != null) return false;
         if (userProfile != null ? !userProfile.equals(paste.userProfile) : paste.userProfile != null) return false;
@@ -137,7 +137,7 @@ public class Paste implements Serializable {
         result = 31 * result + (pasteType != null ? pasteType.hashCode() : 0);
         result = 31 * result + (userProfile != null ? userProfile.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (creation != null ? creation.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
         return result;
     }
 }

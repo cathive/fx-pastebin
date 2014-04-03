@@ -72,7 +72,7 @@ public class Fixture {
                     p.setId(i);
                     p.setTitle(rand());
                     p.setContent(rand());
-                    p.setCreation(now());
+                    p.setCreated(now());
                     p.setUserProfile(createUserProfile(i, p));
                     p.setPasteType(createPasteType(i));
                     testPasteRepo.save(p);

@@ -47,7 +47,7 @@ public class JsonConverter {
         singlePaste.add("id", p.getId());
         singlePaste.add("title", p.getTitle());
         singlePaste.add("content", p.getContent());
-        singlePaste.add("creation", p.getCreation().format(ISO_DATE_TIME));
+        singlePaste.add("creation", p.getCreated().format(ISO_DATE_TIME));
         return singlePaste.build();
     }
 
@@ -97,7 +97,7 @@ public class JsonConverter {
         singlePaste.add("id", p.getId());
         singlePaste.add("title", p.getTitle());
         singlePaste.add("content", p.getContent());
-        singlePaste.add("creation", p.getCreation().format(ISO_DATE_TIME));
+        singlePaste.add("creation", p.getCreated().format(ISO_DATE_TIME));
         singlePaste.add("user", buildUser(user));
         singlePaste.add("pasteType", buildPasteType(pasteType));
         return singlePaste.build();
