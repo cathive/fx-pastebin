@@ -16,12 +16,17 @@
 
 package com.cathive.fx.pastebin.common.rest.conversion.common;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.MessageBodyReader;
+import javax.ws.rs.ext.Providers;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 
@@ -31,9 +36,27 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
  */
 public abstract class AbstractCollectionMessageBodyReader<T> implements MessageBodyReader<Collection<T>> {
 
+    private static final Map<Class<?>, AbstractMessageBodyReader<?>> ENTITY_MESSAGE_BODY_READERS;
+    static {
+        ENTITY_MESSAGE_BODY_READERS = new HashMap<>();
+
+        // TODO In a JavaEE / JAX-RS server context the following lines don't need to be executed!
+        ServiceLoader.load(MessageBodyReader.class).forEach(r -> {
+            if (r instanceof AbstractMessageBodyReader) {
+                final Class<?> entityClass = (Class<?>) ((ParameterizedType) r.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+                ENTITY_MESSAGE_BODY_READERS.put(entityClass, (AbstractMessageBodyReader<?>) r);
+            }
+        });
+
+    }
+
+    @Context
+    private Providers providers;
+
     private final Class<T> t;
 
     protected AbstractCollectionMessageBodyReader(Class<T> type) {
+        super();
         this.t = type;
     }
 
@@ -44,6 +67,31 @@ public abstract class AbstractCollectionMessageBodyReader<T> implements MessageB
             return actualTypeArgs.length == 1 && actualTypeArgs[0].equals(t);
         }
         return false;
+    }
+
+    /**
+     * Returns a {@link javax.ws.rs.ext.MessageBodyReader} instance from the JAX-RS context for the type
+     * that is contained in the collection that this reader is able to process.
+     * <p>This class is basically a workaround, because the JAX-RS <em>client</em> API
+     * doesn't honor the {@link javax.ws.rs.core.Context @Context} annotation in a
+     * Java SE environment.</p>
+     * @param annotations
+     *         Annotations associated with the current invocation context.
+     * @param mediaType
+     *         Media type of the requested message body reader.
+     * @return
+     *         A message body reader for the type of entities that are contained within
+     *         collections that this reader is able to process.
+     */
+    public AbstractMessageBodyReader<T> getEntityMessageBodyReader(final Annotation[] annotations, MediaType mediaType) {
+
+        if (this.providers == null) {
+            // Workaround for JavaSE JAX-RS clients that don't know anything
+            // about the injected providers.
+            return (AbstractMessageBodyReader<T>) ENTITY_MESSAGE_BODY_READERS.get(t);
+        }
+
+        return (AbstractMessageBodyReader<T>) this.providers.getMessageBodyReader(t, t, annotations, mediaType);
     }
 
 }

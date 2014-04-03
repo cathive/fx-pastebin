@@ -19,15 +19,13 @@ package com.cathive.fx.pastebin.common.rest.conversion.pastetype;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.common.rest.conversion.common.AbstractCollectionMessageBodyReader;
 
-import javax.json.Json;
+import javax.json.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
-import javax.ws.rs.ext.Providers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
@@ -40,11 +38,8 @@ import java.util.List;
  * @author Benjamin P. Jung
  */
 @Provider
-@Consumes
+@Consumes(MediaType.APPLICATION_JSON)
 public class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMessageBodyReader<PasteType> {
-
-    @Context
-    private Providers providers;
 
     public PasteTypeCollectionMessageBodyReader() {
         super(PasteType.class);
@@ -54,14 +49,15 @@ public class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMess
     @Override
     public Collection<PasteType> readFrom(Class<Collection<PasteType>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
         final List pasteTypes = new ArrayList<>();
-        final MessageBodyReader<PasteType> reader = providers.getMessageBodyReader(PasteType.class, PasteType.class, annotations, mediaType);
-        Json.createReader(entityStream).readArray().forEach((jsonValue) -> {
-            try {
-                pasteTypes.add(reader.readFrom(PasteType.class, PasteType.class, annotations, mediaType, httpHeaders, entityStream));
-            } catch (final IOException e) {
-                throw new IllegalStateException(e);
+        final JsonReader jsonReader = Json.createReader(entityStream);
+        final JsonArray jsonArray = jsonReader.readArray();
+        try {
+            for (final JsonValue jsonValue: jsonArray) {
+                pasteTypes.add(this.getEntityMessageBodyReader(annotations, mediaType).read(jsonValue));
             }
-        });
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
+        }
         return pasteTypes;
     }
 
