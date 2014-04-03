@@ -16,12 +16,10 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
-import com.cathive.fx.pastebin.common.JsonConverter;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -40,11 +38,6 @@ public class PasteTypeController {
 
     @Inject
     private PastebinService pastebinService;
-
-    @Inject
-    @Named("converter")
-    private JsonConverter jsonConverter;
-
 
     /**
      * Return all {@link com.cathive.fx.pastebin.common.model.PasteType} as JSON
