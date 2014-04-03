@@ -22,7 +22,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
- * Common boilerplate methods for {@link javax.ws.rs.ext.MessageBodyWriter}
+ * Common boilerplate methods for {@link javax.ws.rs.ext.MessageBodyReader}
  * @author Alexander Erben
  */
 public abstract class AbstractMessageBodyReader<T> implements MessageBodyReader<T> {
