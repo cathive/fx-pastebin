@@ -50,7 +50,7 @@
         </center>
     </BorderPane>
 
-    <HBox fx:id="statusBar">
+    <HBox fx:id="statusBar" styleClass="status-bar">
         <Label text="TODO: status bar"/>
     </HBox>
 

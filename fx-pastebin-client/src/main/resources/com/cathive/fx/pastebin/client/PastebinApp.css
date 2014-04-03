@@ -1,0 +1,55 @@
+/*
+ * Copyright (C) 2014 The Cat Hive Developers.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.root {
+
+    /* Looked up colors */
+    solarized-base03: #002b36;
+    solarized-base02: #073642;
+    solarized-base01: #586e75;
+    solarized-base00: #657b83;
+    solarized-base0: #839496;
+    solarized-base1: #93a1a1;
+    solarized-base2: #eee8d5;
+    solarized-base3: #fdf6e3;
+    solarized-yellow: #b58900;
+    solarized-orange: #cb4b16;
+    solarized-red: #dc322f;
+    solarized-magenta: #d33682;
+    solarized-violet: #6c71c4;
+    solarized-blue: #268bd2;
+    solarized-cyan: #2aa198;
+    solarized-green: #859900;
+
+    -fx-base: solarized-base03;
+    -fx-background: solarized-base02;
+
+    -fx-control-inner-background: derive(-fx-base,80%);
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background,-2%);
+
+    -fx-dark-text-color: solarized-base03;
+    -fx-mid-text-color: solarized-base2;
+    -fx-light-text-color: solarized-base3;
+
+    -fx-accent: solarized-green;
+    -fx-default-button: solarized-violet;
+
+    -fx-focus-color: solarized-base0;
+    -fx-faint-focus-color: #83949633;
+
+    -fx-color: -fx-base;
+
+}

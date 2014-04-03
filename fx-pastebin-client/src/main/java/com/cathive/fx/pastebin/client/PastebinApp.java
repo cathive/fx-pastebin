@@ -70,12 +70,12 @@ public class PastebinApp extends Application {
         loader.setRoot(this);
         loader.setController(this);
         loader.load();
-
         primaryStage.setWidth(960);
         primaryStage.setHeight(540);
         primaryStage.setTitle(this.resources.getString(Messages.APP_TITLE));
 
         final Scene scene = new Scene(new RootPane(this));
+        scene.getStylesheets().add(getClass().getResource("PastebinApp.css").toExternalForm());
 
         primaryStage.setScene(scene);
 
