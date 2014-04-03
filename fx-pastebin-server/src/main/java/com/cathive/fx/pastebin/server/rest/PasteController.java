@@ -90,11 +90,11 @@ public class PasteController {
     }
 
     @POST
-    @Path("/add/user/{user:\\d+}/type/{type:\\d+}")
-    public Response addPaste(Paste paste,
+    @Path("/save/user/{user:\\d+}/type/{type:\\d+}")
+    public Response savePaste(Paste paste,
                              @PathParam("user") final Long userId,
                              @PathParam("type") final Long typeId) {
-        pastebinService.addPaste(paste, userId, typeId);
+        pastebinService.savePaste(paste, userId, typeId);
         return Response.ok().build();
     }
 

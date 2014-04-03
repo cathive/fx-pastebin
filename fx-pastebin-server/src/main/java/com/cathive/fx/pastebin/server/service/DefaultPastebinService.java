@@ -68,11 +68,6 @@ public class DefaultPastebinService implements PastebinService {
     }
 
     @Override
-    public Paste savePaste(Paste toSave) {
-        return pasteRepository.save(toSave);
-    }
-
-    @Override
     public void deletePaste(Paste toDelete) {
         pasteRepository.delete(toDelete);
     }
@@ -127,13 +122,13 @@ public class DefaultPastebinService implements PastebinService {
     }
 
     @Override
-    public void addPaste(Paste paste, Long userId, Long typeId) {
+    public Paste savePaste(Paste paste, Long userId, Long typeId) {
         UserProfile user = userProfileRepository.findOne(userId);
         if (user == null) throw new IllegalArgumentException("User with id "+userId+" not found");
         PasteType type = pasteTypeRepository.findOne(typeId);
         if (type == null) throw new IllegalArgumentException("Paste Type with id "+typeId+" not found");
         paste.setUserProfile(user);
         paste.setPasteType(type);
-        pasteRepository.save(paste);
+        return pasteRepository.save(paste);
     }
 }

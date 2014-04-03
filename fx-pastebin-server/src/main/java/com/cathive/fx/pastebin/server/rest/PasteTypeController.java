@@ -20,11 +20,9 @@ import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -58,6 +56,13 @@ public class PasteTypeController {
     @Path("/id/{id:\\d+}")
     public PasteType getPasteTypeById(@PathParam("id") final Long id) {
         return pastebinService.findPasteTypeById(id);
+    }
+
+    @POST
+    @Path("/save")
+    public Response savePasteType (PasteType pasteType) {
+        pastebinService.savePasteType(pasteType);
+        return Response.ok().build();
     }
 
 }

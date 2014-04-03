@@ -20,11 +20,9 @@ import com.cathive.fx.pastebin.common.model.UserProfile;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -62,5 +60,11 @@ public class UserProfileController {
         return pastebinService.findUserProfileById(id);
     }
 
+    @POST
+    @Path("/save")
+    public Response saveUserProfile(UserProfile user) {
+        pastebinService.saveUserProfile(user);
+        return Response.ok().build();
+    }
 
 }

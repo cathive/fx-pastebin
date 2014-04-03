@@ -42,8 +42,6 @@ public interface PastebinService {
 
     UserProfile findUserProfileById(Long id);
 
-    Paste savePaste(Paste toSave);
-
     void deletePaste(Paste toDelete);
 
     UserProfile saveUserProfile(UserProfile toSave);
@@ -58,5 +56,5 @@ public interface PastebinService {
 
     void deletePasteType(PasteType toDelete);
 
-    void addPaste(Paste paste, Long userId, Long typeId);
+    Paste savePaste(Paste paste, Long userId, Long typeId);
 }
