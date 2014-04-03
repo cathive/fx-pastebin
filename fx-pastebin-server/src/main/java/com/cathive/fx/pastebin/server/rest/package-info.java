@@ -16,6 +16,5 @@
 
 /**
  * Contains the REST interface
- * @author Alexander Erben
  */
 package com.cathive.fx.pastebin.server.rest;
