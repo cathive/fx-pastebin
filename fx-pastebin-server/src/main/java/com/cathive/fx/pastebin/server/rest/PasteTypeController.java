@@ -30,7 +30,7 @@ import java.util.Collection;
  *
  * @author Alexander Erben
  */
-@Path("/pasteType")
+@Path("/pasteTypes")
 @Produces(MediaType.APPLICATION_JSON)
 public class PasteTypeController {
 

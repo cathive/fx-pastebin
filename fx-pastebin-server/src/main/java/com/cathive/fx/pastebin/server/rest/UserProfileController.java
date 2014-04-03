@@ -30,7 +30,7 @@ import java.util.Collection;
  *
  * @author Alexander Erben
  */
-@Path("/userProfile")
+@Path("/userProfiles")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserProfileController {
 

@@ -71,7 +71,7 @@ public class PasteController {
      * @return JSON
      */
     @GET
-    @Path("/user/{user:\\d+}")
+    @Path("/userProfile/{user:\\d+}")
     public Collection<Paste> getPastesByUserProfile(@PathParam("user") final Long id) {
         return pastebinService.findPastesByUser(id);
     }
@@ -84,13 +84,13 @@ public class PasteController {
      * @return JSON
      */
     @GET
-    @Path("/type/{type:\\d+}")
+    @Path("/pasteType/{type:\\d+}")
     public Collection<Paste> getPastesByPasteType(@PathParam("type") final Long id) {
         return pastebinService.findPastesByUser(id);
     }
 
     @POST
-    @Path("/save/user/{user:\\d+}/type/{type:\\d+}")
+    @Path("/save/userProfile/{user:\\d+}/pasteType/{type:\\d+}")
     public Response savePaste(Paste paste,
                              @PathParam("user") final Long userId,
                              @PathParam("type") final Long typeId) {
