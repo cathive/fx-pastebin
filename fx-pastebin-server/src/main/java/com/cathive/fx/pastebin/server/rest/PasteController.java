@@ -52,8 +52,7 @@ public class PasteController {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllPastes() {
         final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findAllPastes().stream().map((p) ->
-                jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+        pastebinService.findAllPastes().stream().map(jsonConverter::buildPaste)
                 .forEach(returnObject::add);
         return returnObject.build().toString();
     }
@@ -62,7 +61,7 @@ public class PasteController {
     @Path("/id/{id:\\d+}")
     public String getPasteById(@PathParam("id") final Long id) {
         Paste paste = this.pastebinService.findPasteById(id);
-        return jsonConverter.buildPasteWithReferences(paste, paste.getUserProfile(), paste.getPasteType()).toString();
+        return jsonConverter.buildPaste(paste).toString();
     }
 
     @GET
@@ -70,7 +69,7 @@ public class PasteController {
     public String getPastesByUserProfile(@PathParam("user") final Long id) {
         final JsonArrayBuilder returnObject = createArrayBuilder();
         pastebinService.findPastesByUser(id).stream().map(
-                (p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+                jsonConverter::buildPaste)
                 .forEach(returnObject::add);
         return returnObject.build().toString();
     }
@@ -80,11 +79,9 @@ public class PasteController {
     public String getPasteByPasteType(@PathParam("type") final Long id) {
         final JsonArrayBuilder returnObject = createArrayBuilder();
         pastebinService.findPastesByUser(id).stream().map(
-                (p) -> jsonConverter.buildPasteWithReferences(p, p.getUserProfile(), p.getPasteType()))
+                jsonConverter::buildPaste)
                 .forEach(returnObject::add);
         return returnObject.build().toString();
 
     }
-
-
 }

@@ -48,6 +48,8 @@ public class JsonConverter {
         singlePaste.add("title", p.getTitle());
         singlePaste.add("content", p.getContent());
         singlePaste.add("creation", p.getCreated().format(ISO_DATE_TIME));
+        singlePaste.add("userProfile_id", p.getUserProfile().getId());
+        singlePaste.add("pasteType_id", p.getPasteType().getId());
         return singlePaste.build();
     }
 
