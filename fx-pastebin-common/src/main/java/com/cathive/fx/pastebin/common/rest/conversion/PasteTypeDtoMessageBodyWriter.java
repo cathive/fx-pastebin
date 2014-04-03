@@ -18,6 +18,7 @@ package com.cathive.fx.pastebin.common.rest.conversion;
 
 import com.cathive.fx.pastebin.common.transfer.PasteTypeDto;
 
+import javax.json.JsonWriter;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -43,11 +44,12 @@ public class PasteTypeDtoMessageBodyWriter extends AbstractDtoMessageBodyWriter<
 
     @Override
     public void writeTo(PasteTypeDto pasteTypeDto, Class<?> aClass, Type type, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> stringObjectMultivaluedMap, OutputStream outputStream) throws IOException, WebApplicationException {
-        createWriter(outputStream).writeObject(
-                createObjectBuilder()
+        final JsonWriter jsonWriter = createWriter(outputStream);
+        jsonWriter.writeObject(createObjectBuilder()
                         .add("id", pasteTypeDto.getId())
                         .add("name", pasteTypeDto.getName())
                         .build());
+        jsonWriter.close();
     }
 
 }
