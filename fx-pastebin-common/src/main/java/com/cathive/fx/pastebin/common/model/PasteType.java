@@ -16,6 +16,8 @@
 
 package com.cathive.fx.pastebin.common.model;
 
+import javafx.beans.NamedArg;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -36,6 +38,23 @@ public class PasteType implements Serializable {
     private Collection<Paste> pastes;
 
     private Long id;
+
+
+    public PasteType() {
+        super();
+    }
+
+    public PasteType(@NamedArg("id") final Long id, @NamedArg("name") final String name) {
+        this();
+        this.setId(id);
+        this.setName(name);
+    }
+
+    public PasteType(@NamedArg("name") final String name) {
+        this();
+        this.setName(name);
+    }
+
 
     @Id
     public Long getId() {
