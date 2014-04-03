@@ -65,8 +65,8 @@ public class PasteDtoBuilder implements Builder<PasteDto> {
         builder.id(json.getJsonNumber("id").longValue());
         builder.title(json.getString("title"));
         builder.content(json.getString("content"));
-        builder.userProfileId(json.getJsonNumber("user").longValue());
-        builder.pasteTypeId(json.getJsonNumber("pasteType").longValue());
+        builder.userProfileId(json.getJsonNumber("userProfile_id").longValue());
+        builder.pasteTypeId(json.getJsonNumber("pasteType_id").longValue());
         builder.created(LocalDateTime.parse(json.getString("created"), DateTimeFormatter.ISO_DATE_TIME));
         return builder;
     }
