@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 /**
  * @author Benjamin P. Jung
  */
-public class RootPane extends BorderPane {
+public class RootPane extends VBox {
 
     private final PastebinApp app;
 

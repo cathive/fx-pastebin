@@ -18,18 +18,42 @@ limitations under the License.
 
 <?language javascript?>
 
-<?import javafx.scene.control.ToolBar?>
-
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <fx:root xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
-         type="javafx.scene.layout.BorderPane"
+         type="javafx.scene.layout.VBox"
         fx:id="root">
 
-    <top>
-        <ToolBar fx:id="toolBar">
-            <Button fx:id="refreshButton" text="Refresh"  onAction="#performRefresh"/>
-        </ToolBar>
-    </top>
+    <MenuBar fx:id="menuBar">
+
+    </MenuBar>
+    <BorderPane VBox.vgrow="ALWAYS">
+        <top>
+            <HBox fx:id="toolBar" styleClass="tool-bar">
+                <HBox alignment="BASELINE_LEFT" HBox.hgrow="ALWAYS">
+                    <Button fx:id="refreshButton" text="Refresh"  onAction="#performRefresh"/>
+                </HBox>
+                <HBox alignment="BASELINE_RIGHT" HBox.hgrow="ALWAYS">
+                    <org.controlsfx.control.textfield.TextFields fx:factory="createSearchField" fx:id="searchTextField"/>
+                </HBox>
+            </HBox>
+        </top>
+        <center>
+            <SplitPane orientation="HORIZONTAL">
+
+            </SplitPane>
+        </center>
+    </BorderPane>
+
+    <HBox fx:id="statusBar">
+        <Label text="TODO: status bar"/>
+    </HBox>
 
 </fx:root>

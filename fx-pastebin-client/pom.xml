@@ -28,6 +28,15 @@
             <type>jar</type>
         </dependency>
 
+        <!-- UI components libraries -->
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.0.5</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- WebSocket API and implementation -->
         <dependency>
             <groupId>javax.websocket</groupId>
