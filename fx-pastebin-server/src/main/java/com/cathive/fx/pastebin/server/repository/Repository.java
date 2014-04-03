@@ -41,6 +41,8 @@ interface Repository<T, ID extends Serializable> extends Serializable {
 
     T findOne(ID id);
 
+    void flush();
+
     Iterable<T> save(Iterable<T> entities);
 
     T save(T entity);

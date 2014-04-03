@@ -20,11 +20,9 @@ import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -55,6 +53,7 @@ public class PasteController {
     /**
      * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by id
      * References suppressed
+     *
      * @param id to search for
      * @return JSON
      */
@@ -67,6 +66,7 @@ public class PasteController {
     /**
      * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.UserProfile} id
      * References suppressed
+     *
      * @param id to search for
      * @return JSON
      */
@@ -79,6 +79,7 @@ public class PasteController {
     /**
      * Return a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.PasteType} id
      * References suppressed
+     *
      * @param id to search for
      * @return JSON
      */
@@ -87,4 +88,14 @@ public class PasteController {
     public Collection<Paste> getPastesByPasteType(@PathParam("type") final Long id) {
         return pastebinService.findPastesByUser(id);
     }
+
+    @POST
+    @Path("/add/user/{user:\\d+}/type/{type:\\d+}")
+    public Response addPaste(Paste paste,
+                             @PathParam("user") final Long userId,
+                             @PathParam("type") final Long typeId) {
+        pastebinService.addPaste(paste, userId, typeId);
+        return Response.ok().build();
+    }
+
 }

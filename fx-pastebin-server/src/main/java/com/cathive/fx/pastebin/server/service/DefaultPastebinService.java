@@ -125,4 +125,15 @@ public class DefaultPastebinService implements PastebinService {
     public void deletePasteType(PasteType toDelete) {
         pasteTypeRepository.delete(toDelete);
     }
+
+    @Override
+    public void addPaste(Paste paste, Long userId, Long typeId) {
+        UserProfile user = userProfileRepository.findOne(userId);
+        if (user == null) throw new IllegalArgumentException("User with id "+userId+" not found");
+        PasteType type = pasteTypeRepository.findOne(typeId);
+        if (type == null) throw new IllegalArgumentException("Paste Type with id "+typeId+" not found");
+        paste.setUserProfile(user);
+        paste.setPasteType(type);
+        pasteRepository.save(paste);
+    }
 }

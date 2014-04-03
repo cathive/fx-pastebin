@@ -48,6 +48,7 @@ public class Paste implements Serializable {
     private LocalDateTime created;
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

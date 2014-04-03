@@ -97,6 +97,11 @@ abstract class AbstractRepository<T, ID extends Serializable> implements Reposit
     }
 
     @Override
+    public void flush() {
+            em.flush();
+    }
+
+    @Override
     public Iterable<T> save(final Iterable<T> entities) {
         final Collection<T> ret = new ArrayList<>();
         entities.forEach((t) -> ret.add(save(t)));

@@ -57,4 +57,6 @@ public interface PastebinService {
     PasteType savePasteType(PasteType toSave);
 
     void deletePasteType(PasteType toDelete);
+
+    void addPaste(Paste paste, Long userId, Long typeId);
 }

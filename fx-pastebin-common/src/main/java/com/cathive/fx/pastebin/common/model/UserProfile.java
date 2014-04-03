@@ -38,6 +38,7 @@ public class UserProfile implements Serializable {
     private Long id;
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

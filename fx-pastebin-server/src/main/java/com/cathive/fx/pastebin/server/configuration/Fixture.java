@@ -30,11 +30,11 @@ import javax.inject.Inject;
 import java.util.stream.LongStream;
 
 import static java.time.LocalDateTime.now;
-import static java.util.Collections.singletonList;
 import static java.util.UUID.randomUUID;
 
 /**
  * Fills the repositories with sample data.
+ *
  * @author Alexander Erben
  */
 @Singleton
@@ -55,49 +55,26 @@ public class Fixture {
         LongStream.range(1, 30).forEach(
                 i -> {
                     PasteType pasteType = new PasteType();
-                    pasteType.setId(i);
                     pasteType.setName(rand());
-                    testPasteTypeRepo.save(pasteType);
-                });
-        LongStream.range(1, 30).forEach(
-                i -> {
-                    UserProfile user = new UserProfile();
-                    user.setId(i);
-                    user.setName(rand());
-                    testUserProfileRepo.save(user);
-                });
-        LongStream.range(1, 30).forEach(
-                i -> {
-                    Paste p = new Paste();
-                    p.setId(i);
-                    p.setTitle(rand());
-                    p.setContent(rand());
-                    p.setCreated(now());
-                    p.setUserProfile(createUserProfile(i, p));
-                    p.setPasteType(createPasteType(i));
-                    testPasteRepo.save(p);
-                }
-        );
-    }
+                    PasteType savedType = testPasteTypeRepo.save(pasteType);
 
-    private PasteType createPasteType(long i) {
-        PasteType pasteType = new PasteType();
-        pasteType.setId(i);
-        pasteType.setName(rand());
-        return pasteType;
+                    UserProfile userProfile = new UserProfile();
+                    userProfile.setName(rand());
+                    UserProfile savedUser = testUserProfileRepo.save(userProfile);
+
+                    Paste paste = new Paste();
+                    paste.setTitle(rand());
+                    paste.setContent(rand());
+                    paste.setCreated(now());
+
+                    paste.setUserProfile(savedUser);
+                    paste.setPasteType(savedType);
+                    testPasteRepo.save(paste);
+                    testPasteTypeRepo.flush();
+                });
     }
 
     private String rand() {
         return randomUUID().toString().substring(1, 10);
     }
-
-    private UserProfile createUserProfile(long i, Paste p) {
-        UserProfile userProfile = new UserProfile();
-        userProfile.setId(i);
-        userProfile.setName("Name");
-        userProfile.setPastes(singletonList(p));
-        return userProfile;
-    }
-
-
 }

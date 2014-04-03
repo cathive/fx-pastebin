@@ -39,7 +39,6 @@ public class PasteType implements Serializable {
 
     private Long id;
 
-
     public PasteType() {
         super();
     }
@@ -57,6 +56,7 @@ public class PasteType implements Serializable {
 
 
     @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }
