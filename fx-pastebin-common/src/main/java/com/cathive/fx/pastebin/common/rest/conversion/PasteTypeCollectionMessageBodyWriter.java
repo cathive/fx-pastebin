@@ -1,10 +1,8 @@
-package com.cathive.fx.pastebin.server.rest.conversion;
+package com.cathive.fx.pastebin.common.rest.conversion;
 
 import com.cathive.fx.pastebin.common.model.PasteType;
 
-import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.json.JsonWriter;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
@@ -18,11 +16,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.List;
 
-import static javax.json.Json.createArrayBuilder;
-import static javax.json.Json.createObjectBuilder;
-import static javax.json.Json.createWriter;
+import static javax.json.Json.*;
 
 /**
  * @author Benjamin P. Jung

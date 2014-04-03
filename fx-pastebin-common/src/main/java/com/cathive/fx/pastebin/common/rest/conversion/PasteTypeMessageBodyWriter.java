@@ -1,8 +1,7 @@
-package com.cathive.fx.pastebin.server.rest.conversion;
+package com.cathive.fx.pastebin.common.rest.conversion;
 
 import com.cathive.fx.pastebin.common.model.PasteType;
 
-import javax.enterprise.context.Dependent;
 import javax.json.JsonObject;
 import javax.json.JsonWriter;
 import javax.ws.rs.Produces;
@@ -11,10 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
