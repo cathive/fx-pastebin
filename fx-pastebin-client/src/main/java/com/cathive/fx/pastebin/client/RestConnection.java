@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,7 +17,6 @@
 package com.cathive.fx.pastebin.client;
 
 import com.cathive.fx.pastebin.common.transfer.PasteListDto;
-import com.cathive.fx.pastebin.common.transfer.PasteTypeDto;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
