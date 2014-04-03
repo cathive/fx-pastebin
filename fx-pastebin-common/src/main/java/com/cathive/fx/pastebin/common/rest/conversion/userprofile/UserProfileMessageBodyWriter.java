@@ -35,7 +35,8 @@ import static javax.json.Json.createObjectBuilder;
 import static javax.json.Json.createWriter;
 
 /**
- * @author Benjamin P. Jung
+ * Writes {@link com.cathive.fx.pastebin.common.model.UserProfile}s
+ * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)

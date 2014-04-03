@@ -26,6 +26,7 @@ import java.util.Collection;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 
 /**
+ * Common boilerplate methods of {@link javax.ws.rs.ext.MessageBodyWriter}s
  * @author Alexander Erben
  */
 public abstract class AbstractCollectionMessageBodyWriter<T> implements MessageBodyWriter<Collection<T>> {

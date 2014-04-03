@@ -36,7 +36,8 @@ import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static javax.json.Json.*;
 
 /**
- * @author Benjamin P. Jung
+ * Writes {@link com.cathive.fx.pastebin.common.model.Paste} {@link java.util.Collection}s
+ * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)

@@ -35,7 +35,8 @@ import java.util.Collection;
 import static javax.json.Json.*;
 
 /**
- * @author Benjamin P. Jung
+ * Writes {@link com.cathive.fx.pastebin.common.model.UserProfile} {@link java.util.Collection}s
+ * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
