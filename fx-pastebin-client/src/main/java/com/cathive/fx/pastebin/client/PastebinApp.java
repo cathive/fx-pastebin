@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
  */
 public class PastebinApp extends Application {
 
-    // <editor-fold desc="Property: RESTful client">
+    // <editor-fold defaultstate="collapsed" desc="Property: RESTful client">
     public static final String REST_CONNECTION_PROPERTY = "restConnection";
     private final ReadOnlyObjectWrapper<RestConnection> restConnection = new ReadOnlyObjectWrapper<>(this, REST_CONNECTION_PROPERTY);
     public RestConnection getRestConnection() {
@@ -42,8 +42,7 @@ public class PastebinApp extends Application {
         return this.restConnection.getReadOnlyProperty();
     }
     // </editor-fold>
-
-    // <editor-fold desc="Property: root pane">
+    // <editor-fold defaultstate="collapsed" desc="Property: root pane">
     public static final String ROOT_PANE_PROPERTY = "rootPane";
     private final ReadOnlyObjectWrapper<RootPane> rootPane = new ReadOnlyObjectWrapper<>(this, ROOT_PANE_PROPERTY);
     public RootPane getRootPane() {
@@ -53,11 +52,22 @@ public class PastebinApp extends Application {
         return this.rootPane.getReadOnlyProperty();
     }
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Property: data store">
+    public static final String DATA_STORE_PROPERTY = "dataStore";
+    private final ReadOnlyObjectWrapper<DataStore> dataStore = new ReadOnlyObjectWrapper<>(this, DATA_STORE_PROPERTY);
+    public DataStore getDataStore() {
+        return this.dataStore.get();
+    }
+    public ReadOnlyObjectProperty<DataStore> dataStoreProperty() {
+        return this.dataStore.getReadOnlyProperty();
+    }
+    // </editor-fold>
 
     @FXML private ResourceBundle resources;
 
     @Override
     public void init() throws Exception {
+        this.dataStore.set(new DataStore());
         this.restConnection.set(new RestConnection(URI.create("http://localhost:18080/fx-pastebin/api")));
         super.init();
     }

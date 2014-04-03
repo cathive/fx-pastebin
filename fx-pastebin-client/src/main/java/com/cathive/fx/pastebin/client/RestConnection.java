@@ -16,7 +16,6 @@
 
 package com.cathive.fx.pastebin.client;
 
-import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -24,8 +23,13 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+
 import java.net.URI;
+import java.util.Collection;
 
 /**
  * @author Benjamin P. Jung
@@ -72,12 +76,20 @@ public class RestConnection {
         this.setClient(client);
     }
 
+    public Collection<PasteType> fetchAllPasteTypes() {
+        return createRequest("pasteType").get(new GenericType<Collection<PasteType>>() {});
+    }
+
     public PasteType fetchPasteTypeById(final Long id) {
-        return this.getClient()
-                .target(this.getEndpointUri())
-                .path("pastes/id/").path(String.valueOf(id))
-                .request(MediaType.APPLICATION_JSON)
-                .get(PasteType.class);
+        return createRequest("pastes", "id", String.valueOf(id)).get(PasteType.class);
+    }
+
+    private Invocation.Builder createRequest(final String ... pathElements) {
+        WebTarget webTarget = this.getClient().target(this.getEndpointUri());
+        for (final String pathElement: pathElements) {
+            webTarget = webTarget.path(pathElement);
+        }
+        return webTarget.request(MediaType.APPLICATION_JSON_TYPE);
     }
 
 }
