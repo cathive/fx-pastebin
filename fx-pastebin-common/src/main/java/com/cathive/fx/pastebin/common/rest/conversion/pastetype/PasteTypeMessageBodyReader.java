@@ -51,4 +51,5 @@ public class PasteTypeMessageBodyReader extends AbstractMessageBodyReader<PasteT
         ret.setName(o.getString("name"));
         return ret;
     }
+
 }
