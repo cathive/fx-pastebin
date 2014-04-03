@@ -17,8 +17,11 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.JsonConverter;
+import com.cathive.fx.pastebin.common.model.PasteType;
+import com.cathive.fx.pastebin.server.rest.conversion.PasteTypeMessageBodyWriter;
 import com.cathive.fx.pastebin.server.service.PastebinService;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.json.JsonArrayBuilder;
@@ -26,7 +29,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.ext.MessageBodyWriter;
+import javax.ws.rs.ext.Providers;
+import javax.xml.ws.Response;
+
+import java.lang.annotation.Annotation;
 
 import static javax.json.Json.createArrayBuilder;
 
@@ -39,12 +48,17 @@ import static javax.json.Json.createArrayBuilder;
 @Produces(MediaType.APPLICATION_JSON)
 public class PasteTypeController {
 
+    @Context
+    private Providers providers;
+
     @Inject
     private PastebinService pastebinService;
 
     @Inject
     @Named("converter")
     private JsonConverter jsonConverter;
+
+
 
     /**
      * Return all {@link com.cathive.fx.pastebin.common.model.PasteType} as JSON
@@ -65,9 +79,8 @@ public class PasteTypeController {
      */
     @GET
     @Path("/id/{id:\\d+}")
-    public String getPasteTypeById(@PathParam("id") final Long id) {
-        return jsonConverter.buildPasteType(pastebinService.findPasteTypeById(id)).toString();
+    public PasteType getPasteTypeById(@PathParam("id") final Long id) {
+        return pastebinService.findPasteTypeById(id);
     }
-
 
 }
