@@ -6,6 +6,7 @@ import com.cathive.fx.pastebin.common.rest.conversion.common.AbstractMessageBody
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
  * @author Alexander Erben (a_erben@outlook.com)
  */
 @Provider
+@Consumes
 public class PasteMessageBodyReader extends AbstractMessageBodyReader<Paste> {
 
     public PasteMessageBodyReader() {
