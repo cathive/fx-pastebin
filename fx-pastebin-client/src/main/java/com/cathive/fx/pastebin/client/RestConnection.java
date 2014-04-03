@@ -16,7 +16,8 @@
 
 package com.cathive.fx.pastebin.client;
 
-import com.cathive.fx.pastebin.common.transfer.PasteListDto;
+import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.common.model.PasteType;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -71,13 +72,12 @@ public class RestConnection {
         this.setClient(client);
     }
 
-    public PasteListDto getRecentPastes() {
-        final PasteListDto pasteList = this.getClient()
+    public PasteType fetchPasteTypeById(final Long id) {
+        return this.getClient()
                 .target(this.getEndpointUri())
-                .path("pastes")
+                .path("pastes/id/").path(String.valueOf(id))
                 .request(MediaType.APPLICATION_JSON)
-                .get(PasteListDto.class);
-        return pasteList;
+                .get(PasteType.class);
     }
 
 }

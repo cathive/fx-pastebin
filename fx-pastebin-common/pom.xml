@@ -71,29 +71,6 @@
                     </execution>
                 </executions>
             </plugin>-->
-            <plugin>
-                <groupId>org.jvnet.jax-ws-commons</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <extension>true</extension>
-                    <vmArgs>
-                        <vmArg>-Djavax.xml.accessExternalSchema=file</vmArg>
-                    </vmArgs>
-                    <wsdlLocation>/PastenService.wsdl</wsdlLocation>
-                    <wsdlDirectory>${project.basedir}/src/main/resources</wsdlDirectory>
-                    <wsdlFiles>
-                        <wsdlFile>PasteService.wsdl</wsdlFile>
-                    </wsdlFiles>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

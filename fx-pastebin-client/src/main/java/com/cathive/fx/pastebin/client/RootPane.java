@@ -53,9 +53,7 @@ public class RootPane extends VBox {
 
     @FXML
     public void performRefresh(final ActionEvent event) {
-        this.app.getRestConnection().getRecentPastes().getPaste().forEach((p) -> {
-            System.out.println(p.getId() + " " + p.getContent());
-        });
+        System.out.println(app.getRestConnection().fetchPasteTypeById(1L).getName());
     }
 
 }

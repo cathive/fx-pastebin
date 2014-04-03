@@ -26,4 +26,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-com.cathive.fx.pastebin.common.rest.conversion.PasteTypeDtoMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.pastetype.PasteTypeCollectionMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.pastetype.PasteTypeMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.userprofile.UserProfileCollectionMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.userprofile.UserProfileMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.paste.PasteCollectionMessageBodyWriter
+com.cathive.fx.pastebin.common.rest.conversion.paste.PasteMessageBodyWriter

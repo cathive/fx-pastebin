@@ -25,8 +25,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-com.cathive.fx.pastebin.common.rest.conversion.PasteDtoMessageBodyReader
-com.cathive.fx.pastebin.common.rest.conversion.PasteListDtoMessageBodyReader
-com.cathive.fx.pastebin.common.rest.conversion.PasteTypeDtoMessageBodyReader
-com.cathive.fx.pastebin.common.rest.conversion.UserProfileDtoMessageBodyReader
