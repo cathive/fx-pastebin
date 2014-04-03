@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server;
+package com.cathive.fx.pastebin.server.configuration;
 
 import com.cathive.fx.pastebin.common.model.Paste;
 import com.cathive.fx.pastebin.common.model.PasteType;

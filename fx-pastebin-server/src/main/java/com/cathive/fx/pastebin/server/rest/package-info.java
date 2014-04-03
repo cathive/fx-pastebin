@@ -14,23 +14,8 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server;
-
-import com.cathive.fx.pastebin.common.JsonConverter;
-
-import javax.ejb.Singleton;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
-
 /**
- * @author Alexander Erben (a_erben@outlook.com)
+ * Contains the REST interface
+ * @author Alexander Erben
  */
-@Singleton
-public class Configuration {
-
-    @Produces
-    @Named("converter")
-    public JsonConverter getJsonConverter(){
-        return new JsonConverter();
-    }
-}
+package com.cathive.fx.pastebin.server.rest;
