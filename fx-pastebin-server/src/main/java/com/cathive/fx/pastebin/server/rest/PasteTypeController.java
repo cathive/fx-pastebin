@@ -36,6 +36,7 @@ import javax.ws.rs.ext.Providers;
 import javax.xml.ws.Response;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 
 import static javax.json.Json.createArrayBuilder;
 
@@ -66,10 +67,8 @@ public class PasteTypeController {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllPasteTypes() {
-        final JsonArrayBuilder returnObject = createArrayBuilder();
-        pastebinService.findAllPasteTypes().stream().map(jsonConverter::buildPasteType).forEach(returnObject::add);
-        return returnObject.build().toString();
+    public Collection<PasteType> getAllPasteTypes() {
+        return pastebinService.findAllPasteTypes();
     }
 
     /**
