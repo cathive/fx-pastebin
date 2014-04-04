@@ -77,7 +77,7 @@ public class RestConnection {
     }
 
     public Collection<PasteType> fetchAllPasteTypes() {
-        return createRequest("pasteType").get(new GenericType<Collection<PasteType>>() {});
+        return createRequest("pasteTypes").get(new GenericType<Collection<PasteType>>() {});
     }
 
     public PasteType fetchPasteTypeById(final Long id) {
