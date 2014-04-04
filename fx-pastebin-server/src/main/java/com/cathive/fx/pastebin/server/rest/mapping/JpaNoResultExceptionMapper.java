@@ -30,7 +30,7 @@ import javax.ws.rs.ext.Provider;
  * @see Response.Status#NOT_FOUND
  */
 @Provider
-class JpaNoResultExceptionMapper implements ExceptionMapper<NoResultException> {
+public class JpaNoResultExceptionMapper implements ExceptionMapper<NoResultException> {
 
     @Override
     public Response toResponse(NoResultException exception) {

@@ -27,10 +27,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.util.stream.LongStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static java.time.LocalDateTime.now;
 import static java.util.UUID.randomUUID;
+import static java.util.stream.LongStream.range;
 
 /**
  * Fills the repositories with sample data.
@@ -52,27 +57,38 @@ public class Fixture {
 
     @PostConstruct
     public void setup() {
-        LongStream.range(1, 30).forEach(
-                i -> {
+        new BufferedReader(new InputStreamReader(
+                this.getClass().getResourceAsStream("pastebinPasteTypes.properties")))
+                .lines()
+                .map(i -> i.split("=")[0])
+                .forEach(name -> {
                     PasteType pasteType = new PasteType();
-                    pasteType.setName(rand());
-                    PasteType savedType = testPasteTypeRepo.save(pasteType);
-
+                    pasteType.setName(name);
+                    testPasteTypeRepo.save(pasteType);
+                    testPasteTypeRepo.flush();
+                });
+        List<PasteType> all = new ArrayList<>(testPasteTypeRepo.findAll());
+        Random rand = new Random();
+        range(1, 1000).forEach(
+                i -> {
                     UserProfile userProfile = new UserProfile();
                     userProfile.setName(rand());
                     UserProfile savedUser = testUserProfileRepo.save(userProfile);
-
+                    testUserProfileRepo.flush();
                     Paste paste = new Paste();
                     paste.setTitle(rand());
                     paste.setContent(rand());
                     paste.setCreated(now());
                     paste.setUserProfile(savedUser);
-                    paste.setPasteType(savedType);
-
+                    PasteType toInsert = null;
+                    while (toInsert == null)
+                        toInsert = testPasteTypeRepo.findOne((long) rand.nextInt(all.size()));
+                    paste.setPasteType(toInsert);
                     testPasteRepo.save(paste);
-                    testPasteTypeRepo.flush();
                 }
         );
+
+
     }
 
     private String rand() {

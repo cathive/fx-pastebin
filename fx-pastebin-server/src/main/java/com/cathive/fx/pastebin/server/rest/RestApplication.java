@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 @Singleton
 @Startup
 @ApplicationPath("/api")
-class RestApplication extends Application {
+public class RestApplication extends Application {
 
     /**
      * Logger for this class.

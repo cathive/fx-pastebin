@@ -41,7 +41,7 @@ import java.util.List;
  */
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMessageBodyReader<PasteType> {
+public class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMessageBodyReader<PasteType> {
 
     public PasteTypeCollectionMessageBodyReader() {
         super(PasteType.class);

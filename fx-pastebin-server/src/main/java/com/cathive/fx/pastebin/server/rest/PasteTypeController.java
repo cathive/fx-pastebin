@@ -31,7 +31,7 @@ import java.util.Collection;
  */
 @Path("/pasteTypes")
 @Produces(MediaType.APPLICATION_JSON)
-class PasteTypeController {
+public class PasteTypeController {
 
     @Inject
     private PastebinService pastebinService;

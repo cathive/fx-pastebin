@@ -41,7 +41,7 @@ import static javax.json.Json.createWriter;
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-class PasteTypeMessageBodyWriter implements MessageBodyWriter<PasteType> {
+public class PasteTypeMessageBodyWriter implements MessageBodyWriter<PasteType> {
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {

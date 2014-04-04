@@ -31,7 +31,7 @@ import java.util.Collection;
  */
 @Path("/userProfiles")
 @Produces(MediaType.APPLICATION_JSON)
-class UserProfileController {
+public class UserProfileController {
 
     @Inject
     private PastebinService pastebinService;

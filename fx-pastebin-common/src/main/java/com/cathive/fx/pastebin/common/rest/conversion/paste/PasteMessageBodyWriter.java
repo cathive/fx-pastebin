@@ -42,7 +42,7 @@ import static javax.json.Json.createWriter;
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-class PasteMessageBodyWriter extends AbstractMessageBodyWriter<Paste> {
+public class PasteMessageBodyWriter extends AbstractMessageBodyWriter<Paste> {
 
     public PasteMessageBodyWriter() {
         super(Paste.class);
