@@ -36,6 +36,7 @@ import static javax.json.Json.*;
 
 /**
  * Writes {@link com.cathive.fx.pastebin.common.model.PasteType} {@link java.util.Collection}s
+ *
  * @author Alexander Erben
  */
 @Provider
@@ -51,8 +52,7 @@ class PasteTypeCollectionMessageBodyWriter extends AbstractCollectionMessageBody
         final JsonArrayBuilder jsonBuilder = createArrayBuilder();
         pasteTypes.forEach(pasteType -> {
             jsonBuilder.add(createObjectBuilder()
-                .add("id", pasteType.getId())
-                .add("name", pasteType.getName()));
+                    .add("name", pasteType.getName()));
 
         });
         final JsonWriter jsonWriter = createWriter(entityStream);

@@ -27,5 +27,5 @@ import javax.inject.Singleton;
  * @author Alexander Erben
  */
 @Singleton
-class JpaPasteTypeRepository extends JpaRepository<PasteType, Long> implements PasteTypeRepository {
+class JpaPasteTypeRepository extends JpaRepository<PasteType, String> implements PasteTypeRepository {
 }

@@ -40,9 +40,9 @@ public interface PastebinService {
 
     Paste findPasteById(Long id);
 
-    Collection<Paste> findPasteByType(Long typeId);
+    Collection<Paste> findPasteByType(String typeId);
 
-    Paste savePaste(Paste paste, Long userId, Long typeId);
+    Paste savePaste(Paste paste, Long userId, String typeId);
 
     /*
     * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
@@ -62,7 +62,7 @@ public interface PastebinService {
     */
     Collection<PasteType> findAllPasteTypes();
 
-    PasteType findPasteTypeById(Long id);
+    PasteType findPasteTypeById(String id);
 
     PasteType savePasteType(PasteType toSave);
 

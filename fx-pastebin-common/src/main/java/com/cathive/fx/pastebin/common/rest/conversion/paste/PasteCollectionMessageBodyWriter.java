@@ -60,7 +60,7 @@ public class PasteCollectionMessageBodyWriter extends AbstractCollectionMessageB
                                 .add("content", p.getContent())
                                 .add("created", p.getCreated().format(ISO_DATE_TIME))
                                 .add("userProfile_id", p.getUserProfile().getId())
-                                .add("pasteType_id", p.getPasteType().getId()))
+                                .add("pasteType_id", p.getPasteType().getName()))
         );
         final JsonWriter jsonWriter = createWriter(entityStream);
         jsonWriter.write(jsonBuilder.build());

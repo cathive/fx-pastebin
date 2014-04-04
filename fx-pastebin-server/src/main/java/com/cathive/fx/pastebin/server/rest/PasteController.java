@@ -97,7 +97,7 @@ public class PasteController {
     @Path("/save/userProfile/{user:\\d+}/pasteType/{type:\\d+}")
     public Paste savePaste(Paste paste,
                            @PathParam("user") final Long userId,
-                           @PathParam("type") final Long typeId) {
+                           @PathParam("type") final String typeId) {
         return pastebinService.savePaste(paste, userId, typeId);
     }
 

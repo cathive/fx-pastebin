@@ -18,7 +18,10 @@ package com.cathive.fx.pastebin.common.model;
 
 import javafx.beans.NamedArg;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -37,16 +40,8 @@ public class PasteType implements Serializable {
 
     private Collection<Paste> pastes;
 
-    private Long id;
-
     public PasteType() {
         super();
-    }
-
-    public PasteType(@NamedArg("id") final Long id, @NamedArg("name") final String name) {
-        this();
-        this.setId(id);
-        this.setName(name);
     }
 
     public PasteType(@NamedArg("name") final String name) {
@@ -55,16 +50,6 @@ public class PasteType implements Serializable {
     }
 
     @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    @Column
     public String getName() {
         return name;
     }
@@ -87,7 +72,6 @@ public class PasteType implements Serializable {
         return "PasteType{" +
                 "name='" + name + '\'' +
                 ", pastes=" + pastes +
-                ", id=" + id +
                 '}';
     }
 
@@ -98,8 +82,7 @@ public class PasteType implements Serializable {
 
         PasteType pasteType = (PasteType) o;
 
-        return !(id != null ? !id.equals(pasteType.id) : pasteType.id != null)
-                && !(name != null ? !name.equals(pasteType.name) : pasteType.name != null)
+        return !(name != null ? !name.equals(pasteType.name) : pasteType.name != null)
                 && !(pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null);
     }
 
@@ -107,7 +90,6 @@ public class PasteType implements Serializable {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (pastes != null ? pastes.hashCode() : 0);
-        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }

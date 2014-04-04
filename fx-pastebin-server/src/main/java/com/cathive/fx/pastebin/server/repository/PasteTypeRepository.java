@@ -25,5 +25,5 @@ import javax.ejb.Local;
  * @author Alexander Erben
  */
 @Local
-public interface PasteTypeRepository extends Repository<PasteType, Long> {
+public interface PasteTypeRepository extends Repository<PasteType, String> {
 }

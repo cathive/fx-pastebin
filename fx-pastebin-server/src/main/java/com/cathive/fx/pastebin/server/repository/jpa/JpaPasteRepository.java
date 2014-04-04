@@ -38,7 +38,7 @@ public class JpaPasteRepository extends JpaRepository<Paste, Long> implements Pa
     }
 
     @Override
-    public Collection<Paste> findByType(Long typeId) {
+    public Collection<Paste> findByType(String typeId) {
         return em.createNamedQuery("paste.findByType", Paste.class)
                 .setParameter("id", typeId)
                 .getResultList();

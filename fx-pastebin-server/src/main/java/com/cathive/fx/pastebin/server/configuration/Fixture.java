@@ -84,9 +84,7 @@ public class Fixture {
                     paste.setContent(rand());
                     paste.setCreated(now());
                     paste.setUserProfile(savedUser);
-                    PasteType toInsert = null;
-                    while (toInsert == null)
-                        toInsert = testPasteTypeRepo.findOne((long) new Random().nextInt(all.size()));
+                    PasteType toInsert = all.get(new Random().nextInt(all.size()));
                     paste.setPasteType(toInsert);
                     testPasteRepo.save(paste);
                 }

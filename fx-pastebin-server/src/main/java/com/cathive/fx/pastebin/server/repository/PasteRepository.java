@@ -43,5 +43,5 @@ public interface PasteRepository extends Repository<Paste, Long> {
      * @param typeId the type id
      * @return the associated entities, or empty if none found.
      */
-    Collection<Paste> findByType(Long typeId);
+    Collection<Paste> findByType(String typeId);
 }

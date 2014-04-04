@@ -63,7 +63,7 @@ public class DefaultPastebinService implements PastebinService {
     }
 
     @Override
-    public Collection<Paste> findPasteByType(Long typeId) {
+    public Collection<Paste> findPasteByType(String typeId) {
         return pasteRepository.findByType(typeId);
     }
 
@@ -105,7 +105,7 @@ public class DefaultPastebinService implements PastebinService {
     }
 
     @Override
-    public PasteType findPasteTypeById(Long id) {
+    public PasteType findPasteTypeById(String id) {
         return pasteTypeRepository.findOne(id);
     }
 
@@ -120,7 +120,7 @@ public class DefaultPastebinService implements PastebinService {
     }
 
     @Override
-    public Paste savePaste(Paste paste, Long userId, Long typeId) {
+    public Paste savePaste(Paste paste, Long userId, String typeId) {
         UserProfile user = userProfileRepository.findOne(userId);
         if (user == null) throw new IllegalArgumentException("User with id " + userId + " not found");
         PasteType type = pasteTypeRepository.findOne(typeId);

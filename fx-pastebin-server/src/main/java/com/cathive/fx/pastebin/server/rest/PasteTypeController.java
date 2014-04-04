@@ -54,7 +54,7 @@ public class PasteTypeController {
      */
     @GET
     @Path("/id/{id:\\d+}")
-    public PasteType getPasteTypeById(@PathParam("id") final Long id) {
+    public PasteType getPasteTypeById(@PathParam("id") final String id) {
         return pastebinService.findPasteTypeById(id);
     }
 
