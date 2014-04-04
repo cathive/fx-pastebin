@@ -17,7 +17,7 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.model.PasteType;
-import com.cathive.fx.pastebin.server.service.PastebinService;
+import com.cathive.fx.pastebin.server.service.PasteTypeService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -34,7 +34,7 @@ import java.util.Collection;
 public class PasteTypeController {
 
     @Inject
-    private PastebinService pastebinService;
+    private PasteTypeService pasteTypeService;
 
     /**
      * Return all {@link com.cathive.fx.pastebin.common.model.PasteType} as JSON
@@ -43,7 +43,7 @@ public class PasteTypeController {
      */
     @GET
     public Collection<PasteType> getAllPasteTypes() {
-        return pastebinService.findAllPasteTypes();
+        return pasteTypeService.findAllPasteTypes();
     }
 
     /**
@@ -55,7 +55,7 @@ public class PasteTypeController {
     @GET
     @Path("/id/{id:\\d+}")
     public PasteType getPasteTypeById(@PathParam("id") final String id) {
-        return pastebinService.findPasteTypeById(id);
+        return pasteTypeService.findPasteTypeById(id);
     }
 
     /**
@@ -67,6 +67,6 @@ public class PasteTypeController {
     @PUT
     @Path("/save")
     public PasteType savePasteType(PasteType pasteType) {
-        return pastebinService.savePasteType(pasteType);
+        return pasteTypeService.savePasteType(pasteType);
     }
 }

@@ -24,16 +24,13 @@ import javax.ejb.Local;
 import java.util.Collection;
 
 /**
- * Service for all Entities
+ * Service for Pastes
  *
  * @author Alexander Erben
  */
 @Local
-public interface PastebinService {
+public interface PasteService {
 
-    /*
-    * {@link com.cathive.fx.pastebin.common.model.Paste} methods
-    */
     Collection<Paste> findAllPastes();
 
     Collection<Paste> findPastesByUser(Long userId);
@@ -44,28 +41,6 @@ public interface PastebinService {
 
     Paste savePaste(Paste paste, Long userId, String typeId);
 
-    /*
-    * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
-    */
-    Collection<UserProfile> findAllUserProfiles();
-
-    UserProfile findUserProfileById(Long id);
-
     void deletePaste(Paste toDelete);
-
-    UserProfile saveUserProfile(UserProfile toSave);
-
-    void deleteUserProfile(UserProfile toDelete);
-
-    /*
-    * {@link com.cathive.fx.pastebin.common.model.PasteType} methods
-    */
-    Collection<PasteType> findAllPasteTypes();
-
-    PasteType findPasteTypeById(String id);
-
-    PasteType savePasteType(PasteType toSave);
-
-    void deletePasteType(PasteType toDelete);
 
 }

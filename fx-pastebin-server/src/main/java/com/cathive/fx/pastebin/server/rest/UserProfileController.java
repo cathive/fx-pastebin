@@ -17,7 +17,7 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.model.UserProfile;
-import com.cathive.fx.pastebin.server.service.PastebinService;
+import com.cathive.fx.pastebin.server.service.UserProfileService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -34,7 +34,7 @@ import java.util.Collection;
 public class UserProfileController {
 
     @Inject
-    private PastebinService pastebinService;
+    private UserProfileService userProfileService;
 
     /**
      * Retrieve all {@link com.cathive.fx.pastebin.common.model.UserProfile} as JSON.
@@ -43,7 +43,7 @@ public class UserProfileController {
      */
     @GET
     public Collection<UserProfile> getAllUserProfiles() {
-        return pastebinService.findAllUserProfiles();
+        return userProfileService.findAllUserProfiles();
     }
 
     /**
@@ -55,7 +55,7 @@ public class UserProfileController {
     @GET
     @Path("/id/{id:\\d+}")
     public UserProfile getUserProfileById(@PathParam("id") final Long id) {
-        return pastebinService.findUserProfileById(id);
+        return userProfileService.findUserProfileById(id);
     }
 
     /**
@@ -67,6 +67,6 @@ public class UserProfileController {
     @PUT
     @Path("/save")
     public UserProfile saveUserProfile(UserProfile user) {
-        return pastebinService.saveUserProfile(user);
+        return userProfileService.saveUserProfile(user);
     }
 }

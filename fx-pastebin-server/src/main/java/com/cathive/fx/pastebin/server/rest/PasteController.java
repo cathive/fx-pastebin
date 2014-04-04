@@ -17,7 +17,7 @@
 package com.cathive.fx.pastebin.server.rest;
 
 import com.cathive.fx.pastebin.common.model.Paste;
-import com.cathive.fx.pastebin.server.service.PastebinService;
+import com.cathive.fx.pastebin.server.service.PasteService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -35,7 +35,7 @@ import java.util.Collection;
 public class PasteController {
 
     @Inject
-    private PastebinService pastebinService;
+    private PasteService pasteService;
 
     /**
      * Return all {@link com.cathive.fx.pastebin.common.model.Paste}
@@ -45,7 +45,7 @@ public class PasteController {
      */
     @GET
     public Collection<Paste> getAllPastes() {
-        return pastebinService.findAllPastes();
+        return pasteService.findAllPastes();
     }
 
     /**
@@ -58,7 +58,7 @@ public class PasteController {
     @GET
     @Path("/id/{id:\\d+}")
     public Paste getPasteById(@PathParam("id") final Long id) {
-        return pastebinService.findPasteById(id);
+        return pasteService.findPasteById(id);
     }
 
     /**
@@ -71,7 +71,7 @@ public class PasteController {
     @GET
     @Path("/userProfile/{user:\\d+}")
     public Collection<Paste> getPastesByUserProfile(@PathParam("user") final Long id) {
-        return pastebinService.findPastesByUser(id);
+        return pasteService.findPastesByUser(id);
     }
 
     /**
@@ -84,7 +84,7 @@ public class PasteController {
     @GET
     @Path("/pasteType/{type:\\d+}")
     public Collection<Paste> getPastesByPasteType(@PathParam("type") final Long id) {
-        return pastebinService.findPastesByUser(id);
+        return pasteService.findPastesByUser(id);
     }
 
     /**
@@ -98,7 +98,7 @@ public class PasteController {
     public Paste savePaste(Paste paste,
                            @PathParam("user") final Long userId,
                            @PathParam("type") final String typeId) {
-        return pastebinService.savePaste(paste, userId, typeId);
+        return pasteService.savePaste(paste, userId, typeId);
     }
 
 }

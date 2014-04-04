@@ -33,20 +33,17 @@ import java.util.Collection;
  * @author Alexander Erben
  */
 @Singleton
-public class DefaultPastebinService implements PastebinService {
+public class DefaultPasteService implements PasteService {
 
     @Inject
     private PasteRepository pasteRepository;
 
     @Inject
-    private UserProfileRepository userProfileRepository;
-
-    @Inject
     private PasteTypeRepository pasteTypeRepository;
 
-    /*
-     * {@link com.cathive.fx.pastebin.common.model.Paste} methods
-     */
+    @Inject
+    private UserProfileRepository userProfileRepository;
+
     @Override
     public Collection<Paste> findAllPastes() {
         return pasteRepository.findAll();
@@ -70,53 +67,6 @@ public class DefaultPastebinService implements PastebinService {
     @Override
     public void deletePaste(Paste toDelete) {
         pasteRepository.delete(toDelete);
-    }
-
-    /*
-     * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
-     */
-    @Override
-    public Collection<UserProfile> findAllUserProfiles() {
-        return userProfileRepository.findAll();
-    }
-
-    @Override
-    public UserProfile findUserProfileById(Long id) {
-        return userProfileRepository.findOne(id);
-    }
-
-    @Override
-    public UserProfile saveUserProfile(UserProfile toSave) {
-        return userProfileRepository.save(toSave);
-    }
-
-    @Override
-    public void deleteUserProfile(UserProfile toDelete) {
-        userProfileRepository.delete(toDelete);
-    }
-
-
-    /*
-     * {@link com.cathive.fx.pastebin.common.model.PasteType} methods
-     */
-    @Override
-    public Collection<PasteType> findAllPasteTypes() {
-        return pasteTypeRepository.findAll();
-    }
-
-    @Override
-    public PasteType findPasteTypeById(String id) {
-        return pasteTypeRepository.findOne(id);
-    }
-
-    @Override
-    public PasteType savePasteType(PasteType toSave) {
-        return pasteTypeRepository.save(toSave);
-    }
-
-    @Override
-    public void deletePasteType(PasteType toDelete) {
-        pasteTypeRepository.delete(toDelete);
     }
 
     @Override
