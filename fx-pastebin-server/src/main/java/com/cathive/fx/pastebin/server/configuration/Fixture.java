@@ -27,11 +27,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import static java.time.LocalDateTime.now;
@@ -58,20 +58,19 @@ public class Fixture {
 
     @PostConstruct
     public void setup() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                this.getClass().getResourceAsStream("pastebinPasteTypes.properties")))) {
-            reader.lines()
-                    .map(i -> i.split("=")[0])
-                    .filter(i -> !i.startsWith("#"))
-                    .forEach(name -> {
-                        PasteType pasteType = new PasteType();
-                        pasteType.setName(name);
-                        testPasteTypeRepo.save(pasteType);
-                        testPasteTypeRepo.flush();
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
+        final Properties pastebinPasteTypes = new Properties();
+        try (final InputStream inputStream = this.getClass().getResourceAsStream("pastebinPasteTypes.properties")){
+            pastebinPasteTypes.load(inputStream);
+        } catch (final IOException e) {
+            throw new IllegalStateException(e);
         }
+        pastebinPasteTypes
+                .forEach((key, value) -> {
+                    PasteType pasteType = new PasteType();
+                    pasteType.setName((String) value);
+                    testPasteTypeRepo.save(pasteType);
+                    testPasteTypeRepo.flush();
+                });
         List<PasteType> all = new ArrayList<>(testPasteTypeRepo.findAll());
         range(1, 1000).forEach(
                 i -> {
