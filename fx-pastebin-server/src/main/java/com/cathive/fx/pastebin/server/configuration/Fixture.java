@@ -28,6 +28,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,16 +58,19 @@ public class Fixture {
 
     @PostConstruct
     public void setup() {
-        new BufferedReader(new InputStreamReader(
-                this.getClass().getResourceAsStream("pastebinPasteTypes.properties")))
-                .lines()
-                .map(i -> i.split("=")[0])
-                .forEach(name -> {
-                    PasteType pasteType = new PasteType();
-                    pasteType.setName(name);
-                    testPasteTypeRepo.save(pasteType);
-                    testPasteTypeRepo.flush();
-                });
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                this.getClass().getResourceAsStream("pastebinPasteTypes.properties")))) {
+            reader.lines()
+                    .map(i -> i.split("=")[0])
+                    .forEach(name -> {
+                        PasteType pasteType = new PasteType();
+                        pasteType.setName(name);
+                        testPasteTypeRepo.save(pasteType);
+                        testPasteTypeRepo.flush();
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<PasteType> all = new ArrayList<>(testPasteTypeRepo.findAll());
         Random rand = new Random();
         range(1, 1000).forEach(
