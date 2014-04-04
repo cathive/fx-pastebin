@@ -62,6 +62,7 @@ public class Fixture {
                 this.getClass().getResourceAsStream("pastebinPasteTypes.properties")))) {
             reader.lines()
                     .map(i -> i.split("=")[0])
+                    .filter(i -> !i.startsWith("#"))
                     .forEach(name -> {
                         PasteType pasteType = new PasteType();
                         pasteType.setName(name);
@@ -72,7 +73,6 @@ public class Fixture {
             e.printStackTrace();
         }
         List<PasteType> all = new ArrayList<>(testPasteTypeRepo.findAll());
-        Random rand = new Random();
         range(1, 1000).forEach(
                 i -> {
                     UserProfile userProfile = new UserProfile();
@@ -86,7 +86,7 @@ public class Fixture {
                     paste.setUserProfile(savedUser);
                     PasteType toInsert = null;
                     while (toInsert == null)
-                        toInsert = testPasteTypeRepo.findOne((long) rand.nextInt(all.size()));
+                        toInsert = testPasteTypeRepo.findOne((long) new Random().nextInt(all.size()));
                     paste.setPasteType(toInsert);
                     testPasteRepo.save(paste);
                 }
