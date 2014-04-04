@@ -67,8 +67,10 @@ public class PastebinApp extends Application {
 
     @Override
     public void init() throws Exception {
+
         this.dataStore.set(new DataStore());
         this.restConnection.set(new RestConnection(URI.create("http://localhost:18080/fx-pastebin/api")));
+
         super.init();
     }
 
