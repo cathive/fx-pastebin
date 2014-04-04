@@ -54,7 +54,6 @@ public class PasteType implements Serializable {
         this.setName(name);
     }
 
-
     @Id
     @GeneratedValue
     public Long getId() {
@@ -99,11 +98,9 @@ public class PasteType implements Serializable {
 
         PasteType pasteType = (PasteType) o;
 
-        if (id != null ? !id.equals(pasteType.id) : pasteType.id != null) return false;
-        if (name != null ? !name.equals(pasteType.name) : pasteType.name != null) return false;
-        if (pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null) return false;
-
-        return true;
+        return !(id != null ? !id.equals(pasteType.id) : pasteType.id != null)
+                && !(name != null ? !name.equals(pasteType.name) : pasteType.name != null)
+                && !(pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null);
     }
 
     @Override

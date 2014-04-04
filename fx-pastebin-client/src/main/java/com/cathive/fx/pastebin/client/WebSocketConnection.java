@@ -33,9 +33,11 @@ public class WebSocketConnection {
     // <editor-fold desc="Property: endpoint URI">
     public static final String ENDPOINT_URI_PROPERTY = "endpointUri";
     private final ReadOnlyObjectWrapper<URI> endpointUri = new ReadOnlyObjectWrapper<>(this, ENDPOINT_URI_PROPERTY);
+
     public URI getEndpointUri() {
         return this.endpointUri.get();
     }
+
     public ReadOnlyObjectProperty<URI> endpointUriProperty() {
         return this.endpointUri.getReadOnlyProperty();
     }
@@ -44,9 +46,11 @@ public class WebSocketConnection {
     // <editor-fold desc="Property: session">
     public static final String SESSION_PROPERTY = "session";
     private final ReadOnlyObjectWrapper<Session> session = new ReadOnlyObjectWrapper<>(this, SESSION_PROPERTY);
+
     public Session getSession() {
         return this.session.get();
     }
+
     public ReadOnlyObjectProperty<Session> sessionProperty() {
         return this.session.getReadOnlyProperty();
     }
@@ -66,7 +70,6 @@ public class WebSocketConnection {
 
     @OnOpen
     public void onOpen(final Session session) {
-        assert this.session == null;
         this.session.set(session);
     }
 

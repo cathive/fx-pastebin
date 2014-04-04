@@ -29,7 +29,19 @@ import java.util.Collection;
 @Local
 public interface PasteRepository extends Repository<Paste, Long> {
 
+    /**
+     * Find a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.UserProfile}
+     *
+     * @param userId the user id
+     * @return the associated entities, or empty if none found.
+     */
     Collection<Paste> findByUser(Long userId);
 
+    /**
+     * Find a {@link com.cathive.fx.pastebin.common.model.Paste} by {@link com.cathive.fx.pastebin.common.model.PasteType}
+     *
+     * @param typeId the type id
+     * @return the associated entities, or empty if none found.
+     */
     Collection<Paste> findByType(Long typeId);
 }

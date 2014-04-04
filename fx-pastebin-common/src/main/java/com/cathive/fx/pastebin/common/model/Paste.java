@@ -28,8 +28,10 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "paste")
 @NamedQueries({
-        @NamedQuery(name = "findByUser", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)"),
-        @NamedQuery(name = "findByType", query = "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT type.id FROM p.pasteType type)")
+        @NamedQuery(name = "paste.findByUser", query =
+                "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)"),
+        @NamedQuery(name = "paste.findByType", query =
+                "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT type.id FROM p.pasteType type)")
 })
 public class Paste implements Serializable {
 
@@ -121,14 +123,12 @@ public class Paste implements Serializable {
 
         Paste paste = (Paste) o;
 
-        if (content != null ? !content.equals(paste.content) : paste.content != null) return false;
-        if (id != null ? !id.equals(paste.id) : paste.id != null) return false;
-        if (created != null ? !created.equals(paste.created) : paste.created != null) return false;
-        if (pasteType != null ? !pasteType.equals(paste.pasteType) : paste.pasteType != null) return false;
-        if (title != null ? !title.equals(paste.title) : paste.title != null) return false;
-        if (userProfile != null ? !userProfile.equals(paste.userProfile) : paste.userProfile != null) return false;
-
-        return true;
+        return !(content != null ? !content.equals(paste.content) : paste.content != null)
+                && !(id != null ? !id.equals(paste.id) : paste.id != null)
+                && !(created != null ? !created.equals(paste.created) : paste.created != null)
+                && !(pasteType != null ? !pasteType.equals(paste.pasteType) : paste.pasteType != null)
+                && !(title != null ? !title.equals(paste.title) : paste.title != null)
+                && !(userProfile != null ? !userProfile.equals(paste.userProfile) : paste.userProfile != null);
     }
 
     @Override

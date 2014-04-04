@@ -36,11 +36,12 @@ import static javax.json.Json.createWriter;
 
 /**
  * Writes {@link com.cathive.fx.pastebin.common.model.UserProfile}s
+ *
  * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class UserProfileMessageBodyWriter extends AbstractMessageBodyWriter<UserProfile> {
+class UserProfileMessageBodyWriter extends AbstractMessageBodyWriter<UserProfile> {
 
     public UserProfileMessageBodyWriter() {
         super(UserProfile.class);

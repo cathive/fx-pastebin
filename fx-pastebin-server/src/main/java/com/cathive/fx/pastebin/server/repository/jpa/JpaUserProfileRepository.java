@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server.repository;
+package com.cathive.fx.pastebin.server.repository.jpa;
 
-import com.cathive.fx.pastebin.common.model.PasteType;
+import com.cathive.fx.pastebin.common.model.UserProfile;
+import com.cathive.fx.pastebin.server.repository.UserProfileRepository;
 
 import javax.inject.Singleton;
 
 /**
- * Default JPA Repository for {@link com.cathive.fx.pastebin.common.model.PasteType}
+ * JPA Repository for {@link com.cathive.fx.pastebin.common.model.PasteType}
+ *
  * @author Alexander Erben
  */
 @Singleton
-public class DefaultPasteTypeRepository extends AbstractRepository<PasteType, Long> implements PasteTypeRepository {
-
+class JpaUserProfileRepository extends JpaRepository<UserProfile, Long> implements UserProfileRepository {
 }

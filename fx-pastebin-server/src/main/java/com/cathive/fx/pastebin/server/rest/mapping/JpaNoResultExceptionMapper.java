@@ -25,13 +25,12 @@ import javax.ws.rs.ext.Provider;
  * This mapper makes sure that {@code NoResultException}s thrown by JPA
  * are mapped to a "404 - not found" response correctly.
  *
+ * @author Benjamin P. Jung
  * @see NoResultException
  * @see Response.Status#NOT_FOUND
- *
- * @author Benjamin P. Jung
  */
 @Provider
-public class JpaNoResultExceptionMapper implements ExceptionMapper<NoResultException> {
+class JpaNoResultExceptionMapper implements ExceptionMapper<NoResultException> {
 
     @Override
     public Response toResponse(NoResultException exception) {

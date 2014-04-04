@@ -81,11 +81,9 @@ public class UserProfile implements Serializable {
 
         UserProfile that = (UserProfile) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (pastes != null ? !pastes.equals(that.pastes) : that.pastes != null) return false;
-
-        return true;
+        return !(id != null ? !id.equals(that.id) : that.id != null)
+                && !(name != null ? !name.equals(that.name) : that.name != null)
+                && !(pastes != null ? !pastes.equals(that.pastes) : that.pastes != null);
     }
 
     @Override

@@ -36,11 +36,12 @@ import static javax.json.Json.createWriter;
 
 /**
  * Writes {@link com.cathive.fx.pastebin.common.model.PasteType}s
+ *
  * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class PasteTypeMessageBodyWriter implements MessageBodyWriter<PasteType> {
+class PasteTypeMessageBodyWriter implements MessageBodyWriter<PasteType> {
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {

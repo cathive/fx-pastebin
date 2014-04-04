@@ -25,7 +25,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -40,7 +39,7 @@ public class PasteMessageBodyReader extends AbstractMessageBodyReader<Paste> {
     }
 
     @Override
-    public Paste read(final JsonValue jsonValue) throws IOException, WebApplicationException {
+    public Paste read(final JsonValue jsonValue) throws WebApplicationException {
         final Paste ret = new Paste();
         final JsonObject o = (JsonObject) jsonValue;
         ret.setTitle(o.getString("title"));

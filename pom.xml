@@ -44,7 +44,7 @@
 
     <properties>
 
-        <!-- Thie variable helps us track down the basedir of the parent POM in submodules -->
+        <!-- This variable helps us track down the basedir of the parent POM in submodules -->
         <main.basedir>${project.basedir}</main.basedir>
 
         <!-- Maven compiler settings -->

@@ -25,11 +25,15 @@ import java.util.Collection;
 
 /**
  * Service for all Entities
+ *
  * @author Alexander Erben
  */
 @Local
 public interface PastebinService {
 
+    /*
+    * {@link com.cathive.fx.pastebin.common.model.Paste} methods
+    */
     Collection<Paste> findAllPastes();
 
     Collection<Paste> findPastesByUser(Long userId);
@@ -38,6 +42,11 @@ public interface PastebinService {
 
     Collection<Paste> findPasteByType(Long typeId);
 
+    Paste savePaste(Paste paste, Long userId, Long typeId);
+
+    /*
+    * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
+    */
     Collection<UserProfile> findAllUserProfiles();
 
     UserProfile findUserProfileById(Long id);
@@ -48,6 +57,9 @@ public interface PastebinService {
 
     void deleteUserProfile(UserProfile toDelete);
 
+    /*
+    * {@link com.cathive.fx.pastebin.common.model.PasteType} methods
+    */
     Collection<PasteType> findAllPasteTypes();
 
     PasteType findPasteTypeById(Long id);
@@ -56,5 +68,4 @@ public interface PastebinService {
 
     void deletePasteType(PasteType toDelete);
 
-    Paste savePaste(Paste paste, Long userId, Long typeId);
 }

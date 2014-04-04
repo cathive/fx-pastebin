@@ -41,7 +41,7 @@ import static javax.json.Json.*;
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class PasteCollectionMessageBodyWriter extends AbstractCollectionMessageBodyWriter<Paste> {
+class PasteCollectionMessageBodyWriter extends AbstractCollectionMessageBodyWriter<Paste> {
 
     public PasteCollectionMessageBodyWriter() {
         super(Paste.class);

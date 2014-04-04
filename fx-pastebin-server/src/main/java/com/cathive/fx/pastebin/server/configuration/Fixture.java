@@ -66,12 +66,13 @@ public class Fixture {
                     paste.setTitle(rand());
                     paste.setContent(rand());
                     paste.setCreated(now());
-
                     paste.setUserProfile(savedUser);
                     paste.setPasteType(savedType);
+
                     testPasteRepo.save(paste);
                     testPasteTypeRepo.flush();
-                });
+                }
+        );
     }
 
     private String rand() {

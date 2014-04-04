@@ -17,7 +17,6 @@
 package com.cathive.fx.pastebin.common.rest.conversion.common;
 
 import javax.json.Json;
-import javax.json.JsonStructure;
 import javax.json.JsonValue;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -55,6 +54,6 @@ public abstract class AbstractMessageBodyReader<T> implements MessageBodyReader<
      * JSON parser. Only one parser can be used to parse the input stream at any time, so if we want
      * to perform composition of message body readers here, we have no other choice but to do it that way.
      */
-    public abstract <J extends JsonValue> T read(J jsonValue) throws IOException, WebApplicationException;
+    public abstract <J extends JsonValue> T read(J jsonValue) throws WebApplicationException;
 
 }

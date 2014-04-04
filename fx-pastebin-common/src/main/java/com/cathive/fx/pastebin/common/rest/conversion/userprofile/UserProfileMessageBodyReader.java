@@ -25,7 +25,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 
 /**
  * @author Alexander Erben
@@ -39,7 +38,7 @@ public class UserProfileMessageBodyReader extends AbstractMessageBodyReader<User
     }
 
     @Override
-    public UserProfile read(final JsonValue jsonValue) throws IOException, WebApplicationException {
+    public UserProfile read(final JsonValue jsonValue) throws WebApplicationException {
         final UserProfile ret = new UserProfile();
         final JsonObject o = (JsonObject) jsonValue;
         ret.setName(o.getString("name"));

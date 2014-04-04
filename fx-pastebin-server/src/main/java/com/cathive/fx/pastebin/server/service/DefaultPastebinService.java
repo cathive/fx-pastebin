@@ -29,6 +29,7 @@ import java.util.Collection;
 
 /**
  * Default service for all Entities
+ *
  * @author Alexander Erben
  */
 @Singleton
@@ -46,7 +47,6 @@ public class DefaultPastebinService implements PastebinService {
     /*
      * {@link com.cathive.fx.pastebin.common.model.Paste} methods
      */
-
     @Override
     public Collection<Paste> findAllPastes() {
         return pasteRepository.findAll();
@@ -75,7 +75,6 @@ public class DefaultPastebinService implements PastebinService {
     /*
      * {@link com.cathive.fx.pastebin.common.model.UserProfile} methods
      */
-
     @Override
     public Collection<UserProfile> findAllUserProfiles() {
         return userProfileRepository.findAll();
@@ -100,7 +99,6 @@ public class DefaultPastebinService implements PastebinService {
     /*
      * {@link com.cathive.fx.pastebin.common.model.PasteType} methods
      */
-
     @Override
     public Collection<PasteType> findAllPasteTypes() {
         return pasteTypeRepository.findAll();
@@ -124,9 +122,9 @@ public class DefaultPastebinService implements PastebinService {
     @Override
     public Paste savePaste(Paste paste, Long userId, Long typeId) {
         UserProfile user = userProfileRepository.findOne(userId);
-        if (user == null) throw new IllegalArgumentException("User with id "+userId+" not found");
+        if (user == null) throw new IllegalArgumentException("User with id " + userId + " not found");
         PasteType type = pasteTypeRepository.findOne(typeId);
-        if (type == null) throw new IllegalArgumentException("Paste Type with id "+typeId+" not found");
+        if (type == null) throw new IllegalArgumentException("Paste Type with id " + typeId + " not found");
         paste.setUserProfile(user);
         paste.setPasteType(type);
         return pasteRepository.save(paste);

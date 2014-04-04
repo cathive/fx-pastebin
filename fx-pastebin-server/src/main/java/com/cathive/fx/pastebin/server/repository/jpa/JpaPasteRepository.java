@@ -14,28 +14,33 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server.repository;
+package com.cathive.fx.pastebin.server.repository.jpa;
 
 import com.cathive.fx.pastebin.common.model.Paste;
+import com.cathive.fx.pastebin.server.repository.PasteRepository;
 
 import javax.inject.Singleton;
 import java.util.Collection;
 
 /**
- * Default Repository for {@link com.cathive.fx.pastebin.common.model.Paste}
+ * JPA Repository for {@link com.cathive.fx.pastebin.common.model.Paste}
  *
  * @author Alexander Erben
  */
 @Singleton
-public class DefaultPasteRepository extends AbstractRepository<Paste, Long> implements PasteRepository {
+public class JpaPasteRepository extends JpaRepository<Paste, Long> implements PasteRepository {
 
     @Override
     public Collection<Paste> findByUser(Long userId) {
-        return em.createNamedQuery("findByUser", Paste.class).setParameter("id", userId).getResultList();
+        return em.createNamedQuery("paste.findByUser", Paste.class)
+                .setParameter("id", userId)
+                .getResultList();
     }
 
     @Override
     public Collection<Paste> findByType(Long typeId) {
-        return em.createNamedQuery("findByType", Paste.class).setParameter("id", typeId).getResultList();
+        return em.createNamedQuery("paste.findByType", Paste.class)
+                .setParameter("id", typeId)
+                .getResultList();
     }
 }

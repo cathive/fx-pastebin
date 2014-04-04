@@ -27,7 +27,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.cathive.fx.pastebin</groupId>
     <artifactId>fx-pastebin-client</artifactId>
     <name>fx-pastebin-client</name>
     <description>Client components</description>

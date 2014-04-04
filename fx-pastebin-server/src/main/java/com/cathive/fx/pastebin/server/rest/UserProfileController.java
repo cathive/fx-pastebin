@@ -22,7 +22,6 @@ import com.cathive.fx.pastebin.server.service.PastebinService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -32,7 +31,7 @@ import java.util.Collection;
  */
 @Path("/userProfiles")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserProfileController {
+class UserProfileController {
 
     @Inject
     private PastebinService pastebinService;
@@ -43,7 +42,6 @@ public class UserProfileController {
      * @return the JSON
      */
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
     public Collection<UserProfile> getAllUserProfiles() {
         return pastebinService.findAllUserProfiles();
     }
@@ -60,11 +58,15 @@ public class UserProfileController {
         return pastebinService.findUserProfileById(id);
     }
 
-    @POST
+    /**
+     * Save or update a {@link com.cathive.fx.pastebin.common.model.UserProfile}
+     *
+     * @param user to save.
+     * @return the saved user profile.
+     */
+    @PUT
     @Path("/save")
-    public Response saveUserProfile(UserProfile user) {
-        pastebinService.saveUserProfile(user);
-        return Response.ok().build();
+    public UserProfile saveUserProfile(UserProfile user) {
+        return pastebinService.saveUserProfile(user);
     }
-
 }

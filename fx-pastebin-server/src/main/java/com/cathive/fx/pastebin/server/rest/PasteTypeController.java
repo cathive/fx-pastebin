@@ -22,7 +22,6 @@ import com.cathive.fx.pastebin.server.service.PastebinService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -32,23 +31,24 @@ import java.util.Collection;
  */
 @Path("/pasteTypes")
 @Produces(MediaType.APPLICATION_JSON)
-public class PasteTypeController {
+class PasteTypeController {
 
     @Inject
     private PastebinService pastebinService;
 
     /**
      * Return all {@link com.cathive.fx.pastebin.common.model.PasteType} as JSON
+     *
      * @return the JSON
      */
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
     public Collection<PasteType> getAllPasteTypes() {
         return pastebinService.findAllPasteTypes();
     }
 
     /**
      * Retrieve a {@link com.cathive.fx.pastebin.common.model.PasteType} by id
+     *
      * @param id to search for
      * @return JSON
      */
@@ -58,11 +58,15 @@ public class PasteTypeController {
         return pastebinService.findPasteTypeById(id);
     }
 
-    @POST
+    /**
+     * Save or update a {@link com.cathive.fx.pastebin.common.model.PasteType}
+     *
+     * @param pasteType the paste type.
+     * @return the saved paste type.
+     */
+    @PUT
     @Path("/save")
-    public Response savePasteType (PasteType pasteType) {
-        pastebinService.savePasteType(pasteType);
-        return Response.ok().build();
+    public PasteType savePasteType(PasteType pasteType) {
+        return pastebinService.savePasteType(pasteType);
     }
-
 }

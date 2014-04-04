@@ -19,16 +19,12 @@ package com.cathive.fx.pastebin.common.rest.conversion.pastetype;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.common.rest.conversion.common.AbstractMessageBodyReader;
 
-import javax.json.*;
+import javax.json.JsonObject;
+import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 
 /**
  * @author Alexander Erben
@@ -42,7 +38,7 @@ public class PasteTypeMessageBodyReader extends AbstractMessageBodyReader<PasteT
     }
 
     @Override
-    public PasteType read(final JsonValue jsonValue) throws IOException, WebApplicationException {
+    public PasteType read(final JsonValue jsonValue) throws WebApplicationException {
         final PasteType ret = new PasteType();
         final JsonObject o = (JsonObject) jsonValue;
         ret.setName(o.getString("name"));

@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.pastebin.server.repository;
+package com.cathive.fx.pastebin.server.repository.jpa;
+
+import com.cathive.fx.pastebin.server.repository.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,18 +27,21 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * An abstract repository bean that implements the most basic CRUD operations for a given
  * entity type.
  * <p>Basically a rip-off of what Spring did with their CrudRepository class.</p>
+ *
  * @author Benjamin P. Jung
  */
 @SuppressWarnings("unchecked")
-abstract class AbstractRepository<T, ID extends Serializable> implements Repository<T, ID> {
+abstract class JpaRepository<T, ID extends Serializable> implements Repository<T, ID> {
 
     @PersistenceContext(unitName = "fx-pastebin")
-    protected EntityManager em;
+    EntityManager em;
 
     @Override
     public long count() {
@@ -53,7 +58,8 @@ abstract class AbstractRepository<T, ID extends Serializable> implements Reposit
         final Root<T> root = q.from(this.getResultClass());
         q.select(root);
         q.orderBy(cb.asc(root.get(root.getModel().getDeclaredId(this.getIdClass()))));
-        return em.createQuery(q).getResultList();
+        List<T> resultList = em.createQuery(q).getResultList();
+        return resultList == null ? Collections.emptyList() : resultList;
     }
 
     @Override
@@ -66,11 +72,11 @@ abstract class AbstractRepository<T, ID extends Serializable> implements Reposit
         q.select(root);
         q.orderBy(cb.asc(root.get(root.getModel().getDeclaredId(this.getIdClass()))));
 
-        return em.createQuery(q)
+        List<T> resultList = em.createQuery(q)
                 .setFirstResult(firstResult)
                 .setMaxResults(maxResults)
                 .getResultList();
-
+        return resultList == null ? Collections.emptyList() : resultList;
     }
 
     @Override
@@ -98,7 +104,7 @@ abstract class AbstractRepository<T, ID extends Serializable> implements Reposit
 
     @Override
     public void flush() {
-            em.flush();
+        em.flush();
     }
 
     @Override
@@ -108,12 +114,12 @@ abstract class AbstractRepository<T, ID extends Serializable> implements Reposit
         return ret;
     }
 
-    protected Class<ID> getIdClass() {
+    Class<ID> getIdClass() {
         final ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         return (Class<ID>) genericSuperclass.getActualTypeArguments()[1];
     }
 
-    protected Class<T> getResultClass() {
+    Class<T> getResultClass() {
         final ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
         return (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }

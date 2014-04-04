@@ -27,14 +27,17 @@ import java.util.logging.Logger;
 /**
  * Representation of the RESTful application that will be deployed as Servlet by
  * the JAX-RS runtime.
+ *
  * @author Benjamin P. Jung
  */
 @Singleton
 @Startup
 @ApplicationPath("/api")
-public class RestApplication extends Application {
+class RestApplication extends Application {
 
-    /** Logger for this class. */
+    /**
+     * Logger for this class.
+     */
     private final Logger LOGGER = Logger.getLogger(RestApplication.class.getName());
 
     @PostConstruct

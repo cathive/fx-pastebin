@@ -37,11 +37,12 @@ import static javax.json.Json.createWriter;
 
 /**
  * Writes {@link com.cathive.fx.pastebin.common.model.Paste}s
+ *
  * @author Alexander Erben
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class PasteMessageBodyWriter extends AbstractMessageBodyWriter<Paste> {
+class PasteMessageBodyWriter extends AbstractMessageBodyWriter<Paste> {
 
     public PasteMessageBodyWriter() {
         super(Paste.class);

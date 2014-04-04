@@ -19,7 +19,10 @@ package com.cathive.fx.pastebin.common.rest.conversion.pastetype;
 import com.cathive.fx.pastebin.common.model.PasteType;
 import com.cathive.fx.pastebin.common.rest.conversion.common.AbstractCollectionMessageBodyReader;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonReader;
+import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -38,24 +41,21 @@ import java.util.List;
  */
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-public class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMessageBodyReader<PasteType> {
+class PasteTypeCollectionMessageBodyReader extends AbstractCollectionMessageBodyReader<PasteType> {
 
     public PasteTypeCollectionMessageBodyReader() {
         super(PasteType.class);
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public Collection<PasteType> readFrom(Class<Collection<PasteType>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
         final List pasteTypes = new ArrayList<>();
         final JsonReader jsonReader = Json.createReader(entityStream);
         final JsonArray jsonArray = jsonReader.readArray();
-        try {
-            for (final JsonValue jsonValue: jsonArray) {
-                pasteTypes.add(this.getEntityMessageBodyReader(annotations, mediaType).read(jsonValue));
-            }
-        } catch (final IOException e) {
-            throw new IllegalStateException(e);
+        for (final JsonValue jsonValue : jsonArray) {
+            pasteTypes.add(this.getEntityMessageBodyReader(annotations, mediaType).read(jsonValue));
         }
         return pasteTypes;
     }

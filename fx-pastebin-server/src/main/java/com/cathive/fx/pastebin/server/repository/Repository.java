@@ -21,30 +21,77 @@ import java.util.Collection;
 
 /**
  * {@code CRUD} repository.
- * @param <T>
- *     The domain type the repository manages.
- * @param <ID>
- *     The type of the id of the entity the repository manages.
+ *
+ * @param <T>  The domain type the repository manages.
+ * @param <ID> The type of the id of the entity the repository manages.
  * @author Benjamin P. Jung
  */
-interface Repository<T, ID extends Serializable> extends Serializable {
+public interface Repository<T, ID extends Serializable> extends Serializable {
 
+    /**
+     * Count result all entities.
+     *
+     * @return the count of all entities.
+     */
     long count();
 
+    /**
+     * Delete entities.
+     *
+     * @param entities to delete, never <code>null</code> and must yield at least one entity.
+     */
     void delete(Iterable<? extends T> entities);
 
+    /**
+     * Delete a single entity.
+     *
+     * @param entity to delete, never <code>null</code>
+     */
     void delete(T entity);
 
+    /**
+     * Find all entities.
+     *
+     * @return all entities, or empty if none present.
+     */
     Collection<T> findAll();
 
+    /**
+     * Find entities from first result with max bounds.
+     *
+     * @param firstResult the first ID to return.
+     * @param maxResults  maximum number of entities to return.
+     * @return the entities, empty if none found.
+     */
     Collection<T> findAll(int firstResult, int maxResults);
 
+    /**
+     * Find by ID.
+     *
+     * @param id the id to search for.
+     * @return the entity, <code>null</code> if none matches.
+     */
     T findOne(ID id);
 
+    /**
+     * Flush state of repository.
+     */
     void flush();
 
+    /**
+     * Save entities, update if already present.
+     *
+     * @param entities to save. Never <code>null</code> and must yield at least one entry.
+     * @return the saved entities.
+     */
     Iterable<T> save(Iterable<T> entities);
 
+    /**
+     * Save a single entity, update if already present.
+     *
+     * @param entity to save, never <code>null</code>
+     * @return the saved entity
+     */
     T save(T entity);
 
 }

@@ -32,11 +32,13 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 
 /**
  * Common boilerplate methods for {@link javax.ws.rs.ext.MessageBodyReader} that can handle collections.
+ *
  * @author Benjamin P. Jung
  */
 public abstract class AbstractCollectionMessageBodyReader<T> implements MessageBodyReader<Collection<T>> {
 
     private static final Map<Class<?>, AbstractMessageBodyReader<?>> ENTITY_MESSAGE_BODY_READERS;
+
     static {
         ENTITY_MESSAGE_BODY_READERS = new HashMap<>();
 
@@ -75,15 +77,14 @@ public abstract class AbstractCollectionMessageBodyReader<T> implements MessageB
      * <p>This class is basically a workaround, because the JAX-RS <em>client</em> API
      * doesn't honor the {@link javax.ws.rs.core.Context @Context} annotation in a
      * Java SE environment.</p>
-     * @param annotations
-     *         Annotations associated with the current invocation context.
-     * @param mediaType
-     *         Media type of the requested message body reader.
-     * @return
-     *         A message body reader for the type of entities that are contained within
-     *         collections that this reader is able to process.
+     *
+     * @param annotations Annotations associated with the current invocation context.
+     * @param mediaType   Media type of the requested message body reader.
+     * @return A message body reader for the type of entities that are contained within
+     * collections that this reader is able to process.
      */
-    public AbstractMessageBodyReader<T> getEntityMessageBodyReader(final Annotation[] annotations, MediaType mediaType) {
+    @SuppressWarnings("unchecked")
+    protected AbstractMessageBodyReader<T> getEntityMessageBodyReader(final Annotation[] annotations, MediaType mediaType) {
 
         if (this.providers == null) {
             // Workaround for JavaSE JAX-RS clients that don't know anything

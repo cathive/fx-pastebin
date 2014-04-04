@@ -29,7 +29,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.cathive.fx.pastebin</groupId>
     <artifactId>fx-pastebin-common</artifactId>
     <name>fx-pastebin-common</name>
     <description>Common components</description>
