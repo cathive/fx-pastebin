@@ -23,8 +23,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.*;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
@@ -80,7 +81,7 @@ public class PasteTypeControllerIT {
         given()
                 .contentType("application/json")
                 .body("{\"name\":\"java\",\"description\":\"Java Programming Language\"}")
-                .put("/fx-pastebin/api/pasteTypes/save/")
+                .put("/fx-pastebin/api/pasteTypes/")
                 .then()
                 .body("name", is("java"))
                 .and()
@@ -94,8 +95,40 @@ public class PasteTypeControllerIT {
     }
 
     @Test
+    public void testSaveAndDelete() {
+        given().body("{\"name\":\"scala\",\"description\":\"Scala Programming Language\"}")
+                .contentType("application/json")
+                .put("/fx-pastebin/api/pasteTypes/")
+                .then()
+                .body("name", is("scala"))
+                .and()
+                .body("description", is("Scala Programming Language"));
+
+        get("/fx-pastebin/api/pasteTypes/name/scala")
+                .then().assertThat()
+                .body("name", is("scala"))
+                .and()
+                .body("description", is("Scala Programming Language"));
+
+        delete("/fx-pastebin/api/pasteTypes/name/scala")
+                .then().assertThat()
+                .body("name", is("scala"))
+                .and()
+                .body("description", is("Scala Programming Language"));
+
+        get("/fx-pastebin/api/pasteTypes/name/scala")
+                .then().assertThat().statusCode(SC_NO_CONTENT);
+    }
+
+    @Test
+    public void testGetPasteTypeWrongNameShould402() {
+        get("/fx-pastebin/api/pasteTypes/name/void")
+                .then().assertThat().statusCode(SC_NO_CONTENT);
+    }
+
+    @Test
     public void testWrongUriShould404() throws Exception {
-        get("/fx-pastebin/api/pasteTypes/foo").then().statusCode(404);
-        get("/fx-pastebin/api/pasteTypes/id/c").then().statusCode(404);
+        get("/fx-pastebin/api/pasteTypes/foo").then().statusCode(SC_NOT_FOUND);
+        get("/fx-pastebin/api/pasteTypes/id/c").then().statusCode(SC_NOT_FOUND);
     }
 }
