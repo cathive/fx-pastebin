@@ -58,6 +58,7 @@ public class PasteTypeMessageBodyWriter implements MessageBodyWriter<PasteType> 
     public void writeTo(PasteType pasteType, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
         final JsonObject json = createObjectBuilder()
                 .add("name", pasteType.getName())
+                .add("description", pasteType.getDescription())
                 .build();
         final JsonWriter jsonWriter = createWriter(entityStream);
         jsonWriter.write(json);

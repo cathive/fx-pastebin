@@ -52,8 +52,8 @@ class PasteTypeCollectionMessageBodyWriter extends AbstractCollectionMessageBody
         final JsonArrayBuilder jsonBuilder = createArrayBuilder();
         pasteTypes.forEach(pasteType -> {
             jsonBuilder.add(createObjectBuilder()
-                    .add("name", pasteType.getName()));
-
+                    .add("name", pasteType.getName())
+                    .add("description", pasteType.getDescription()));
         });
         final JsonWriter jsonWriter = createWriter(entityStream);
         jsonWriter.write(jsonBuilder.build());

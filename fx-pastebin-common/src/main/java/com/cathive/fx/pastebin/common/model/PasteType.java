@@ -18,10 +18,7 @@ package com.cathive.fx.pastebin.common.model;
 
 import javafx.beans.NamedArg;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -38,6 +35,8 @@ public class PasteType implements Serializable {
 
     private String name;
 
+    private String description;
+
     private Collection<Paste> pastes;
 
     public PasteType() {
@@ -47,6 +46,15 @@ public class PasteType implements Serializable {
     public PasteType(@NamedArg("name") final String name) {
         this();
         this.setName(name);
+    }
+
+    @Column
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Id
@@ -71,6 +79,7 @@ public class PasteType implements Serializable {
     public String toString() {
         return "PasteType{" +
                 "name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", pastes=" + pastes +
                 '}';
     }
@@ -82,13 +91,18 @@ public class PasteType implements Serializable {
 
         PasteType pasteType = (PasteType) o;
 
-        return !(name != null ? !name.equals(pasteType.name) : pasteType.name != null)
-                && !(pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null);
+        if (description != null ? !description.equals(pasteType.description) : pasteType.description != null)
+            return false;
+        if (name != null ? !name.equals(pasteType.name) : pasteType.name != null) return false;
+        if (pastes != null ? !pastes.equals(pasteType.pastes) : pasteType.pastes != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (pastes != null ? pastes.hashCode() : 0);
         return result;
     }

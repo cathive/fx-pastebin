@@ -59,7 +59,7 @@ public class Fixture {
     @PostConstruct
     public void setup() {
         final Properties pastebinPasteTypes = new Properties();
-        try (final InputStream inputStream = this.getClass().getResourceAsStream("pastebinPasteTypes.properties")){
+        try (final InputStream inputStream = this.getClass().getResourceAsStream("pastebinPasteTypes.properties")) {
             pastebinPasteTypes.load(inputStream);
         } catch (final IOException e) {
             throw new IllegalStateException(e);
@@ -67,7 +67,8 @@ public class Fixture {
         pastebinPasteTypes
                 .forEach((key, value) -> {
                     PasteType pasteType = new PasteType();
-                    pasteType.setName((String) value);
+                    pasteType.setName((String) key);
+                    pasteType.setDescription((String) value);
                     testPasteTypeRepo.save(pasteType);
                     testPasteTypeRepo.flush();
                 });
