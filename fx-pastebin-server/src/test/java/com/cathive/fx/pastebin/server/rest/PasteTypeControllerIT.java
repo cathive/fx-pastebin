@@ -16,8 +16,6 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -25,6 +23,9 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static com.jayway.restassured.RestAssured.get;
+import static org.hamcrest.CoreMatchers.hasItems;
 
 /**
  * @author Alexander Erben (a_erben@outlook.com)
@@ -36,7 +37,7 @@ public class PasteTypeControllerIT {
     private static final boolean RECURSIVE = true;
 
     @Deployment
-    public static WebArchive setupDeployment(){
+    public static WebArchive setupDeployment() {
         return ShrinkWrap.create(WebArchive.class, "fx-pastebin.war")
                 .addPackages(RECURSIVE, "com.cathive")
                 .addAsResource("META-INF/beans.xml")
@@ -47,7 +48,10 @@ public class PasteTypeControllerIT {
 
     @Test
     public void testGetAllPasteTypes() throws Exception {
-        Response response = RestAssured.get("/fx-pastebin/api/pasteTypes");
-        System.out.println(response.getBody().prettyPrint());
+        get("/fx-pastebin/api/pasteTypes/")
+                .then().assertThat()
+                .body("name", hasItems("c", "d", "delphi"))
+                .and()
+                .body("description", hasItems("C", "D", "Delphi"));
     }
 }
