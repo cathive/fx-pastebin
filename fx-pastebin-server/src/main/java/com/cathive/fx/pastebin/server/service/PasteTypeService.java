@@ -27,7 +27,7 @@ public interface PasteTypeService {
 
     Collection<PasteType> findAllPasteTypes();
 
-    PasteType findPasteTypeById(String id);
+    PasteType findPasteTypeByName(String id);
 
     PasteType savePasteType(PasteType toSave);
 

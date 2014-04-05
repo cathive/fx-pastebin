@@ -38,8 +38,8 @@ public class DefaultPasteTypeService implements PasteTypeService {
     }
 
     @Override
-    public PasteType findPasteTypeById(String id) {
-        return pasteTypeRepository.findOne(id);
+    public PasteType findPasteTypeByName(String name) {
+        return pasteTypeRepository.findOne(name);
     }
 
     @Override

@@ -47,15 +47,15 @@ public class PasteTypeController {
     }
 
     /**
-     * Retrieve a {@link com.cathive.fx.pastebin.common.model.PasteType} by id
+     * Retrieve a {@link com.cathive.fx.pastebin.common.model.PasteType} by name
      *
-     * @param id to search for
+     * @param name to search for
      * @return JSON
      */
     @GET
-    @Path("/id/{id:\\d+}")
-    public PasteType getPasteTypeById(@PathParam("id") final String id) {
-        return pasteTypeService.findPasteTypeById(id);
+    @Path("/name/{name:\\d+}")
+    public PasteType getPasteTypeByName(@PathParam("name") final String name) {
+        return pasteTypeService.findPasteTypeByName(name);
     }
 
     /**
