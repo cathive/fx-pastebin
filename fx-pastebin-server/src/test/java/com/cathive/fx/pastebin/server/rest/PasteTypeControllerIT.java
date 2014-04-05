@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.jayway.restassured.RestAssured.get;
+import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
@@ -32,6 +33,7 @@ import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
  * Integration Test for {@link com.cathive.fx.pastebin.server.rest.PasteTypeController}
  * Runs via Arquillian in a managed or embedded application server.
  * Currently configured to run on a managed JBoss Wildfly.
+ *
  * @author Alexander Erben (a_erben@outlook.com)
  */
 @RunWith(Arquillian.class)
@@ -42,6 +44,7 @@ public class PasteTypeControllerIT {
 
     /**
      * Add new resources or package namespaces necessary for the execution of this IT here.
+     *
      * @return the readily wrapped archive.
      */
     @Deployment
@@ -70,6 +73,24 @@ public class PasteTypeControllerIT {
                 .body("name", is("c"))
                 .and()
                 .body("description", is("C"));
+    }
+
+    @Test
+    public void testSavePaste() {
+        given()
+                .contentType("application/json")
+                .body("{\"name\":\"java\",\"description\":\"Java Programming Language\"}")
+                .put("/fx-pastebin/api/pasteTypes/save/")
+                .then()
+                .body("name", is("java"))
+                .and()
+                .body("description", is("Java Programming Language"));
+
+        get("/fx-pastebin/api/pasteTypes/name/java")
+                .then().assertThat()
+                .body("name", is("java"))
+                .and()
+                .body("description", is("Java Programming Language"));
     }
 
     @Test
