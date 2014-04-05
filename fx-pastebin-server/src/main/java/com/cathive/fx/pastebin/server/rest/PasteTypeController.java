@@ -65,8 +65,19 @@ public class PasteTypeController {
      * @return the saved paste type.
      */
     @PUT
-    @Path("/save")
     public PasteType savePasteType(PasteType pasteType) {
         return pasteTypeService.savePasteType(pasteType);
+    }
+
+    /**
+     * Delete a {@link com.cathive.fx.pastebin.common.model.PasteType}
+     *
+     * @param name the name of the entity to delete.
+     * @return the deleted paste type.
+     */
+    @DELETE
+    @Path("/name/{name:.+}")
+    public PasteType deletePasteType(@PathParam("name") final String name) {
+        return pasteTypeService.deletePasteType(name);
     }
 }

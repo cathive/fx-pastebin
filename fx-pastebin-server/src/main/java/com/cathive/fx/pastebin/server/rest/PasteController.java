@@ -94,7 +94,7 @@ public class PasteController {
      * @return the saved paste.
      */
     @PUT
-    @Path("/save/userProfile/{user:\\d+}/pasteType/{type:\\d+}")
+    @Path("/userProfile/{user:\\d+}/pasteType/{type:\\d+}")
     public Paste savePaste(Paste paste,
                            @PathParam("user") final Long userId,
                            @PathParam("type") final String typeId) {

@@ -48,8 +48,11 @@ public class DefaultPasteTypeService implements PasteTypeService {
     }
 
     @Override
-    public void deletePasteType(PasteType toDelete) {
-        pasteTypeRepository.delete(toDelete);
+    public PasteType deletePasteType(String name) {
+        PasteType pt = pasteTypeRepository.findOne(name);
+        if (pt == null) throw new IllegalArgumentException("Paste type with name " + name + " not found!");
+        pasteTypeRepository.delete(pt);
+        return pt;
     }
 
 }

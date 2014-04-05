@@ -31,5 +31,5 @@ public interface PasteTypeService {
 
     PasteType savePasteType(PasteType toSave);
 
-    void deletePasteType(PasteType toDelete);
+    PasteType deletePasteType(String name);
 }

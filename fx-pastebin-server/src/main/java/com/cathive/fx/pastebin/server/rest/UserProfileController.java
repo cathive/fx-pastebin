@@ -65,7 +65,6 @@ public class UserProfileController {
      * @return the saved user profile.
      */
     @PUT
-    @Path("/save")
     public UserProfile saveUserProfile(UserProfile user) {
         return userProfileService.saveUserProfile(user);
     }
