@@ -53,7 +53,7 @@ public class PasteTypeController {
      * @return JSON
      */
     @GET
-    @Path("/name/{name:\\d+}")
+    @Path("/name/{name:.+}")
     public PasteType getPasteTypeByName(@PathParam("name") final String name) {
         return pasteTypeService.findPasteTypeByName(name);
     }
