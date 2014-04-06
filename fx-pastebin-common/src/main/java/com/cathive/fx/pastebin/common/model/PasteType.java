@@ -19,6 +19,9 @@ package com.cathive.fx.pastebin.common.model;
 import javafx.beans.NamedArg;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -29,6 +32,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "paste_type")
+@XmlRootElement
 public class PasteType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +56,7 @@ public class PasteType implements Serializable {
     }
 
     @Column
+    @XmlElement
     public String getDescription() {
         return description;
     }
@@ -61,6 +66,7 @@ public class PasteType implements Serializable {
     }
 
     @Id
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -69,6 +75,7 @@ public class PasteType implements Serializable {
         this.name = name;
     }
 
+    @XmlTransient
     @OneToMany(mappedBy = "pasteType")
     public Collection<Paste> getPastes() {
         return this.pastes;
