@@ -40,12 +40,15 @@ public class PasteType implements Serializable {
     private Collection<Paste> pastes;
 
     public PasteType() {
-        super();
     }
 
     public PasteType(@NamedArg("name") final String name) {
-        this();
         this.setName(name);
+    }
+
+    public PasteType(@NamedArg("name") final String name, @NamedArg("description") final String description) {
+        this.name = name;
+        this.description = description;
     }
 
     @Column

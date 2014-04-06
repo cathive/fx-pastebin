@@ -16,6 +16,7 @@
 
 package com.cathive.fx.pastebin.server.rest;
 
+import com.cathive.fx.pastebin.server.configuration.Fixture;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -28,6 +29,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
+import static org.jboss.shrinkwrap.api.Filters.exclude;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
 
 /**
@@ -51,10 +53,10 @@ public class PasteTypeControllerIT {
     @Deployment
     public static WebArchive setupDeployment() {
         return create(WebArchive.class, "fx-pastebin.war")
-                .addPackages(RECURSIVE, "com.cathive")
+                .addPackages(RECURSIVE, exclude(Fixture.class), "com.cathive")
+                .addClass(TestFixture.class)
                 .addAsResource("META-INF/beans.xml")
                 .addAsResource("META-INF/persistence.xml")
-                .addAsResource("com/cathive/fx/pastebin/server/configuration/pastebinPasteTypes.properties")
                 .addAsResource("orm.xml");
     }
 

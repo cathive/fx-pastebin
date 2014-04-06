@@ -16,6 +16,8 @@
 
 package com.cathive.fx.pastebin.common.model;
 
+import javafx.beans.NamedArg;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -48,6 +50,17 @@ public class Paste implements Serializable {
     private Long id;
 
     private LocalDateTime created;
+
+    public Paste() {
+    }
+
+    public Paste(@NamedArg("title") final String title,
+                 @NamedArg("content") final String content,
+                 @NamedArg("created") final LocalDateTime created) {
+        this.title = title;
+        this.content = content;
+        this.created = created;
+    }
 
     @Id
     @GeneratedValue

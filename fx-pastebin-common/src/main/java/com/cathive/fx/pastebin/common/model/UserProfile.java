@@ -37,6 +37,13 @@ public class UserProfile implements Serializable {
 
     private Long id;
 
+    public UserProfile() {
+    }
+
+    public UserProfile(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue
     public Long getId() {
