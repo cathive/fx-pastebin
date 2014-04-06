@@ -17,6 +17,9 @@
 package com.cathive.fx.pastebin.common.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -27,6 +30,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "user_profile")
+@XmlRootElement
 public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +50,7 @@ public class UserProfile implements Serializable {
 
     @Id
     @GeneratedValue
+    @XmlElement
     public Long getId() {
         return id;
     }
@@ -55,6 +60,7 @@ public class UserProfile implements Serializable {
     }
 
     @Column
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -64,6 +70,7 @@ public class UserProfile implements Serializable {
     }
 
     @OneToMany(mappedBy = "pasteType")
+    @XmlTransient
     public Collection<Paste> getPastes() {
         return this.pastes;
     }
