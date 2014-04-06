@@ -19,6 +19,8 @@ package com.cathive.fx.pastebin.common.model;
 import javafx.beans.NamedArg;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -64,6 +66,7 @@ public class Paste implements Serializable {
 
     @Id
     @GeneratedValue
+    @XmlElement
     public Long getId() {
         return id;
     }
@@ -73,6 +76,7 @@ public class Paste implements Serializable {
     }
 
     @Column
+    @XmlElement
     public String getTitle() {
         return title;
     }
@@ -82,6 +86,7 @@ public class Paste implements Serializable {
     }
 
     @Column
+    @XmlElement
     public String getContent() {
         return content;
     }
@@ -91,6 +96,7 @@ public class Paste implements Serializable {
     }
 
     @ManyToOne
+    @XmlTransient
     public PasteType getPasteType() {
         return pasteType;
     }
@@ -100,6 +106,7 @@ public class Paste implements Serializable {
     }
 
     @ManyToOne
+    @XmlTransient
     public UserProfile getUserProfile() {
         return userProfile;
     }
@@ -109,12 +116,23 @@ public class Paste implements Serializable {
     }
 
     @Column
+    @XmlElement
     public LocalDateTime getCreated() {
         return created;
     }
 
     public void setCreated(LocalDateTime creation) {
         this.created = creation;
+    }
+
+    @XmlElement(name = "userProfile_id")
+    public Long userProfileId() {
+        return getUserProfile().getId();
+    }
+
+    @XmlElement(name = "pasteType_name")
+    public String pasteType() {
+        return getPasteType().getName();
     }
 
     @Override
