@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,6 +15,8 @@
  */
 
 package com.cathive.fx.pastebin.server.repository;
+
+import com.cathive.fx.pastebin.common.model.Paste;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -47,7 +49,7 @@ public interface Repository<T, ID extends Serializable> extends Serializable {
      *
      * @param entity to delete, never <code>null</code>
      */
-    void delete(T entity);
+    T delete(T entity);
 
     /**
      * Find all entities.

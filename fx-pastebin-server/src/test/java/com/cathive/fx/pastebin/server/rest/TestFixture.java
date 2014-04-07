@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -53,10 +53,10 @@ public class TestFixture {
             u("Heisenberg")
     };
 
-    private final Paste[] PASTES ={
-            p("main", "int main(int argc, char *argv[]){}", now()),
-            p( "main", "void main() {}", now()),
-            p( "main", "no such thing", now())};
+    private final Paste[] PASTES = {
+            p("c main", "int main(int argc, char *argv[]){}", now()),
+            p("d main", "void main() {}", now()),
+            p("delphi main", "no such thing", now())};
 
     @Inject
     private PasteRepository testPasteRepo;
@@ -92,7 +92,7 @@ public class TestFixture {
         return new UserProfile(name);
     }
 
-    private Paste p( String title, String content, LocalDateTime time) {
+    private Paste p(String title, String content, LocalDateTime time) {
         return new Paste(title, content, time);
     }
 }

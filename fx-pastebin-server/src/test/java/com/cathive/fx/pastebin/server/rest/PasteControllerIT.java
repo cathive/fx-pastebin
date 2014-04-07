@@ -21,18 +21,23 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.json.JsonObject;
+
 import static com.jayway.restassured.RestAssured.*;
+import static javax.json.Json.createReader;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
 import static org.jboss.shrinkwrap.api.Filters.exclude;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
 
 /**
- * Integration Test for {@link com.cathive.fx.pastebin.server.rest.PasteTypeController}
+ * Integration Test for {@link PasteTypeController}
  * Runs via Arquillian in a managed or embedded application server.
  * Currently configured to run on a managed JBoss Wildfly.
  *
@@ -40,9 +45,15 @@ import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-public class PasteTypeControllerIT {
+public class PasteControllerIT {
 
     private static final boolean RECURSIVE = true;
+
+    private static final String CONTROLLER_URI = "/fx-pastebin/api/pastes/";
+
+    private String firstPasteType;
+
+    private int firstUserProfile;
 
     /**
      * Add new resources or package namespaces necessary for the execution of this IT here.
@@ -59,67 +70,68 @@ public class PasteTypeControllerIT {
                 .addAsResource("orm.xml");
     }
 
-    @Test
-    public void testGetAllPasteTypes() throws Exception {
-        get("/fx-pastebin/api/pasteTypes/")
-                .then().assertThat()
-                .body("name", hasItems("c", "d", "delphi"))
-                .and()
-                .body("description", hasItems("C", "D", "Delphi"));
+    @Before
+    public void setupProfileAndPasteType() {
+        firstPasteType = firstJsonObject("/fx-pastebin/api/pasteTypes").getString("name");
+        firstUserProfile = firstJsonObject("/fx-pastebin/api/userProfiles").getInt("id");
     }
 
     @Test
-    public void testFindPasteTypeByName() throws Exception {
-        get("/fx-pastebin/api/pasteTypes/name/c")
+    public void testGetAllPastes() throws Exception {
+        get(CONTROLLER_URI)
                 .then().assertThat()
-                .body("name", is("c"))
+                .body("title", hasItems("c main", "d main", "delphi main"))
                 .and()
-                .body("description", is("C"));
+                .body("content", hasItems("int main(int argc, char *argv[]){}", "void main() {}", "no such thing"));
+    }
+
+    @Test
+    public void testFindPasteById() throws Exception {
+        get("/fx-pastebin/api/pastes/id/" + firstJsonObject(CONTROLLER_URI).getInt("id"))
+                .then().assertThat()
+                .body("title", is(firstJsonObject(CONTROLLER_URI).getString("title")))
+                .and()
+                .body("content", is(firstJsonObject(CONTROLLER_URI).getString("content")));
     }
 
     @Test
     public void testSavePaste() {
-        given()
+        final String locationHeader = given()
                 .contentType("application/json")
-                .body("{\"name\":\"java\",\"description\":\"Java Programming Language\"}")
-                .post("/fx-pastebin/api/pasteTypes/")
-                .then()
-                .header("location", containsString("/pasteTypes/name/java"));
-
-        get("/fx-pastebin/api/pasteTypes/name/java")
+                .body("{\"title\":\"java_example\",\"content\":\"a=b\"}")
+                .post(saveUri())
+                .header("location");
+        get(locationHeader)
                 .then().assertThat()
-                .body("name", is("java"))
+                .body("title", is("java_example"))
                 .and()
-                .body("description", is("Java Programming Language"));
+                .body("content", is("a=b"));
     }
 
     @Test
     public void testSaveAndDelete() {
-        given().body("{\"name\":\"scala\",\"description\":\"Scala Programming Language\"}")
+        String locationHeader = given()
                 .contentType("application/json")
-                .post("/fx-pastebin/api/pasteTypes/")
-                .then()
-                .header("location", containsString("pasteTypes/name/scala"));
-
-        get("/fx-pastebin/api/pasteTypes/name/scala")
+                .body("{\"title\":\"scala\",\"content\":\"Scala Programming Language\"}")
+                .post(saveUri())
+                .header("location");
+        get(locationHeader)
                 .then().assertThat()
-                .body("name", is("scala"))
+                .body("title", is("scala"))
                 .and()
-                .body("description", is("Scala Programming Language"));
-
-        delete("/fx-pastebin/api/pasteTypes/name/scala")
+                .body("content", is("Scala Programming Language"));
+        delete(locationHeader)
                 .then().assertThat()
-                .body("name", is("scala"))
+                .body("title", is("scala"))
                 .and()
-                .body("description", is("Scala Programming Language"));
-
-        get("/fx-pastebin/api/pasteTypes/name/scala")
+                .body("content", is("Scala Programming Language"));
+        get(locationHeader)
                 .then().assertThat().statusCode(SC_NO_CONTENT);
     }
 
     @Test
     public void testGetPasteTypeWrongNameShould402() {
-        get("/fx-pastebin/api/pasteTypes/name/void")
+        get(CONTROLLER_URI + "id/99999")
                 .then().assertThat().statusCode(SC_NO_CONTENT);
     }
 
@@ -127,5 +139,16 @@ public class PasteTypeControllerIT {
     public void testWrongUriShould404() throws Exception {
         get("/fx-pastebin/api/pasteTypes/foo").then().statusCode(SC_NOT_FOUND);
         get("/fx-pastebin/api/pasteTypes/id/c").then().statusCode(SC_NOT_FOUND);
+    }
+
+    private JsonObject firstJsonObject(String controllerUri) {
+        return createReader(
+                get(controllerUri).getBody().asInputStream())
+                .readArray()
+                .getJsonObject(0);
+    }
+
+    private String saveUri() {
+        return CONTROLLER_URI + "userProfile/" + firstUserProfile + "/pasteType/" + firstPasteType;
     }
 }

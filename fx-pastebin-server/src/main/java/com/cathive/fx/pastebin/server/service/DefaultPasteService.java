@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -65,8 +65,9 @@ public class DefaultPasteService implements PasteService {
     }
 
     @Override
-    public void deletePaste(Paste toDelete) {
-        pasteRepository.delete(toDelete);
+    public Paste deletePaste(Long toDelete) {
+        System.out.print("xxxxxxxxxxxxxxxxxxxxxxxx" + toDelete);
+        return pasteRepository.delete(findPasteById(toDelete));
     }
 
     @Override

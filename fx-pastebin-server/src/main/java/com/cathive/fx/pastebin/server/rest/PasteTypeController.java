@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -22,7 +22,12 @@ import com.cathive.fx.pastebin.server.service.PasteTypeService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
+
+import static javax.ws.rs.core.Response.*;
 
 /**
  * Provides an external REST interface for {@link com.cathive.fx.pastebin.common.model.PasteType} instances.
@@ -33,6 +38,8 @@ import java.util.Collection;
 @Produces(MediaType.APPLICATION_JSON)
 public class PasteTypeController {
 
+    public static final String CREATED_URI = "/pasteTypes/name/";
+
     @Inject
     private PasteTypeService pasteTypeService;
 
@@ -42,8 +49,11 @@ public class PasteTypeController {
      * @return the JSON
      */
     @GET
-    public Collection<PasteType> getAllPasteTypes() {
-        return pasteTypeService.findAllPasteTypes();
+    public Response getAllPasteTypes() {
+        Collection<PasteType> all = pasteTypeService.findAllPasteTypes();
+        if (all != null && !all.isEmpty())
+            return ok(all).build();
+        return noContent().build();
     }
 
     /**
@@ -54,8 +64,11 @@ public class PasteTypeController {
      */
     @GET
     @Path("/name/{name:.+}")
-    public PasteType getPasteTypeByName(@PathParam("name") final String name) {
-        return pasteTypeService.findPasteTypeByName(name);
+    public Response getPasteTypeByName(@PathParam("name") final String name) {
+        PasteType one = pasteTypeService.findPasteTypeByName(name);
+        if (one != null)
+            return ok(one).build();
+        return noContent().build();
     }
 
     /**
@@ -64,9 +77,10 @@ public class PasteTypeController {
      * @param pasteType the paste type.
      * @return the saved paste type.
      */
-    @PUT
-    public PasteType savePasteType(PasteType pasteType) {
-        return pasteTypeService.savePasteType(pasteType);
+    @POST
+    public Response savePasteType(PasteType pasteType) throws URISyntaxException {
+        PasteType saved = pasteTypeService.savePasteType(pasteType);
+        return created(new URI(CREATED_URI + saved.getName())).build();
     }
 
     /**
@@ -77,7 +91,10 @@ public class PasteTypeController {
      */
     @DELETE
     @Path("/name/{name:.+}")
-    public PasteType deletePasteType(@PathParam("name") final String name) {
-        return pasteTypeService.deletePasteType(name);
+    public Response deletePasteType(@PathParam("name") final String name) {
+        PasteType deleted = pasteTypeService.deletePasteType(name);
+        if (deleted != null)
+            return ok(deleted).build();
+        return noContent().build();
     }
 }
