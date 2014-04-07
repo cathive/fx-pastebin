@@ -5,7 +5,7 @@
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
+  ~ may obtain a copy of the License at
   ~
   ~ http://www.apache.org/licenses/LICENSE-2.0
   ~
@@ -31,7 +31,6 @@
 
     <properties>
         <main.basedir>${parent.basedir}</main.basedir>
-        <jbossHome>${project.build.directory}</jbossHome>
     </properties>
 
     <artifactId>fx-pastebin-server</artifactId>
@@ -44,7 +43,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.1.4.Final</version>
+                <version>${arquillian.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -65,28 +64,26 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Arquillian Test Harness -->
+        <!-- Test -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>
         </dependency>
-
-        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
         </dependency>
 
     </dependencies>
@@ -98,11 +95,17 @@
                 <artifactId>wildfly-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
     </build>
 
     <profiles>
         <profile>
-            <id>arq-jbossas-managed-7</id>
+            <id>arq-wildfly</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -110,7 +113,7 @@
                 <dependency>
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <version>8.0.0.Final</version>
+                    <version>${wildfly-version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -131,7 +134,7 @@
                                         <artifactItem>
                                             <groupId>org.wildfly</groupId>
                                             <artifactId>wildfly-dist</artifactId>
-                                            <version>8.0.0.Final</version>
+                                            <version>${wildfly-version}</version>
                                             <type>zip</type>
                                             <overWrite>false</overWrite>
                                             <outputDirectory>${project.build.directory}</outputDirectory>
