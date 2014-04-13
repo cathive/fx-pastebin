@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "paste.findByUser", query =
                 "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT profile.id FROM p.userProfile profile)"),
         @NamedQuery(name = "paste.findByType", query =
-                "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT type.id FROM p.pasteType type)")
+                "SELECT OBJECT(p) FROM Paste p WHERE :id = ANY (SELECT pt.name FROM p.pasteType pt)")
 })
 public class Paste implements Serializable {
 
@@ -65,7 +65,8 @@ public class Paste implements Serializable {
     }
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "Paste_ID_SEQ", sequenceName = "seq_paste_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Paste_ID_SEQ")
     @XmlElement
     public Long getId() {
         return id;

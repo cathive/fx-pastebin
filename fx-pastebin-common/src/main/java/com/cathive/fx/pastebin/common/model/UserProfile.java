@@ -49,7 +49,8 @@ public class UserProfile implements Serializable {
     }
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "UserProfile_ID_SEQ", sequenceName = "seq_user_profile_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserProfile_ID_SEQ")
     @XmlElement
     public Long getId() {
         return id;
@@ -69,7 +70,7 @@ public class UserProfile implements Serializable {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "pasteType")
+    @OneToMany(mappedBy = "userProfile")
     @XmlTransient
     public Collection<Paste> getPastes() {
         return this.pastes;

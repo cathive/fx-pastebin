@@ -66,6 +66,8 @@ public class PasteType implements Serializable {
     }
 
     @Id
+    @SequenceGenerator(name = "PasteType_ID_SEQ", sequenceName = "seq_paste_type_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PasteType_ID_SEQ")
     @XmlElement
     public String getName() {
         return name;
