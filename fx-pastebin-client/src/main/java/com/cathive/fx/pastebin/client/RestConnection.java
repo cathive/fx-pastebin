@@ -91,8 +91,8 @@ public class RestConnection {
         return createRequest("pasteTypes").get(new GenericType<Collection<PasteType>>() {});
     }
 
-    public PasteType fetchPasteTypeById(final Long id) {
-        return createRequest("pastes", "id", String.valueOf(id)).get(PasteType.class);
+    public PasteType fetchPasteTypeByName(final String name) {
+        return createRequest("pasteTypes", "name", name).get(PasteType.class);
     }
 
     private Invocation.Builder createRequest(final String ... pathElements) {
