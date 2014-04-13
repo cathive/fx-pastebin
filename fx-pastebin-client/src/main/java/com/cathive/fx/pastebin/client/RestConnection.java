@@ -21,13 +21,13 @@ import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
+import javax.json.stream.JsonGenerator;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-
 import java.net.URI;
 import java.util.Collection;
 
@@ -70,10 +70,21 @@ public class RestConnection {
     }
 
     public RestConnection(@NamedArg(ENDPOINT_URI_PROPERTY) final URI endpointUri) {
+
         super();
         this.setEndpointUri(endpointUri);
-        final Client client = ClientBuilder.newClient();
-        this.setClient(client);
+
+        try {
+            final Client client = ClientBuilder.newBuilder()
+                    .register(Class.forName("org.glassfish.jersey.jsonp.JsonProcessingFeature"))
+                    .register(Class.forName("org.glassfish.jersey.jackson.JacksonFeature"))
+                    .property(JsonGenerator.PRETTY_PRINTING, true)
+                    .build();
+            this.setClient(client);
+        } catch (final ClassNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
+
     }
 
     public Collection<PasteType> fetchAllPasteTypes() {
