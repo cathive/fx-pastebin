@@ -28,7 +28,7 @@ import java.util.Map;
 public class DataStore {
 
     /** Name of the persistence unit to be used when working with pastes. */
-    public static final String PERSISTENCE_UNIT_NAME = "fx-pastebin-client";
+    public static final String PERSISTENCE_UNIT_NAME = "fx-pastebin";
 
     private final Map<String, String> persistenceProperties;
 

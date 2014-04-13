@@ -21,7 +21,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="fx-pastebin" transaction-type="JTA">
+    <persistence-unit name="fx-pastebin">
         <description>Pastebin - Persistence Unit</description>
         <jta-data-source>jboss/datasources/ExampleDS</jta-data-source>
         <mapping-file>com/cathive/fx/pastebin/common/model/orm.xml</mapping-file>
@@ -45,7 +45,7 @@
             <property name="eclipselink.logging.level" value="FINEST"/>
             <property name="eclipselink.memory.free-metadata" value="true"/>
             <property name="eclipselink.tuning" value="Safe"/>
-            <property name="eclipselink.weaving" value="true"/>
+            <property name="eclipselink.weaving" value="static"/>
             <property name="eclipselink.weaving.changetracking" value="true"/>
             <property name="eclipselink.weaving.eager" value="true"/>
             <property name="eclipselink.weaving.fetchgroups" value="true"/>
