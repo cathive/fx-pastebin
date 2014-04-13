@@ -31,9 +31,19 @@
 
     <!-- JSF configuration -->
     <context-param>
-        <description>See javax.faces.application.ProjectStage for possible values</description>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <description>Time in seconds that facelets should be checked for changes since last request. A value of -1 disables refresh checking.</description>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+    <context-param>
+        <description>If this param is set, and calling toLowerCase().equals("true") on a String representation of its value returns true, the runtime must ensure that any XML comments in the Facelets source page are not delivered to the client.</description>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <description>Allow the web application to define an alternate suffix for JSP pages containing JSF  content.</description>
+        <param-name>javax.faces.FACELETS_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
     </context-param>
     <context-param>
         <description>Pass submitted empty Strings as null values if set to "true".</description>
@@ -41,14 +51,29 @@
         <param-value>true</param-value>
     </context-param>
     <context-param>
-        <description>Time in seconds that facelets should be checked for changes since last request. A value of -1 disables refresh checking.</description>
-        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-        <param-value>0</param-value>
+        <description>See javax.faces.application.ProjectStage for possible values</description>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <description>State saving method: 'client' or 'server' (default). See JSF Specification section 2.5.2</description>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
     </context-param>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>5</session-timeout>
