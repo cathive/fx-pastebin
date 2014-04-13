@@ -23,10 +23,28 @@
 
     <display-name>Pastebin</display-name>
     <module-name>com.cathive.fx.pastebin.server</module-name>
+    <description>fx-pastebin Server</description>
 
     <absolute-ordering>
         <others/>
     </absolute-ordering>
+
+    <!-- JSF configuration -->
+    <context-param>
+        <description>See javax.faces.application.ProjectStage for possible values</description>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <description>Pass submitted empty Strings as null values if set to "true".</description>
+        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <description>Time in seconds that facelets should be checked for changes since last request. A value of -1 disables refresh checking.</description>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
