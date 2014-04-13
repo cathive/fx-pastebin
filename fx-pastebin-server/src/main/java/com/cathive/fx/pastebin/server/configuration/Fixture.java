@@ -59,8 +59,8 @@ public class Fixture {
     @PostConstruct
     public void setup() {
         final Properties pastebinPasteTypes = new Properties();
-        try (final InputStream inputStream = this.getClass().getResourceAsStream("pastebinPasteTypes.properties")) {
-            pastebinPasteTypes.load(inputStream);
+        try (final InputStream inputStream = this.getClass().getResourceAsStream("pasteTypes.xml")) {
+            pastebinPasteTypes.loadFromXML(inputStream);
         } catch (final IOException e) {
             throw new IllegalStateException(e);
         }
