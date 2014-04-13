@@ -38,7 +38,19 @@
             <property name="eclipselink.create-ddl-jdbc-file-name" value="fx-pastebin.ddl.jdbc"/>
             <property name="eclipselink.ddl-generation.output-mode" value="both"/>
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.deploy-on-startup" value="true"/>
+            <property name="eclipselink.jdbc.uppercase-column-names" value="false"/>
+            <property name="eclipselink.jpa.uppercase-column-names" value="false"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
+            <property name="eclipselink.memory.free-metadata" value="true"/>
+            <property name="eclipselink.tuning" value="Safe"/>
+            <property name="eclipselink.weaving" value="static"/>
+            <property name="eclipselink.weaving.changetracking" value="true"/>
+            <property name="eclipselink.weaving.eager" value="true"/>
+            <property name="eclipselink.weaving.fetchgroups" value="true"/>
+            <property name="eclipselink.weaving.internal" value="true"/>
+            <property name="eclipselink.weaving.lazy" value="true"/>
+            <property name="eclipselink.weaving.rest" value="true"/>
         </properties>
     </persistence-unit>
 
