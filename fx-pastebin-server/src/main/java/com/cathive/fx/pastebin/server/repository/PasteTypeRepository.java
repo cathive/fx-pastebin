@@ -25,5 +25,15 @@ import javax.ejb.Local;
  * @author Alexander Erben
  */
 @Local
-public interface PasteTypeRepository extends Repository<PasteType, String> {
+public interface PasteTypeRepository extends Repository<PasteType, Long> {
+
+    /**
+     * Finds a paste type with the given (unique) name.
+     * @param name
+     *     Name of the paste type to be looked up.
+     * @return
+     *     The paste type with the given name.
+     */
+    PasteType findOneByName(String name);
+
 }

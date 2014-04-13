@@ -32,10 +32,15 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "paste_type")
+@NamedQueries({
+        @NamedQuery(name = "pasteType.findByName", query = "SELECT OBJECT(pt) FROM PasteType pt WHERE pt.name = :name")
+})
 @XmlRootElement
 public class PasteType implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private Long id;
 
     private String name;
 
@@ -55,6 +60,18 @@ public class PasteType implements Serializable {
         this.description = description;
     }
 
+    @Id
+    @Column
+    @SequenceGenerator(name = "PasteType_ID_SEQ", sequenceName = "seq_paste_type_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PasteType_ID_SEQ")
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
     @Column
     @XmlElement
     public String getDescription() {
@@ -65,9 +82,7 @@ public class PasteType implements Serializable {
         this.description = description;
     }
 
-    @Id
-    @SequenceGenerator(name = "PasteType_ID_SEQ", sequenceName = "seq_paste_type_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PasteType_ID_SEQ")
+    @Column
     @XmlElement
     public String getName() {
         return name;

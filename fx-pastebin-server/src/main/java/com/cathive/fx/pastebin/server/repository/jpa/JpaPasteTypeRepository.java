@@ -27,5 +27,13 @@ import javax.inject.Singleton;
  * @author Alexander Erben
  */
 @Singleton
-class JpaPasteTypeRepository extends JpaRepository<PasteType, String> implements PasteTypeRepository {
+class JpaPasteTypeRepository extends JpaRepository<PasteType, Long> implements PasteTypeRepository {
+
+    @Override
+    public PasteType findOneByName(final String name) {
+        return this.em.createNamedQuery("pasteType.findByName", PasteType.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
 }

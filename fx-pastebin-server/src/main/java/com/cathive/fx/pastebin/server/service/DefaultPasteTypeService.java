@@ -39,7 +39,7 @@ public class DefaultPasteTypeService implements PasteTypeService {
 
     @Override
     public PasteType findPasteTypeByName(String name) {
-        return pasteTypeRepository.findOne(name);
+        return pasteTypeRepository.findOneByName(name);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class DefaultPasteTypeService implements PasteTypeService {
 
     @Override
     public PasteType deletePasteType(String name) {
-        PasteType pt = pasteTypeRepository.findOne(name);
+        PasteType pt = pasteTypeRepository.findOneByName(name);
         if (pt == null) throw new IllegalArgumentException("Paste type with name " + name + " not found!");
         pasteTypeRepository.delete(pt);
         return pt;

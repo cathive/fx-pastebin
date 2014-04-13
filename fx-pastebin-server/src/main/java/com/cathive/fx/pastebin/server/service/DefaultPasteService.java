@@ -74,7 +74,7 @@ public class DefaultPasteService implements PasteService {
     public Paste savePaste(Paste paste, Long userId, String typeId) {
         UserProfile user = userProfileRepository.findOne(userId);
         if (user == null) throw new IllegalArgumentException("User with id " + userId + " not found");
-        PasteType type = pasteTypeRepository.findOne(typeId);
+        PasteType type = pasteTypeRepository.findOneByName(typeId);
         if (type == null) throw new IllegalArgumentException("Paste Type with id " + typeId + " not found");
         paste.setUserProfile(user);
         paste.setPasteType(type);
